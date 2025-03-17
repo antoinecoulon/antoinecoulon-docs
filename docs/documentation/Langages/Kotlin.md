@@ -42,7 +42,7 @@ Emulateur Android = Accelerateur materiel/emulation (HAXM, HyperV)
 
 Créer un projet:
 
-![Android Studio](../img/android-studio.png)
+![Android Studio](../img/kotlin_android-studio.png)
 
 ---
 
@@ -63,7 +63,7 @@ Créer un projet:
 
 ---
 
-### Syntaxe
+### Learning
 
 **Types:**
 ```kotlin
@@ -266,8 +266,155 @@ fun HomeScreen(navController: NavController) {}
 **ViewModel**
 
 Vulgarisation du ViewModel
-![ViewModel](../img/vulgarisation_mvvm.png)
+![ViewModel](../img/kotlin_vulgarisation_mvvm.png)
 
+**Webservices**
+
+Ajouter les dépendances suivantes: 
+```kotlin title="build.gradle.kts"
+// Moshi
+implementation(libs.moshi)
+implementation(libs.moshi.kotlin)
+
+// Retrofit
+implementation(libs.retrofit)
+implementation(libs.converter.moshi)
+
+// Ok HTTP
+implementation(libs.okhttp)
+```
+
+Créer une classe RetrofitTools:
+```kotlin title="RetrofitTools.kt"
+class RetrofitTools {
+
+    // Kotlin :  companion object = tout ce qui est dedans est statics
+    companion object{
+        // La racine de l'api
+        // val BASE_URL = "http://localhost:3000/"
+
+        // La racine de l'api
+        val BASE_URL = "http://161.35.39.34:3000/"
+
+        // Pour les personnes emulateurs :
+        //val BASE_URL = "http://10.0.2.2:3000/"
+
+        // L'utilitaire conversion JSON <=> Objet
+        val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build();
+
+        // Retrofit
+        val retrofit = Retrofit.Builder()
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .baseUrl(BASE_URL).build();
+    }
+}
+```
+Moshi permet de convertir du JSON. On créé une instance Retrofit qui va nous permettre d'appeler l'API. Le "companion object" est l'équivalent d'une classe statique, on peut l'appeler de n'importe où dans le projet.
+
+Créer une interface qui permettra de déterminer les endpoints de l'API:
+```kotlin title="PersonService.kt"
+interface PersonService {
+    @GET("persons.json") // Annotation pour savoir quelle URL appeler
+    suspend fun getPersons(): List<Person>
+
+    // Singleton Retrofit pour accéder au service: PersonApi.personService
+    object PersonApi {
+        val personService : PersonService by lazy { retrofit.create(PersonService::class.java) }
+    }
+}
+```
+
+Notre data class doit avoir la même structure que le JSON de l'API:
+```kotlin title="Person.kt"
+data class Person (
+    var pseudo: String = "",
+    var age: Int = 0
+)
+```
+
+On retourne dans le ViewModel:
+```kotlin title="ListPersonViewModel.kt"
+class ListPersonViewModel: ViewModel() {
+    // Liste de base, pas obligatoire !!!!
+    var persons = MutableStateFlow<List<Person>>(mutableListOf(
+        Person("titi", 360),
+        Person("dddd", 45)
+    ))
+
+    /**
+     * Fonction qui permet de charger la liste de personnes dans le view model
+     */
+    fun reloadPersons() {
+        // Simulation de l'API = Obsolète
+//        persons.value = mutableListOf(
+//            Person("pipi", 360),
+//            Person("popo", 45)
+//        )
+
+        // Coroutine (tâche asynchrone)
+        viewModelScope.launch {
+            // Appeler le service API
+            // apiResponse = Retour de l'api
+            val apiResponse = PersonService.PersonApi.personService.getPersons()
+            
+            // Remplacer la liste de personnes du ViewModel par celle de l'API
+            persons.value = apiResponse
+        }
+    }
+}
+```
+
+Ne pas oublier les permissions réseau/internet dans le manifest!!!
+```xml title="AndroidManifest.xml"
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+```
+
+On peut maintenant s'en servir dans la vue:
+```kotlin title="ListPersonActivity.kt"
+@Composable
+fun ListPersonPage(viewModel: ListPersonViewModel){
+    // J'écoute les changements de counter en temps réel
+    val personsState by viewModel.persons.collectAsState()
+
+    EniPage {
+        Column(modifier = Modifier.padding(32.dp)) {
+
+            WrapPadding {
+                EniButton(buttonText = "Appel API", onClick ={
+                    // Rafraichir les données
+                    // = Appeler la fonction qui rafraichie les données dans le VM
+                    viewModel.reloadPersons()
+                })
+            }
+
+            LazyColumn {
+                items(personsState) { person ->
+                    Card(modifier = Modifier.padding(4.dp).border(1.dp, Color.Cyan, RoundedCornerShape(40.dp)), colors = CardDefaults.cardColors(Color.Transparent)) {
+                        Text(
+                            text = "Pseudo: ${person.pseudo}",
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Age: ${person.age}",
+                            modifier = Modifier.fillMaxWidth(),
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+Schéma:
+
+![Schéma API](../img/kotlin_schema_API.png)
 
 ---
 
@@ -275,13 +422,13 @@ Vulgarisation du ViewModel
 
 KISS → Keep It Simple, Stupid
 
-![KISS Design](../img/design-kiss.png)
+![KISS Design](../img/kotlin_design-kiss.png)
 
 ---
 
 ### Traduction
 
-![Traduction](../img/traduction.png)
+![Traduction](../img/kotlin_traduction.png)
 
 Un fichier strings.xml (dans res/values/) qui contient des combinaisons clé-texte:
 
