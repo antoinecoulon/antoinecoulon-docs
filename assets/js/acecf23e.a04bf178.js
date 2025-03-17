@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkantoinecoulon_docs=self.webpackChunkantoinecoulon_docs||[]).push([[1903],{1912:o=>{o.exports=JSON.parse('{"blogBasePath":"/antoinecoulon-docs/blog","blogTitle":"Blog","authorsListPath":"/antoinecoulon-docs/blog/authors"}')}}]);
