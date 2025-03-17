@@ -42,7 +42,7 @@ Emulateur Android = Accelerateur materiel/emulation (HAXM, HyperV)
 
 Créer un projet:
 
-![Android Studio](./img/android-studio.png)
+![Android Studio](../img/android-studio.png)
 
 ---
 
@@ -130,6 +130,7 @@ class Person(var age: Int) {
 	set(value) {
 		field = value
 	}
+}
 ```
 
 ```kotlin
@@ -138,6 +139,7 @@ var <propertyName>[: <PropertyType>] [= <property_initializer>]
 [<getter>]
 [<setter>]
 ```
+
 **Surcharge d'opérateurs**
 ```kotlin
 operator fun plus(other: Person) : Person {
@@ -261,19 +263,25 @@ Puis dans chaque screen:
 fun HomeScreen(navController: NavController) {}
 ```
 
+**ViewModel**
+
+Vulgarisation du ViewModel
+![ViewModel](../img/vulgarisation_mvvm.png)
+
+
 ---
 
 ### Design
 
 KISS → Keep It Simple, Stupid
 
-![KISS Design](./img/design-kiss.png)
+![KISS Design](../img/design-kiss.png)
 
 ---
 
 ### Traduction
 
-![Traduction](./img/traduction.png)
+![Traduction](../img/traduction.png)
 
 Un fichier strings.xml (dans res/values/) qui contient des combinaisons clé-texte:
 
