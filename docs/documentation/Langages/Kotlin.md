@@ -42,7 +42,7 @@ Emulateur Android = Accelerateur materiel/emulation (HAXM, HyperV)
 
 Créer un projet:
 
-![Android Studio](../img/kotlin_android-studio.png)
+![Android Studio](/img/kotlin_android-studio.png)
 
 ---
 
@@ -266,7 +266,7 @@ fun HomeScreen(navController: NavController) {}
 **ViewModel**
 
 Vulgarisation du ViewModel
-![ViewModel](../img/kotlin_vulgarisation_mvvm.png)
+![ViewModel](/img/kotlin_vulgarisation_mvvm.png)
 
 **Webservices**
 
@@ -414,7 +414,7 @@ fun ListPersonPage(viewModel: ListPersonViewModel){
 
 Schéma:
 
-![Schéma API](../img/kotlin_schema_API.png)
+![Schéma API](/img/kotlin_schema_API.png)
 
 ---
 
@@ -422,13 +422,13 @@ Schéma:
 
 KISS → Keep It Simple, Stupid
 
-![KISS Design](../img/kotlin_design-kiss.png)
+![KISS Design](/img/kotlin_design-kiss.png)
 
 ---
 
 ### Traduction
 
-![Traduction](../img/kotlin_traduction.png)
+![Traduction](/img/kotlin_traduction.png)
 
 Un fichier strings.xml (dans res/values/) qui contient des combinaisons clé-texte:
 
