@@ -11,6 +11,29 @@ description: Android Jetpack Compose
 
 IDE: **Android Studio**
 
+### Sommaire
+- [Kotlin](#kotlin)
+    - [Sommaire](#sommaire)
+  - [Repos](#repos)
+  - [Ressources](#ressources)
+  - [Doc](#doc)
+    - [Introduction](#introduction)
+    - [Android Studio](#android-studio)
+    - [Workflow](#workflow)
+    - [Types](#types)
+    - [Strings](#strings)
+    - [String interpolation](#string-interpolation)
+    - [Getters / Setters](#getters--setters)
+    - [Surcharge d'opérateurs](#surcharge-dopérateurs)
+    - [Héritage](#héritage)
+    - [Components](#components)
+    - [Routing](#routing)
+    - [ViewModel](#viewmodel)
+    - [Webservices](#webservices)
+    - [Dialog](#dialog)
+    - [Design](#design)
+    - [Traduction](#traduction)
+
 ---
 
 ## Repos
@@ -63,9 +86,7 @@ Créer un projet:
 
 ---
 
-### Learning
-
-**Types:**
+### Types
 ```kotlin
 // String
 val string: String = "Yasha Gozwan"
@@ -88,7 +109,7 @@ val isVerify: Boolean = false
 val isSuccess: Boolean = true
 ```
 
-**Strings:**
+### Strings
 ```kotlin
 // String
 val myStr = "Hello World"
@@ -106,7 +127,7 @@ val firstChar = myStr[0]
 val lastChar = myStr[myStr.length - 1]
 ```
 
-**String interpolation:**
+### String interpolation
 ```kotlin
 // String Interpolation
 val name = "Yasha"
@@ -114,7 +135,7 @@ val age = 26
 println("Hello everyone. My name is $name and i $age old thanks")
 ```
 
-**Getters / Setters**
+### Getters / Setters
 ```kotlin
 // Les getters et setters sont implicites et peuvent être surchargés
 newPerson.age //Getter
@@ -140,7 +161,7 @@ var <propertyName>[: <PropertyType>] [= <property_initializer>]
 [<setter>]
 ```
 
-**Surcharge d'opérateurs**
+### Surcharge d'opérateurs
 ```kotlin
 operator fun plus(other: Person) : Person {
 	this.age += other.age
@@ -149,7 +170,7 @@ operator fun plus(other: Person) : Person {
 ```
 Ici on surcharge l'opérateur "+"
 
-**Héritage**
+### Héritage
 ```kotlin
 open class Person(var age : Int){
 	[...]
@@ -161,7 +182,7 @@ class Salary(var salaire : Int, var age : Int) : Person(age){
 ```
 La classe "Salary" hérite de la classe "Person" (on rappelle le constructeur)
 
-**Components**
+### Components
 - Annotation Composable:
 ```kotlin
 @Composable
@@ -209,7 +230,7 @@ fun EniTextField(modifier: Modifier = Modifier, hintText : String = "") {
 }
 ```
 
-**Routing**
+### Routing
 
 Les deux fichiers suivants permettent de définir les routes, on les place dans un package "navigation":
 ```kotlin title="navigation/Screens.kt"
@@ -263,12 +284,12 @@ Puis dans chaque screen:
 fun HomeScreen(navController: NavController) {}
 ```
 
-**ViewModel**
+### ViewModel
 
 Vulgarisation du ViewModel
 ![ViewModel](/img/kotlin_vulgarisation_mvvm.png)
 
-**Webservices**
+### Webservices
 
 Ajouter les dépendances suivantes: 
 ```kotlin title="build.gradle.kts"
@@ -415,6 +436,116 @@ fun ListPersonPage(viewModel: ListPersonViewModel){
 Schéma:
 
 ![Schéma API](/img/kotlin_schema_API.png)
+
+### Dialog
+
+Utilisation de la classe Dialog qui permet d'afficher une boite de dialogue, ici on s'en servira pour afficher un loader.
+
+On créé un fichier AppDialogHelper:
+```kotlin title="helpers/AppDialogHelper.kt"
+class AppDialogHelper {
+
+    // Singleton explicite
+    companion object {
+        val instance : AppDialogHelper by lazy { AppDialogHelper() }
+
+        fun get() : AppDialogHelper {
+            return instance;
+        }
+    }
+
+    // Sert à savoir en temps réel si il faut afficher ou pas la dialog
+    var dialogModelData = MutableStateFlow(DialogModelData());
+
+    /**
+     * Afficher la popup
+     */
+    fun showDialog(message: String){
+        // Forcer le rafraichissement de l'etat
+        dialogModelData.value = dialogModelData.value.copy(isShow = true, message = message);
+    }
+
+    /**
+     * Fermer la popup
+     */
+    fun closeDialog() {
+        // Forcer le rafraichissement de l'etat
+        dialogModelData.value = dialogModelData.value.copy(isShow = false);
+    }
+}
+
+@Composable
+fun ProgressDialog(){
+    // Je vais ecouter quand la dialog est true ou false
+    // Donc quand je dois afficher ou pas
+    val dialogModelDataState by AppDialogHelper.get().dialogModelData.collectAsState();
+
+    if (dialogModelDataState.isShow) {
+        Dialog(onDismissRequest = {}){
+            Box(modifier = Modifier.background(
+                color = Color(0xFFFFFFFF),
+                shape = RoundedCornerShape(30.dp)
+            )
+                .padding(20.dp)) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    CircularProgressIndicator()
+                    Text(text = dialogModelDataState.message)
+                }
+            }
+        }
+    }
+}
+```
+
+La classe DialogModelData va permettre de gérer les messages et l'affichage ou non de la popup:
+```kotlin title="helpers/DialogModelData.kt"
+data class DialogModelData(var isShow : Boolean = false, var message : String = "") {
+}
+```
+
+On ajoute dans l'Activity en le passant directement dans le thème de l'app, on pourra l'utiliser sur toutes les pages: 
+```kotlin title="ui.theme/AppTheme.kt"
+// Main theme
+@Composable
+fun Page(content: @Composable () -> Unit) {
+    TpAndroidTheme {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)) {
+                Image(
+                    painter = painterResource(R.drawable.background),
+                    contentDescription = "",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.fillMaxSize()
+                )
+                content()
+                
+                ProgressDialog()
+                
+            }
+        }
+    }
+}
+```
+
+Enfin dans le ViewModel:
+```kotlin title="ArticleViewModel.kt"
+fun loadArticles(callback: () -> Unit) {
+        
+    AppDialogHelper.get().showDialog("Loading articles in progress...")
+
+    viewModelScope.launch {
+
+        // Simuler 1 sec de lag en dev pour voir la popup
+        delay(1000)
+        val apiResponse = ArticleService.ArticleApi.articleService.getArticles()
+
+        articles.value = apiResponse
+    
+        // On attend que la tâche ASYNC soit terminée
+        AppDialogHelper.get().closeDialog()
+    }
+}
+```
 
 ---
 
