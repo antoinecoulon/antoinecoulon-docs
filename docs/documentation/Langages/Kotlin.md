@@ -55,9 +55,12 @@ IDE: **Android Studio**
 
 ### Introduction
 
-Android Physique = Utilisez le pour tester vos app (Il faut un cable USB, le mode dev d'activé)
+- Android Physique = Utilisez le pour tester vos app (Il faut un cable USB, le mode dev d'activé)
+- Emulateur Android = Accelerateur materiel/emulation (HAXM, HyperV)
 
-Emulateur Android = Accelerateur materiel/emulation (HAXM, HyperV)
+**Important** - Cycle de vie d'une Activity:
+
+![Cycle de vie d'une activité](/img/kotlin_activity-lifecycle.png)
 
 ---
 

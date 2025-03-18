@@ -5,7 +5,7 @@ description: Logiciels, extensions, plugins...
 
 # Software
 
-## VS Code
+## VS Code Extensions
 
 <em>en vrac... à trier/compléter</em>
 
@@ -18,6 +18,6 @@ description: Logiciels, extensions, plugins...
 - Markdown PDF
 - Inline Fold (Tailwind)
 
-### Analyse et conception
+## Analyse et conception
 
 - Umlet
