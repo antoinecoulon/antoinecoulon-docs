@@ -20,7 +20,7 @@ description: Notions diverses de dev
 - [Guard Clauses](https://dev.to/maximegel/guard-clauses-explained-13aa)
 - [Replace Nested Conditionnals with Guard Clauses](https://refactoring.guru/replace-nested-conditional-with-guard-clauses)
 
-Ex: Au lieu de return, de if...else, on utilise des codes et des messages associés
+Ex: Au lieu de if...else, on utilise des codes et des messages associés
 ```bash
 PS D:\AndroidStudioProjects\ApiArticle> node app.js
 Le serveur a démarré
