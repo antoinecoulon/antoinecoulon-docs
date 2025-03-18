@@ -29,8 +29,9 @@ IDE: **Android Studio**
     - [Components](#components)
     - [Routing](#routing)
     - [ViewModel](#viewmodel)
-    - [Webservices](#webservices)
+    - [Webservices (API)](#webservices-api)
     - [Dialog](#dialog)
+    - [Webservices (API) (2)](#webservices-api-2)
     - [Design](#design)
     - [Traduction](#traduction)
 
@@ -292,7 +293,7 @@ fun HomeScreen(navController: NavController) {}
 Vulgarisation du ViewModel
 ![ViewModel](/img/kotlin_vulgarisation_mvvm.png)
 
-### Webservices
+### Webservices (API)
 
 Ajouter les dépendances suivantes: 
 ```kotlin title="build.gradle.kts"
@@ -546,6 +547,55 @@ fun loadArticles(callback: () -> Unit) {
     
         // On attend que la tâche ASYNC soit terminée
         AppDialogHelper.get().closeDialog()
+    }
+}
+```
+
+### Webservices (API) (2)
+**Utilisation avec une API "réelle":**
+
+```kotlin title="RetrofitTools.kt"
+val BASE_URL = "http://165.232.147.139:3000/"
+```
+
+On créé une classe utilitaire ResponseAPI qui contient 'code', 'message' et 'data' (data est de type générique car peut changer)
+```kotlin title="api/ResponseAPI.kt"
+class ResponseAPI<T>(var code: String = "", var message: String = "", var data : T?) {
+}
+```
+
+On modifie l'adresse du 'GET' dans le service Article:
+```kotlin title="ArticleService.kt"
+@GET("articles")
+suspend fun getArticles(): ResponseAPI<List<Article>>
+```
+
+Afin de pouvoir atteindre des adresses en dehors du serveur local, il faut modifier le Manifest:
+```xml title="AndroidManifest.xml"
+<application
+    android:usesCleartextTraffic="true"
+```
+
+Enfin dans le viewModel.launch du ArticleViewModel:
+```kotlin title="ArticleViewModel.kt"
+viewModelScope.launch {
+
+    // Simuler 1 sec de lag en dev pour voir la popup
+    delay(1000)
+
+    // Maintenant le retour de l'API est un code, un message et le data
+    val apiResponse = ArticleService.ArticleApi.articleService.getArticles()
+
+    // On attend que la tâche ASYNC soit terminée
+    AppDialogHelper.get().closeDialog()
+
+    // Afficher le message
+    // TODO: pour l'instant le message est dans la console
+    println(apiResponse.message)
+
+    // Tester si OK (code == 200)
+    if(apiResponse.code.equals("200")) {
+        articles.value = apiResponse.data!!
     }
 }
 ```
