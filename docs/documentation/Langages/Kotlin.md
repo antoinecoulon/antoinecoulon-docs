@@ -5,12 +5,9 @@ description: Android Jetpack Compose
 
 # Kotlin
 
----
-
 **Android Jetpack Compose**
 
-IDE: **Android Studio**
-
+---
 ### Sommaire
 - [Kotlin](#kotlin)
     - [Sommaire](#sommaire)
@@ -553,6 +550,10 @@ fun loadArticles(callback: () -> Unit) {
 
 ### Webservices (API) (2)
 **Utilisation avec une API "réelle":**
+
+Diagramme du processus:
+
+![Diagramme API](/img/kotlin_processus-api.drawio.png)
 
 ```kotlin title="RetrofitTools.kt"
 val BASE_URL = "http://165.232.147.139:3000/"
