@@ -8,9 +8,8 @@ description: Android Jetpack Compose
 **Android Jetpack Compose**
 
 ---
-### Sommaire
+
 - [Kotlin](#kotlin)
-    - [Sommaire](#sommaire)
   - [Repos](#repos)
   - [Ressources](#ressources)
   - [Doc](#doc)
