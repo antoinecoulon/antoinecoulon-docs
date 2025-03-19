@@ -7,6 +7,7 @@ description: Notions diverses de dev
 <em>à trier et organiser...</em>
 
 - [Notions diverses](#notions-diverses)
+  - [HTTP et requêtes](#http-et-requêtes)
   - [Guard Clauses](#guard-clauses)
   - [Tests](#tests)
     - [Tests unitaires](#tests-unitaires)
@@ -20,7 +21,16 @@ description: Notions diverses de dev
     - [🚨 En résumé, pour se protéger...](#-en-résumé-pour-se-protéger)
 
 ---
+## HTTP et requêtes
 
+Il y a plein de façons différentes d'accéder à une API afin d'en lire les données (commandes, navigateur, postman...).
+
+Une API est donc cross-platoform et ne dépend pas d'un OS spécifique.
+
+
+
+
+---
 ## Guard Clauses
 
 - Tests fonctionnels
