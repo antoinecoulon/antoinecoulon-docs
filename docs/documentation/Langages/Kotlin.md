@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 description: Android Jetpack Compose
 ---
 
@@ -41,11 +41,11 @@ description: Android Jetpack Compose
 
 ## Ressources
 
-- [Docs formateur ENI](https://chocolaterie.github.io/documentation/docs/category/android-kotlin)
-- [Kotlin Playground](https://play.kotlinlang.org/) - Bac à sable Kotlin
-- [GeeksforGeeks Tutorials](https://www.geeksforgeeks.org/android-jetpack-compose-tutorial/) - Divers tutos
-- [Free Android Resources](https://dev.to/mjpasx/free-android-resources-52ec) - Cours, docs, ressources
-- [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/) - Constructeur de thèmes Material
+> - [Docs formateur ENI](https://chocolaterie.github.io/documentation/docs/category/android-kotlin)
+> - [Kotlin Playground](https://play.kotlinlang.org/) - Bac à sable Kotlin
+> - [GeeksforGeeks Tutorials](https://www.geeksforgeeks.org/android-jetpack-compose-tutorial/) - Divers tutos
+> - [Free Android Resources](https://dev.to/mjpasx/free-android-resources-52ec) - Cours, docs, ressources
+> - [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/) - Constructeur de thèmes Material
 
 ---
 
@@ -614,7 +614,7 @@ viewModelScope.launch {
 ### Login
 
 On définit les modèles qui correspondent à l'API:
-*** Ne pas oublier l'adresse de l'API dans le RetrofitTools ***
+*Ne pas oublier l'adresse de l'API dans le RetrofitTools*
 
 ```kotlin title="LoginRequestApi.kt"
 // Les valeurs par défaut sont utilisés pour l'env de dev et ne pas perdre de temps
