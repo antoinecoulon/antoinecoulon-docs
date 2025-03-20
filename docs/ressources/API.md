@@ -7,3 +7,4 @@ description: Liste d'APIs et notions
 
 - [Tests API](https://swagger.io/docs/)
 - [Liste d'APIs publiques](https://github.com/public-apis/public-apis)
+- [DummyJSON](https://dummyjson.com/)
