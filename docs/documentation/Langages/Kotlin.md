@@ -26,7 +26,7 @@ description: Android Jetpack Compose
     - [Routing](#routing)
     - [ViewModel](#viewmodel)
     - [Webservices (API)](#webservices-api)
-    - [Dialog](#dialog)
+    - [Dialog / Toasts](#dialog--toasts)
     - [Webservices (API) (2)](#webservices-api-2)
     - [Login](#login)
     - [Design](#design)
@@ -438,7 +438,7 @@ Schéma:
 
 ![Schéma API](/img/kotlin_schema_API.png)
 
-### Dialog
+### Dialog / Toasts
 
 Utilisation de la classe Dialog qui permet d'afficher une boite de dialogue, ici on s'en servira pour afficher un loader.
 
@@ -548,6 +548,17 @@ fun loadArticles(callback: () -> Unit) {
 }
 ```
 
+Les messages toasts sont déjà implémentés dans Compose:
+```kotlin
+// Le contexte de l'application doit être déclaré:
+val context = LocalContext.current
+
+Toast.makeText(context, message, length).show()
+// context: est déclaré plus haut
+// message: est un String (ici appelé via un callback)
+// length: est Toast.LENGTH_SHORT ou Toast.LENGTH_LONG
+```
+
 ### Webservices (API) (2)
 **Utilisation avec une API "réelle":**
 
@@ -605,9 +616,9 @@ viewModelScope.launch {
 On définit les modèles qui correspondent à l'API:
 *** Ne pas oublier l'adresse de l'API dans le RetrofitTools ***
 
-```kotlin title="RequestApi.kt"
+```kotlin title="LoginRequestApi.kt"
 // Les valeurs par défaut sont utilisés pour l'env de dev et ne pas perdre de temps
-data class RequestAPI(var email: String = "isaac@gmail.com", var password: String = "password"){
+data class LoginRequestAPI(var email: String = "isaac@gmail.com", var password: String = "password"){
 }
 ```
 ```kotlin title="ResponseApi.kt"
