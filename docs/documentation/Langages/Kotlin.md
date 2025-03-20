@@ -28,6 +28,7 @@ description: Android Jetpack Compose
     - [Webservices (API)](#webservices-api)
     - [Dialog](#dialog)
     - [Webservices (API) (2)](#webservices-api-2)
+    - [Login](#login)
     - [Design](#design)
     - [Traduction](#traduction)
 
@@ -599,8 +600,108 @@ viewModelScope.launch {
     }
 }
 ```
+### Login
 
+On définit les modèles qui correspondent à l'API:
+*** Ne pas oublier l'adresse de l'API dans le RetrofitTools ***
 
+```kotlin title="RequestApi.kt"
+// Les valeurs par défaut sont utilisés pour l'env de dev et ne pas perdre de temps
+data class RequestAPI(var email: String = "isaac@gmail.com", var password: String = "password"){
+}
+```
+```kotlin title="ResponseApi.kt"
+data class ResponseAPI<T>(var code: String = "", var message: String = "", var data: T?) {
+}
+```
+
+On définit les routes de l'API:
+```kotlin title="AuthService.kt"
+interface AuthService {
+
+    companion object {
+      // Token stocké dans l'app, si redémarre, est supprimé
+      var token : String = ""
+    }
+
+    @POST("login")
+    suspend fun login(@Body requestAPI: RequestAPI): ResponseAPI<String>
+
+    object AuthApi {
+        val authService : AuthService by lazy { retrofit.create(AuthService::class.java) }
+    }
+}
+```
+
+On fait un ViewModel **réutilisable**:
+```kotlin title="AuthViewModel.kt"
+class AuthViewModel(): ViewModel() {
+
+    // Servira à lier les données dans les champs et à envoyer en JSON dans l'api
+    var requestAPI = MutableStateFlow(RequestAPI())
+
+    // onLoginSuccess est un CALLBACK
+    fun callLoginRequest(onLoginSuccess: () -> Unit = {}) {
+
+        AppDialogHelper.get().showDialog("Verifying credentials...")
+
+        viewModelScope.launch {
+            delay(1000)
+
+            // Appel API /login avec dans le body mon requestAPI (donc email + pwd)
+            val apiResponse = AuthService.AuthApi.authService.login(requestAPI.value)
+
+            AppDialogHelper.get().closeDialog()
+
+            when (apiResponse.code) {
+                "200" -> {
+                    AuthService.token = apiResponse.data!!
+
+                    AppDialogHelper.get().showDialog("Login successful, preparing articles...")
+
+                    // REDIRECT !
+                    // Le viewModel doit être réutilisable et donc indépendant de la navigation
+                    // à la place on utilise le Callback
+                    onLoginSuccess()
+
+                    AppDialogHelper.get().closeDialog()
+                }
+                "768" -> {
+                    AppDialogHelper.get().showDialog("Error: Wrong credentials. Please try again.")
+                    delay(1000)
+                    AppDialogHelper.get().closeDialog()
+                }
+            }
+        }
+    }
+}
+```
+
+Enfin dans l'activité:
+```kotlin title="HomeScreen.kt"
+// On observe l'objet qui contient l'email et le mot de passe
+val requestAPIState by viewModel.requestAPI.collectAsState()
+
+// On modifie les TextField
+TpTextField(
+    value = requestAPIState.email,
+    onValueChange = { value -> viewModel.requestAPI.value = viewModel.requestAPI.value.copy(email = value) },
+)
+TpTextField(
+    value = requestAPIState.password,
+    onValueChange = { value -> viewModel.requestAPI.value = viewModel.requestAPI.value.copy(password = value) },
+)
+
+// Dans le onClick du bouton, on appelle la fonction du viewmodel puis son callback pour le redirect
+TpButton(
+    buttonText = stringResource(R.string.app_btn_text_sign_in),
+    onClick = {
+        viewModel.callLoginRequest(
+            onLoginSuccess = { navController.navigate(Screens.Articles.route) }
+        )
+    }
+)
+```
 
 ---
 
