@@ -28,4 +28,6 @@ description: Cheatsheets pour différentes technos
 - [CSS](https://htmlcheatsheet.com/css/)
 - [JavaScript](https://htmlcheatsheet.com/js/)
 
-### 
+### Tailwind
+
+- [Tailwind CSS](https://nerdcave.com/tailwind-cheat-sheet)
