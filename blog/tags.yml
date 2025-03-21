@@ -22,3 +22,8 @@ api:
   label: Api
   permalink: /api
   description: Api tag description
+
+learn:
+  label: Learn
+  permalink: /learn
+  description: Learn tag description
