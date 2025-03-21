@@ -106,6 +106,14 @@ const config = {
                 label: 'Documentation',
                 to: '/docs/category/documentation',
               },
+              {
+                label: 'Ressources',
+                to: '/docs/category/ressources',
+              },
+              {
+                label: 'TODO: Projets',
+                to: '/docs/',
+              },
             ],
           },
           {

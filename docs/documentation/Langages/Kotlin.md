@@ -233,6 +233,8 @@ fun EniTextField(modifier: Modifier = Modifier, hintText : String = "") {
 
 ### Routing
 
+**Version Perso**
+
 Les deux fichiers suivants permettent de définir les routes, on les place dans un package "navigation":
 ```kotlin title="navigation/Screens.kt"
 package com.example.tpandroid.navigation
@@ -284,6 +286,107 @@ Puis dans chaque screen:
 @Composable
 fun HomeScreen(navController: NavController) {}
 ```
+
+**Version Formateur**
+
+
+Importer la librairie:
+```kotlin title="build.gradle.kts"
+    implementation(libs.androidx.navigation.compose)
+```
+
+Notre MainActivity servira de routeur:
+```kotlin
+class DemoNavActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            DemoAndroidTheme {
+                DemoNav()
+            }
+        }
+    }
+}
+
+@Composable
+fun DemoNav() {
+    NavHost() {
+        
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun DemoNavPreview() {
+    DemoAndroidTheme {
+        DemoNav()
+    }
+}
+```
+Puis...:
+```kotlin
+@Composable
+fun DemoNav() {
+    val navController = rememberNavController()
+    
+    NavHost(
+        navController = navController,
+        startDestination = "page1"
+    ) {
+        
+    }
+}
+```
+
+On peut simplement créer des liens entre deux pages:
+```kotlin
+@Composable
+fun Page2() {
+    Column { 
+        Text("Page 2")
+    }
+}
+
+@Composable
+fun DemoNav() {
+    val navController = rememberNavController()
+
+    NavHost(
+        navController = navController,
+        startDestination = "page1"
+    ) {
+        composable("page1") { // Déclarer une page
+            // Ajouter le design, qui peut être un simple élément...
+            Column {
+                Text("Page 1")
+                ElevatedButton(onClick = {
+                    navController.navigate("page2") // le ".navigate("id_page") pour faire le lien vers l'autre page
+                }) { Text("Ouvrir Page 2") }
+            }
+        }
+        composable("page2") { 
+            // Ou un composable/une page entier(e)
+            Page2()
+        }
+    }
+}
+```
+
+On peut maintenant transférer le navController à un autre composant:
+```kotlin
+@Composable
+fun Page2(navController: NavHostController) {
+    Column {
+        Text("Page 2")
+        ElevatedButton(onClick = {
+            navController.navigate("page1")
+        }) { Text("Retour page 1") }
+    }
+}
+```
+
+---
 
 ### ViewModel
 

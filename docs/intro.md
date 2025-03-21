@@ -24,18 +24,18 @@ Il est en construction...
     - [Express.js](https://antoinecoulon.github.io/antoinecoulon-docs/docs/documentation/Langages/Express.js)
     - [Node.js](https://antoinecoulon.github.io/antoinecoulon-docs/docs/documentation/Langages/Node.js)
     - [Kotlin](https://antoinecoulon.github.io/antoinecoulon-docs/docs/documentation/Langages/Kotlin)
-    - [HTML - CSS]
-    - [Tailwind CSS - Bootstrap]
-    - [PHP - Symfony]
-    - [Angular]
-    - [Base de données]
-    - [Java - Spring Boot]
-    - [JavaScript]
+    - [HTML - CSS](https://antoinecoulon.github.io/antoinecoulon-docs/docs/documentation/Langages/HTML_CSS)
+    - [Tailwind CSS - Bootstrap](https://antoinecoulon.github.io/antoinecoulon-docs/docs/documentation/Langages/TailwindCSS_Bootstrap)
+    - [PHP - Symfony](https://antoinecoulon.github.io/antoinecoulon-docs/docs/documentation/Langages/PHP-Symfony)
+    - [Angular](https://antoinecoulon.github.io/antoinecoulon-docs/docs/documentation/Langages/Angular)
+    - [Base de données](https://antoinecoulon.github.io/antoinecoulon-docs/docs/documentation/Langages/Database)
+    - [Java - Spring Boot](https://antoinecoulon.github.io/antoinecoulon-docs/docs/documentation/Langages/JAVA-Spring_boot)
+    - [JavaScript](https://antoinecoulon.github.io/antoinecoulon-docs/docs/documentation/Langages/JavaScript)
   - [Ressources]
-    - [Cheatsheets]
-    - [Boîte à outils]
-    - [Software]
-    - [UI]
-    - [Open Source]
-    - [API]
-  - [CDA]
+    - [Cheatsheets](https://antoinecoulon.github.io/antoinecoulon-docs/docs/ressources/Cheatsheets)
+    - [Boîte à outils](https://antoinecoulon.github.io/antoinecoulon-docs/docs/ressources/Outils)
+    - [Software](https://antoinecoulon.github.io/antoinecoulon-docs/docs/ressources/Software)
+    - [UI](https://antoinecoulon.github.io/antoinecoulon-docs/docs/ressources/UI)
+    - [Open Source](https://antoinecoulon.github.io/antoinecoulon-docs/docs/ressources/Open-Source)
+    - [API](https://antoinecoulon.github.io/antoinecoulon-docs/docs/ressources/API)
+  - [CDA](https://antoinecoulon.github.io/antoinecoulon-docs/docs/CDA-2025)
