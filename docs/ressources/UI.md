@@ -6,6 +6,13 @@ description: Images, icones, animations, sprites...
 # UI
 
 - [UiVerse](https://uiverse.io/) - UI Elements (CSS, Tailwind, React…)
+- [AtroposJs](https://atroposjs.com/) - 3D hover effects
+- [Toggles.dev](https://toggles.dev/) - Theme toggles
+- [Uiball](https://uiball.com/ldrs/) - Loaders
+
+- [ShadcnUI](https://ui.shadcn.com/docs) - Components (Tailwind, React, etc)
+- [ShadcnUI color customizer](https://customizer.railly.dev/)
+- [Aceternity](https://ui.aceternity.com/components/3d-card-effect) - + de components
 
 ---
 ## Images / Illustrations
