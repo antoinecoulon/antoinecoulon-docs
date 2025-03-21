@@ -41,6 +41,7 @@
 > - [GeeksforGeeks Tutorials](https://www.geeksforgeeks.org/android-jetpack-compose-tutorial/) - Divers tutos
 > - [Free Android Resources](https://dev.to/mjpasx/free-android-resources-52ec) - Cours, docs, ressources
 > - [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/) - Constructeur de thèmes Material
+> - [Doc Retrofit](https://square.github.io/retrofit/)
 
 ---
 
