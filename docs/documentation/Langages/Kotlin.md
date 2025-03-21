@@ -1,8 +1,3 @@
----
-sidebar_position: 5
-description: Android Jetpack Compose
----
-
 # Kotlin
 
 **Android Jetpack Compose**

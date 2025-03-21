@@ -1,7 +1,6 @@
----
-sidebar_position: 4
----
+# Node.js
 
+- [Node.js](#nodejs)
 - [Introduction](#introduction)
   - [Les Bases de Node.js](#les-bases-de-nodejs)
   - [Modules en Node.js](#modules-en-nodejs)

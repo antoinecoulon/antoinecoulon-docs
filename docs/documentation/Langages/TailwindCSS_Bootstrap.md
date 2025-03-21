@@ -1,7 +1,3 @@
----
-sidebar_position: 7
----
-
 # Tailwind CSS / Bootstrap
 
 - [Tailwind CSS / Bootstrap](#tailwind-css--bootstrap)

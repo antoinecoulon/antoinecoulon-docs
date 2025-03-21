@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # HTML / CSS
 
 - [HTML / CSS](#html--css)

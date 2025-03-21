@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # TypeScript
 
 *Première approche en cours Eni: Angular*

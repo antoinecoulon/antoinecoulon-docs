@@ -1,7 +1,3 @@
----
-sidebar_position: 8
----
-
 # PHP / Symfony
 
 - [PHP / Symfony](#php--symfony)

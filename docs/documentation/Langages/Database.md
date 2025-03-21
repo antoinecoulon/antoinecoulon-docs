@@ -1,7 +1,3 @@
----
-
----
-
 # Base de données
 
 - [Base de données](#base-de-données)
