@@ -110,10 +110,7 @@ const config = {
                 label: 'Ressources',
                 to: '/docs/category/ressources',
               },
-              {
-                label: 'TODO: Projets',
-                to: '/docs/',
-              },
+              // TODO: Projets
             ],
           },
           {
