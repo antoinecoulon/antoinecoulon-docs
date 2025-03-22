@@ -30,7 +30,7 @@ description: Images, icones, animations, sprites...
 ---
 ## Librairies SVG
 
-- [SVGL](https://svgl.app/)
+- [SVGL](https://svgl.app/) - Icônes SVG Dev Languages
 
 ---
 ## Icones
