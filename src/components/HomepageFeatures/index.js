@@ -16,7 +16,7 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Articles / Blog ???',
+    title: 'Blog',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
@@ -24,6 +24,19 @@ const FeatureList = [
           className="button button--secondary button--lg"
           to="/blog">
           Aller sur le blog !
+        </Link>
+      </>
+    ),
+  },
+  {
+    title: 'Projet en cours',
+    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    description: (
+      <>
+        <Link
+          className="button button--secondary button--lg"
+          to="/portfolio-project">
+          Personal portfolio
         </Link>
       </>
     ),
