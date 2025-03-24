@@ -15,6 +15,9 @@
   - [Créer son premier composant](#créer-son-premier-composant)
     - [Structure d'un composant](#structure-dun-composant)
     - [Décorateurs principaux](#décorateurs-principaux)
+  - [Communication entre composants](#communication-entre-composants)
+    - [Directives](#directives)
+    - [Directives structurelles](#directives-structurelles)
 
 ---
 
@@ -159,3 +162,43 @@ Un dossier 'hello-world' a été créé dans /src/app avec tous les fichiers né
 
 - @Component() - Définit un composant
 - @Injectable() - Service injectable
+
+---
+
+## Communication entre composants
+
+- Services : communication transverse
+- Signals : état réactif (depuis Angular 17)
+- Observables : gestion de flux de données
+
+### Directives
+
+- Interpolation `{{ }}` -> `{{ data }}`
+
+![Interpolation](/img/angular_interpolation.PNG)
+
+- Property binding `[ ]` -> `[property]="data"`
+
+![Property binding](/img/angular_property-binding.PNG)
+
+- Event binding `( )` -> `(event)="handler()"`
+
+![Event binding](/img/angular_event-binding.PNG)
+
+- Two-wat binding `[( )]` -> `[(ngModel)]="data"`
+
+![Two Way Binding](/img/angular_twoway-binding.PNG)
+
+### Directives structurelles
+
+- @for
+
+![for](/img/angular_for.PNG)
+
+- @if
+
+![if](/img/angular_if.PNG)
+
+- @switch
+
+![switch](/img/angular_switch.PNG)
