@@ -24,6 +24,7 @@
 ## Ressources
 
 - [Doc](https://angular.dev/overview)
+- [Repo](https://github.com/antoinecoulon/ws-angular)
 - [Simon DIENY](https://www.youtube.com/channel/UCZqq_ow06Husetd9ICEM2gQ/videos)
 
 ---
