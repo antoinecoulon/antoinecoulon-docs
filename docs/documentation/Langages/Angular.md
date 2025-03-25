@@ -26,6 +26,7 @@
     - [Injecter un service](#injecter-un-service)
   - [Routing et navigation](#routing-et-navigation)
     - [Routes simples](#routes-simples)
+    - [Routes avec paramètres](#routes-avec-paramètres)
 
 ---
 
@@ -364,4 +365,41 @@ A terme le fichier `app.component.ts` ressemblera à:
 <router-outlet></router-outlet> // Cette partie seulement est rafraichie
 
 <FooterComponent />
+```
+
+### Routes avec paramètres
+
+La classe ActivatedRoute permet de gérer les paramètres.
+
+Configuration :​
+
+```js
+const routes: Routes = [​
+  { path: 'product/:id', component: HomeComponent },​
+];​
+```
+
+Redirection :​
+
+```js
+goToAbout() {​
+  this.router.navigate(['/about', 123456]);​
+}​
+```
+
+Récupération des arguments​:
+
+```js
+constructor(private route: ActivatedRoute) { }
+
+ngOnInit() {​
+  const id = this.route.snapshot.paramMap.get('id');​
+  console.log(id);
+}
+```
+
+Enfin dans le html:
+
+```html
+<a [routerLink]="['/product', 12]">Contact</a>
 ```
