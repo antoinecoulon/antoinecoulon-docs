@@ -18,6 +18,7 @@
   - [Communication entre composants](#communication-entre-composants)
     - [Directives](#directives)
     - [Directives structurelles](#directives-structurelles)
+  - [Installer Tailwind (v4)](#installer-tailwind-v4)
 
 ---
 
@@ -204,3 +205,25 @@ Un dossier 'hello-world' a été créé dans /src/app avec tous les fichiers né
 - @switch
 
 ![switch](/img/angular_switch.PNG)
+
+## Installer Tailwind (v4)
+
+```bash
+npm install tailwindcss @tailwindcss/postcss postcss --force
+```
+
+Create a `.postcssrc.json` file in the root of your project and add the `@tailwindcss/postcss` plugin to your PostCSS configuration.
+
+```json title=".postcssrc.json"
+{
+  "plugins": {
+    "@tailwindcss/postcss": {}
+  }
+}
+```
+
+Add an `@import` to `./src/styles.css` that imports Tailwind CSS.
+
+```css title="styles.css"
+@import "tailwindcss";
+```
