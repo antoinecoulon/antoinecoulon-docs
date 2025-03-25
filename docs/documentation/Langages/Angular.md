@@ -19,6 +19,13 @@
     - [Directives](#directives)
     - [Directives structurelles](#directives-structurelles)
   - [Installer Tailwind (v4)](#installer-tailwind-v4)
+  - [Services](#services)
+    - [Rôles et responsabilités](#rôles-et-responsabilités)
+    - [Exemple de service :​](#exemple-de-service-)
+    - [Créer un service](#créer-un-service)
+    - [Injecter un service](#injecter-un-service)
+  - [Routing et navigation](#routing-et-navigation)
+    - [Routes simples](#routes-simples)
 
 ---
 
@@ -226,4 +233,135 @@ Add an `@import` to `./src/styles.css` that imports Tailwind CSS.
 
 ```css title="styles.css"
 @import "tailwindcss";
+```
+
+---
+
+## Services
+
+### Rôles et responsabilités
+
+Le pattern **MVVM (Model-View-ViewModel)** est une architecture logicielle utilisée principalement dans le développement d'applications frontend. Voici une définition simple :​
+
+*Model* : Représente les données de l'application et la logique métier. Il est responsable de la récupération et de la gestion des données.​
+
+*View* : C'est l'interface utilisateur. Elle affiche les données et envoie les interactions de l'utilisateur au ViewModel.​
+
+*ViewModel* : Sert d'intermédiaire entre le Model et la View. Il récupère les données du Model et les prépare pour la View. Il gère également les interactions de l'utilisateur en mettant à jour le Model en conséquence.​
+
+Exemples de fonctions qui peuvent être positionnées dans un Service :​
+
+- Gestion d'authentification et d'autorisation​
+- Gestion d'envoi d'email​
+- Gestion de paiement en ligne​
+- Gestion de génération de rapports​
+- Gestion de traitement d'image​
+- Gestion de communication avec des API externes​
+- etc.​
+
+Les Services peuvent être injectés dans les Contrôleurs pour être utilisés et peuvent également être testés indépendamment du reste de l'application.​
+
+### Exemple de service :​
+
+```js
+import { Injectable } from '@angular/core';​
+​
+@Injectable({​
+  providedIn: 'root'​
+})​
+export class MonService {​
+  private data: string[];​
+  constructor(private httpClient: HttpClient) {​
+    this.data = ['donnée1', 'donnée2', 'donnée3'];​
+  }​
+  getData() {​
+    return this.data;​
+  }​
+  getDataFromApi() {​
+    return this.httpClient.get('https://monapi.com/data');​
+  }​
+}
+```
+
+### Créer un service
+
+```bash
+ng generate service services/nomDuService
+```
+
+### Injecter un service
+
+Plusieurs solutions:
+
+- Par un constructeur
+
+```js
+products?: Product[]
+
+constructor(private readonly productsService: ProductService) {
+  this.products = this.productsService.fetchProducts()
+}
+```
+
+- Avec `inject()`
+
+```js
+products?: Product[]
+
+private readonly productsService: ProductService = inject(ProductService)
+
+ngOnInit() {
+  this.products = this.productsService.fetchProducts()
+}
+```
+
+*voir aussi:* [LifeCycle Hooks Angular](https://angular.dev/guide/components/lifecycle)
+
+## Routing et navigation
+
+On peut déclarer nos routes dans le fichier `app.routes` ou via le *lazy loading*
+
+### Routes simples
+
+```js title="app.routes.ts"
+import { Routes } from '@angular/router';​
+​
+const routes: Routes = [​
+  { path: '', component: HomeComponent },​
+  { path: 'about', component: AboutComponent },​
+  { path: 'contact', component: ContactComponent },​
+
+  { path: '**', component: NotFoundComponent },​ // L'URL n'existe pas
+  // { path: '**', redirectTo: '', pathMatch: 'full' },
+];
+```
+
+On ajoute dans le composant principal (`app.component.ts`) un composant spécial: `<router-outlet></router-outlet>`, c'est lui qui va gérer l'affichage et le changement d'une route.
+
+Pour naviguer vers une route depuis un composant, on peut utiliser le service Router​:
+
+```js
+constructor(private router: Router) { }​
+​
+goToAbout() {​
+  this.router.navigate(['/about']);​
+}​
+```
+
+La méthode navigate permet de naviguer vers une route, en passant en paramètre le chemin de l'URL.
+
+Pour créer un lien vers une page, on utilise pas l'attribut `href=` sinon on casserait le principe de SPA. On va plutôt utiliser le `router-link` de la classe `RouterLink`:
+
+```js
+<a router-link="/">Home</a>
+```
+
+A terme le fichier `app.component.ts` ressemblera à:
+
+```js title="app.component.ts"
+<HeaderComponent />
+
+<router-outlet></router-outlet>
+
+<FooterComponent />
 ```
