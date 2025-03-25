@@ -361,7 +361,7 @@ A terme le fichier `app.component.ts` ressemblera à:
 ```js title="app.component.ts"
 <HeaderComponent />
 
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> // Cette partie seulement est rafraichie
 
 <FooterComponent />
 ```
