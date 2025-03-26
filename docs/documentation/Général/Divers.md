@@ -15,16 +15,12 @@ description: Notions diverses de dev
     - [Tests unitaires](#tests-unitaires)
     - [Tests fonctionnels](#tests-fonctionnels)
   - [Sécurité](#sécurité)
-    - [💣 Attaque XSS (cross-site scripting)](#-attaque-xss-cross-site-scripting)
-    - [💣 Attaque XSS par l'URL](#-attaque-xss-par-lurl)
-    - [💣 Injections SQL](#-injections-sql)
-    - [💣 Attaque CSRF (cross-site request forgery)](#-attaque-csrf-cross-site-request-forgery)
-    - [💣 Attaque par force brute](#-attaque-par-force-brute)
-    - [🚨 En résumé, pour se protéger](#-en-résumé-pour-se-protéger)
-    - [💥 Attaques XSS](#-attaques-xss)
-    - [💥 Injections SQL](#-injections-sql-1)
-    - [💥 Attaques CSRF](#-attaques-csrf)
-    - [💥 Attaques par force brute](#-attaques-par-force-brute)
+    - [Attaque XSS (cross-site scripting)](#attaque-xss-cross-site-scripting)
+    - [Attaque XSS par l'URL](#attaque-xss-par-lurl)
+    - [Injections SQL](#injections-sql)
+    - [Attaque CSRF (cross-site request forgery)](#attaque-csrf-cross-site-request-forgery)
+    - [Attaque par force brute](#attaque-par-force-brute)
+    - [En résumé, pour se protéger](#en-résumé-pour-se-protéger)
 
 ---
 
@@ -108,7 +104,7 @@ Tester une fonctionnalité, mais entière
 
 ## Sécurité
 
-### 💣 Attaque XSS (cross-site scripting)
+### Attaque XSS (cross-site scripting)
 
 L'idée est d'injecter des balises HTML dans notre site victime 😆.
 
@@ -147,7 +143,7 @@ En 2e couche de protection, au moment de l'affichage, ils auraient dû transform
 </div>
 ```
 
-### 💣 Attaque XSS par l'URL
+### Attaque XSS par l'URL
 
 Les données d'un utilisateur peuvent provenir d'un formulaire, mais aussi directement depuis l'URL ! Il est donc possible de réaliser des attaques XSS (dites non-persistantes) en manipulant les paramètres des urls 😆.
 
@@ -181,7 +177,7 @@ Avant d'afficher *mon* terme de recherche dans *leur* page, ils l'ont filtré av
 <h2><?= htmlentities($keyword) ?> sur AlloCiné</h2>
 ```
 
-### 💣 Injections SQL
+### Injections SQL
 
 L'idée est de faire exécuter nos propres requêtes SQL sur la base de données de notre site victime 😆.
 
@@ -253,7 +249,7 @@ $stmt->bindValue(":username", $username);
 
 Ils auraient été protégés virtuellement à 100% seulement en faisant ça. Un peu plus long, mais ça vaut le coup !
 
-### 💣 Attaque CSRF (cross-site request forgery)
+### Attaque CSRF (cross-site request forgery)
 
 À prononcer *siseurf* ! Eh oui !
 
@@ -316,7 +312,7 @@ Et oui, si vous vous posez la question : le site devrait en principe insérer un
 
 Mais *rejoice* : des frameworks comme Symfony incluent une protection totale contre les attaques CSRF par défaut !
 
-### 💣 Attaque par force brute
+### Attaque par force brute
 
 Par essais et erreurs, vous essayer de déterminer le mot de passe de votre victime et de vous connecter avec son compte 😆.
 
@@ -369,27 +365,27 @@ Mais le site pouvait-il faire quelque chose pour arrêter cette attaque ?
 
 À vrai dire, mieux vaut s'en remettre à son sysadmin et lui dire de mettre en place [fail2ban](https://www.fail2ban.org/) 🕶️
 
-### 🚨 En résumé, pour se protéger
+### En résumé, pour se protéger
 
-### 💥 Attaques XSS
+- Attaques XSS
 
 - retirer les balises HTML avec strip_tags() quand on récupère des données utilisateurs
 - échapper les caractères spéciaux avant l'affichage avec htmlentities()
 - [strip_tags](https://www.php.net/manual/fr/function.strip-tags.php) / [htmlentities](https://www.php.net/manual/fr/function.htmlentities.php)
 
-### 💥 Injections SQL
+- Injections SQL
 
 - Toujours utiliser les requêtes préparées, avec $pdo->prepare();
 - Les données de la requête sont placées dans des paramètres nommés
 - [prepare](https://www.php.net/manual/fr/pdo.prepare.php) / [bindvalue](https://www.php.net/manual/fr/pdostatement.bindvalue.php)
 
-### 💥 Attaques CSRF
+- Attaques CSRF
 
 - Générer un token aléatoire avant chaque affichage de formulaire
 - S'assurer que le token envoyé est le même que celui en session
 - [random_bytes](https://www.php.net/manual/fr/function.random-bytes.php) / [sessions PHP](https://www.php.net/manual/fr/reserved.variables.session.php)
 
-### 💥 Attaques par force brute
+- Attaques par force brute
 
 - [fail2ban](https://www.fail2ban.org/)
 
