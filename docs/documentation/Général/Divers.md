@@ -4,9 +4,11 @@ description: Notions diverses de dev
 ---
 
 # Notions diverses
-<em>à trier et organiser...</em>
+
+*à trier et organiser...*
 
 - [Notions diverses](#notions-diverses)
+  - [Ressources diverses](#ressources-diverses)
   - [HTTP et requêtes](#http-et-requêtes)
   - [Guard Clauses](#guard-clauses)
   - [Tests](#tests)
@@ -18,19 +20,28 @@ description: Notions diverses de dev
     - [💣 Injections SQL](#-injections-sql)
     - [💣 Attaque CSRF (cross-site request forgery)](#-attaque-csrf-cross-site-request-forgery)
     - [💣 Attaque par force brute](#-attaque-par-force-brute)
-    - [🚨 En résumé, pour se protéger...](#-en-résumé-pour-se-protéger)
+    - [🚨 En résumé, pour se protéger](#-en-résumé-pour-se-protéger)
+    - [💥 Attaques XSS](#-attaques-xss)
+    - [💥 Injections SQL](#-injections-sql-1)
+    - [💥 Attaques CSRF](#-attaques-csrf)
+    - [💥 Attaques par force brute](#-attaques-par-force-brute)
 
 ---
+
+## Ressources diverses
+
+- [AppWrite.io](https://appwrite.io/) - Build app
+
+---
+
 ## HTTP et requêtes
 
 Il y a plein de façons différentes d'accéder à une API afin d'en lire les données (commandes, navigateur, postman...).
 
 Une API est donc cross-platoform et ne dépend pas d'un OS spécifique.
 
-
-
-
 ---
+
 ## Guard Clauses
 
 - Tests fonctionnels
@@ -40,11 +51,13 @@ Une API est donc cross-platoform et ne dépend pas d'un OS spécifique.
 - Centraliser et rendre le code fonctionnel homogène
 - Plus de throw (dans la couche métier), moins d'exception
 
-**Aller plus loin:** 
+**Aller plus loin:**
+
 - [Guard Clauses](https://dev.to/maximegel/guard-clauses-explained-13aa)
 - [Replace Nested Conditionnals with Guard Clauses](https://refactoring.guru/replace-nested-conditional-with-guard-clauses)
 
 Ex: Au lieu de if...else, on utilise des codes et des messages associés
+
 ```bash
 PS D:\AndroidStudioProjects\ApiArticle> node app.js
 Le serveur a démarré
@@ -54,7 +67,9 @@ Le serveur a démarré
 ```
 
 ---
+
 ## Tests
+
 ### Tests unitaires
 
 Tester **unitairement** des fonctionnalités
@@ -87,9 +102,10 @@ Tester une fonctionnalité, mais entière
 
 **Outils** : Utilisent des outils comme Selenium pour les tests d'interface utilisateur, ou des frameworks comme Cucumber pour les tests d'acceptation.
 
-<em>Les tests unitaires et les tests fonctionnels sont complémentaires. Les tests unitaires permettent de s'assurer que chaque composant fonctionne correctement en isolation, tandis que les tests fonctionnels vérifient que le système dans son ensemble répond aux exigences et fonctionne comme prévu pour les utilisateurs finaux. Les deux types de tests sont essentiels pour garantir la qualité et la fiabilité du logiciel.</em>
+*Les tests unitaires et les tests fonctionnels sont complémentaires. Les tests unitaires permettent de s'assurer que chaque composant fonctionne correctement en isolation, tandis que les tests fonctionnels vérifient que le système dans son ensemble répond aux exigences et fonctionne comme prévu pour les utilisateurs finaux. Les deux types de tests sont essentiels pour garantir la qualité et la fiabilité du logiciel.*
 
 ---
+
 ## Sécurité
 
 ### 💣 Attaque XSS (cross-site scripting)
@@ -139,7 +155,7 @@ Les données d'un utilisateur peuvent provenir d'un formulaire, mais aussi direc
 
 Par exemple, en réalisant une recherche sur [http://allocine.fr](http://allocine.fr/), on constate que le mot-clef saisi se retrouve dans l'URL ET est réaffiché dans la page. Une recherche de *batman* m'amène sur l'URL http://www.allocine.fr/recherche/?q=batman et mon terme de recherche m'est représenté.
 
-Que se passe-t-il si je modifie ?q=batman par ?q=<h1>batman</h1> dans la barre d'adresse ? Est-ce que *batman* s'affiche en grand sur la page ? Si oui, attaque XSS par l'URL done !
+Que se passe-t-il si je modifie ?q=batman par ?q=< h1>batman< /h1> dans la barre d'adresse ? Est-ce que *batman* s'affiche en grand sur la page ? Si oui, attaque XSS par l'URL done !
 
 Malheureusement, l'attaque échoue sur AlloCiné 😢.
 
@@ -248,7 +264,7 @@ Plus compliquée, cette attaque... Elle permet de faire faire des choses à notr
 1. Trouvez un site mal protégé, par exemple où la soumission du formulaire de changement de mot de passe se fait en GET, et sans confirmation de l'ancien mdp.
 2. Assurez-vous que votre victime (un utilisateur du site) est actuellement connecté sur le site. He oui, c'est pas simple.
 3. Envoyez-lui un email comprenant un lien de ce type :
-4. <a href="http://www.site-mal-protege.com/change-password.php?newpass=tiguidou">Voir des chatons mignons</a>
+4. < a href="http://www.site-mal-protege.com/change-password.php?newpass=tiguidou">Voir des chatons mignons< /a>
 5. Si la victime clique sur votre lien, elle est amenée sans le savoir sur le site comportant la faille, et son mot de passe est changé pour *tigidou* !
 6. Vous pouvez maintenant vous connecter en tant que votre victime sur ce site, puisque vous connaissez son mot de passe.
 
@@ -283,17 +299,16 @@ Voici donc la seule manière qu'ils avaient de protéger leurs utilisateurs :
 
 </form>
 ```
- 
+
 - Lorsque le formulaire est soumis, *s'assurer que le token reçu (du formulaire) correspond bien à celui stocké en session*.
-    
-    - Si non, rejeter complètement la demande, c'est trop louche !! b. Si oui, vous savez que c'est bien votre site qui a affiché ce formulaire, et vous pouvez procéder au changement de mot de passe en base de données.
-    
+
+  - Si non, rejeter complètement la demande, c'est trop louche !! b. Si oui, vous savez que c'est bien votre site qui a affiché ce formulaire, et vous pouvez procéder au changement de mot de passe en base de données.
 
 **Comment fonctionne cette protection ?**
 
 Comment pouvons-nous contourner cette protection ??? Comment écririons nous notre lien maintenant ?
 
-<a href="http://www.site-mal-protege.com/change-password.php?newpass=tiguidou&token=?????">Voir des chatons mignons</a>
+<\a href="\http ://www.site-mal-protege.com/change-password.php?newpass=tiguidou&token=?????"> Voir des chatons mignons</a>
 
 On ne sait pas quelle valeur donner au token ! De toutes façons, si l'utilisateur n'est pas allé de lui-même sur le site, il n'a même pas de token en session ! Et nous sommes des pirates au chômage. Ils nous ont kill.
 
@@ -354,27 +369,27 @@ Mais le site pouvait-il faire quelque chose pour arrêter cette attaque ?
 
 À vrai dire, mieux vaut s'en remettre à son sysadmin et lui dire de mettre en place [fail2ban](https://www.fail2ban.org/) 🕶️
 
-### 🚨 En résumé, pour se protéger...
+### 🚨 En résumé, pour se protéger
 
-**💥 Attaques XSS**
+### 💥 Attaques XSS
 
 - retirer les balises HTML avec strip_tags() quand on récupère des données utilisateurs
 - échapper les caractères spéciaux avant l'affichage avec htmlentities()
 - [strip_tags](https://www.php.net/manual/fr/function.strip-tags.php) / [htmlentities](https://www.php.net/manual/fr/function.htmlentities.php)
 
-**💥 Injections SQL**
+### 💥 Injections SQL
 
 - Toujours utiliser les requêtes préparées, avec $pdo->prepare();
 - Les données de la requête sont placées dans des paramètres nommés
 - [prepare](https://www.php.net/manual/fr/pdo.prepare.php) / [bindvalue](https://www.php.net/manual/fr/pdostatement.bindvalue.php)
 
-**💥 Attaques CSRF**
+### 💥 Attaques CSRF
 
 - Générer un token aléatoire avant chaque affichage de formulaire
 - S'assurer que le token envoyé est le même que celui en session
 - [random_bytes](https://www.php.net/manual/fr/function.random-bytes.php) / [sessions PHP](https://www.php.net/manual/fr/reserved.variables.session.php)
 
-**💥 Attaques par force brute**
+### 💥 Attaques par force brute
 
 - [fail2ban](https://www.fail2ban.org/)
 
