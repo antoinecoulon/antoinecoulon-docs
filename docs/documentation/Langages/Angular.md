@@ -27,6 +27,7 @@
   - [Routing et navigation](#routing-et-navigation)
     - [Routes simples](#routes-simples)
     - [Routes avec paramètres](#routes-avec-paramètres)
+    - [Protéger les routes avec les Guards](#protéger-les-routes-avec-les-guards)
 
 ---
 
@@ -332,7 +333,7 @@ const routes: Routes = [​
   { path: 'about', component: AboutComponent },​
   { path: 'contact', component: ContactComponent },​
 
-  { path: '**', component: NotFoundComponent },​ // L'URL n'existe pas
+  { path: '**', component: NotFoundComponent },​ // L'URL n'existe pas = page d'erreur ou redirect
   // { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 ```
@@ -379,6 +380,17 @@ const routes: Routes = [​
 ];​
 ```
 
+Ou:
+
+```js
+const routes: Routes = [​
+  { path: 'products', children: [
+    {path: '', component: ProductsComponent},
+    {path: ':id', component: ProductCardComponent},
+  ]},​
+];​
+```
+
 Redirection :​
 
 ```js
@@ -402,4 +414,46 @@ Enfin dans le html:
 
 ```html
 <a [routerLink]="['/product', 12]">Contact</a>
+```
+
+### Protéger les routes avec les Guards
+
+```bash
+ng generate guard guards/nomDuGuard
+```
+
+```js title="Exemple de Guard généré"
+export const testGuard : CanActivateFn = (route, state) => {​
+  return true​
+}​
+
+route : ActivatedRouteSnaphot – state : RouterStateSnapsh
+```
+
+On associera le Guard à un service d'authentification. Exemple:
+
+```js
+export const authGuard: CanActivateFn = (route, state) => {​
+​
+  const authService = inject(AuthService)​
+  const router = inject(Router)​
+  const requiredRole = route.data['role'] ?? null​
+​
+  if (authService.isAuthenticated() && authService.hasRole(requiredRole)) {​
+    return true​
+  } else {​
+    router.navigate(['login'], {queryParams: {returnUrl: state.url, message : "Vous devez être connecté"}} );​
+    return false​
+  }​
+};
+```
+
+Pour utiliser un Guard, il suffit de l'ajouter à la propriété canActivate de la route protégée:
+
+```js title="app.routes.ts"
+export const routes: Routes = [​
+  {path: 'login', component: LoginPageComponent},​
+  {path: 'admin', component: AdminPageComponent, canActivate: [authGuard], data: {role: 'admin'}},​
+  {path: '**', component: HomePageComponent, canActivate: [authGuard]},​
+];
 ```
