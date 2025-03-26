@@ -304,7 +304,9 @@ Voici donc la seule manière qu'ils avaient de protéger leurs utilisateurs :
 
 Comment pouvons-nous contourner cette protection ??? Comment écririons nous notre lien maintenant ?
 
-> <ahref ="http ://www.site-mal-protege.com/change-password.php?newpass=tiguidou&token=?????"> Voir des chatons mignons</a>
+```html
+  <a href="http://www.site-mal-protege.com/change-password.php?newpass=tiguidou&token=?????"> Voir des chatons mignons</a>
+```
 
 On ne sait pas quelle valeur donner au token ! De toutes façons, si l'utilisateur n'est pas allé de lui-même sur le site, il n'a même pas de token en session ! Et nous sommes des pirates au chômage. Ils nous ont kill.
 
