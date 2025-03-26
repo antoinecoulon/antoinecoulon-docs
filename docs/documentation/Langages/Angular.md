@@ -28,6 +28,8 @@
     - [Routes simples](#routes-simples)
     - [Routes avec paramètres](#routes-avec-paramètres)
     - [Protéger les routes avec les Guards](#protéger-les-routes-avec-les-guards)
+  - [Formulaires](#formulaires)
+    - [Exemple d'utilisation des validateurs Angular :​](#exemple-dutilisation-des-validateurs-angular-)
 
 ---
 
@@ -319,6 +321,8 @@ ngOnInit() {
 
 *voir aussi:* [LifeCycle Hooks Angular](https://angular.dev/guide/components/lifecycle)
 
+---
+
 ## Routing et navigation
 
 On peut déclarer nos routes dans le fichier `app.routes` ou via le *lazy loading*
@@ -457,3 +461,76 @@ export const routes: Routes = [​
   {path: '**', component: HomePageComponent, canActivate: [authGuard]},​
 ];
 ```
+
+---
+
+## Formulaires
+
+### Exemple d'utilisation des validateurs Angular :​
+
+Importer Validators depuis @angular/forms :​
+
+```js
+import { Validators } from '@angular/forms';​
+```
+
+Utiliser Validators pour définir les règles de validation pour chaque champ :​
+
+```js
+this.monFormulaire = new FormGroup({​
+  nom: new FormControl('', Validators.required),​
+  email: new FormControl('', [Validators.required, Validators.email]),​
+  age: new FormControl('', [Validators.required, Validators.min(18)])​
+});​
+```
+
+Utilisez la propriété errors pour afficher les erreurs de validation dans le template :​
+
+```html
+<form [formGroup]="monFormulaire" (submit)="onFormSubmit()">​
+  <label for="nom">Nom :</label>​
+  <input type="text" id="nom" name="nom" formControlName="nom">​
+  @if (monFormulaire.get('nom')?.touched && monFormulaire.get('nom')?.invalid) {
+    @if(monFormulaire.get('nom')?.hasError('required')) {<span>Le nom est obligatoire</span>}​
+  }
+  
+​
+  <label for="email">Email :</label>​
+  <input type="email" id="email" name="email" formControlName="email">​
+  @if (monFormulaire.get('email')?.touched && monFormulaire.get('email')?.invalid) {
+    @if(monFormulaire.get('email')?.hasError('required')){<span>L'email est obligatoire</span>}​
+    @if(monFormulaire.get('email')?.hasError('email')){<span>L'email doit être valide</span>}
+  }​
+​
+  <button type="submit">Submit</button> ​<!-- on peut aussi désactiver le button tant que le form n'est pas valide -->
+</form>
+```
+
+Valider le formulaire avec le bouton submit​
+
+```js
+public onFormSubmit() {​
+  if (this.monFormulaire.valid) {​
+    console.log("FORMULAIRE VALIDE !");​
+  } else {​
+    console.log("FORMULAIRE INVALIDE !")​
+  }​
+}
+```
+
+Vous pouvez également créer vos propres validateurs personnalisés en créant une fonction qui implémente ValidatorFn et retourne un objet contenant les erreurs de validation.​
+
+```js
+import { ValidatorFn } from '@angular/forms’;​
+
+export function emailValidator(): ValidatorFn {​
+
+  return (control: AbstractControl<string>): {[key: string]: any} | null => {​
+
+  const forbidden = !control.value.endsWith(‘eni.fr’);​
+
+  return forbidden ? {'forbiddenEmail': {value: control.value}} : null;​
+
+  };​
+}​
+```​
