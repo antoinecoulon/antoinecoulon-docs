@@ -115,7 +115,7 @@ L'idée est d'injecter des balises HTML dans notre site victime 😆.
 **😈 Comment la réaliser ?**
 
 1. Trouvez un site web où un formulaire vous permet d'ajouter du contenu au site, ou de participer à celui-ci. Par exemple, Wikipédia, ou un formulaire de commentaire sous un article de blog.
-2. Écrivez des balises HTML dans les champs du formulaire. Par exemple, <h1>hihihi</h1>.
+2. Écrivez des balises HTML dans les champs du formulaire. Par exemple, < h1>hihihi< /h1>.
 3. Soumettez le formulaire. Votre "commentaire" sera alors sauvegardé en base de donnée.
 4. Rafraîchissez la page, et regardez si votre balise HTML est toujours là, et bien interprétée par le navigateur (ie le texte *hihihi* s'affiche en grand). Si oui, vous avez réussi une attaque XSS ! 👍
 5. Vous pouvez maintenant passer à l'étape supérieure et injecter des balises " img " ou plus vilain encore, des balises " script " 🔥
@@ -153,7 +153,7 @@ Les données d'un utilisateur peuvent provenir d'un formulaire, mais aussi direc
 
 **😈 Comment la réaliser ?**
 
-Par exemple, en réalisant une recherche sur [http://allocine.fr](http://allocine.fr/), on constate que le mot-clef saisi se retrouve dans l'URL ET est réaffiché dans la page. Une recherche de *batman* m'amène sur l'URL http://www.allocine.fr/recherche/?q=batman et mon terme de recherche m'est représenté.
+Par exemple, en réalisant une recherche sur [http://allocine.fr](http://allocine.fr/), on constate que le mot-clef saisi se retrouve dans l'URL ET est réaffiché dans la page. Une recherche de *batman* m'amène sur l'URL http: //www.allocine.fr/recherche/?q=batman et mon terme de recherche m'est représenté.
 
 Que se passe-t-il si je modifie ?q=batman par ?q=< h1>batman< /h1> dans la barre d'adresse ? Est-ce que *batman* s'affiche en grand sur la page ? Si oui, attaque XSS par l'URL done !
 
@@ -264,7 +264,7 @@ Plus compliquée, cette attaque... Elle permet de faire faire des choses à notr
 1. Trouvez un site mal protégé, par exemple où la soumission du formulaire de changement de mot de passe se fait en GET, et sans confirmation de l'ancien mdp.
 2. Assurez-vous que votre victime (un utilisateur du site) est actuellement connecté sur le site. He oui, c'est pas simple.
 3. Envoyez-lui un email comprenant un lien de ce type :
-4. < a href="http://www.site-mal-protege.com/change-password.php?newpass=tiguidou">Voir des chatons mignons< /a>
+4. < a href="http ://www.site-mal-protege.com/change-password.php?newpass=tiguidou">Voir des chatons mignons< /a>
 5. Si la victime clique sur votre lien, elle est amenée sans le savoir sur le site comportant la faille, et son mot de passe est changé pour *tigidou* !
 6. Vous pouvez maintenant vous connecter en tant que votre victime sur ce site, puisque vous connaissez son mot de passe.
 
@@ -337,7 +337,7 @@ Pour faire simple, imaginons que le formulaire de connexion soit fait en GET.
 $result = file_get_contents("https://www.lesite.com/login.php?pseudo=yo&pass=abc");
 ```
 
-On recherche sur StackOverflow comment générer toutes les combinaisons de lettres possibles : https://stackoverflow.com/questions/2617055/how-to-generate-all-permutations-of-a-string-in-php
+On recherche sur StackOverflow comment générer toutes les combinaisons de lettres possibles : https ://stackoverflow.com/questions/2617055/how-to-generate-all-permutations-of-a-string-in-php
 Puis on exécute la requête en boucle avec toutes ces permutations !
 
 ```php
