@@ -7,7 +7,7 @@ sidebar_position: 1
 Ce site sert de notes de cours...
 Il est en construction...
 
-[Cours, tutos, projets...](https://hackr.io/)
+**TODO:** Remplacer ce sommaire par une roadmap
 
 ## Liste des notes
 

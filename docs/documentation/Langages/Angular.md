@@ -30,6 +30,13 @@
     - [Protéger les routes avec les Guards](#protéger-les-routes-avec-les-guards)
   - [Formulaires](#formulaires)
     - [Exemple d'utilisation des validateurs Angular :​](#exemple-dutilisation-des-validateurs-angular-)
+  - [API REST](#api-rest)
+    - [Module HttpClient](#module-httpclient)
+    - [Méthode GET](#méthode-get)
+    - [Méthode POST](#méthode-post)
+    - [Observables](#observables)
+    - [Pratique](#pratique)
+    - [Config](#config)
 
 ---
 
@@ -502,7 +509,7 @@ Utilisez la propriété errors pour afficher les erreurs de validation dans le t
     @if(monFormulaire.get('email')?.hasError('email')){<span>L'email doit être valide</span>}
   }​
 ​
-  <button type="submit">Submit</button> ​<!-- on peut aussi désactiver le button tant que le form n'est pas valide -->
+  <button type="submit" [disabled]="!monFormulaire.valid" >Submit</button> ​<!-- on peut aussi désactiver le button tant que le form n'est pas valide -->
 </form>
 ```
 
@@ -532,5 +539,117 @@ export function emailValidator(): ValidatorFn {​
   return forbidden ? {'forbiddenEmail': {value: control.value}} : null;​
 
   };​
-}​
-```​
+}​;
+​
+```
+
+---
+
+## API REST
+
+Architecture web REST (Representational State Transfer): basé sur HTTP, utilise des ressources pour communiquer entre les clients et les serveurs. En comparaison avec un service SOAP, REST est moins réputé pour sa sécurité, mais est plus flexible, plus rapide et plus simple en général.
+
+### Module HttpClient
+
+- Injecter le service HttpClient dans le composant (ou service)​
+
+- Utiliser la méthode get(), post(), put() ou delete() (exemples)​
+
+- Passer l'URL de l'API en premier paramètre de la méthode​
+
+- Ajouter les paramètres optionnels tels que les headers ou le corps de la requête dans un objet en deuxième paramètre ([doc](https://angular.dev/guide/http/making-requests))​
+
+- Souscrire à l'observable retourné par la méthode pour récupérer la réponse de l’API​
+
+- *Attention v19* : [HttpClient](https://angular.dev/api/common/http/HttpClient?tab=usage-notes) / [Resource](https://angular.dev/guide/signals/resource) (cf. demo)​
+
+### Méthode GET
+
+```js
+import { HttpClient } from '@angular/common/http';​
+​
+constructor(private readonly http: HttpClient) {}​
+​
+this.http.get<dataType>('https://api.com/data').subscribe(​
+  (response) => {​
+    console.log(response);​
+  },​
+  (error) => {​
+    console.error(error);​
+  }​
+);
+```
+
+### Méthode POST
+
+```js
+import { HttpClient, HttpHeaders } from '@angular/common/http';​
+​
+constructor(private readonly http: HttpClient) {}​
+​
+const data = {​
+  name: 'John Doe',​
+  email: 'johndoe@mail.com'​
+};​
+​
+const headers = new HttpHeaders({​
+  'Content-Type': 'application/json'​
+});​
+​
+this.http.post('https://mon-api.com/data', data, { headers }).subscribe(​
+  (response) => {​
+    console.log(response);​
+  },​
+  (error) => {​
+    console.error(error);​
+  }​
+);
+```
+
+### Observables
+
+- Création d'un observable qui émet une valeur puis se termine​
+
+```js
+const observable = new Observable(subscriber => {​
+
+  subscriber.next('Bonjour RxJS!');​
+
+  subscriber.complete();​
+
+});​
+```
+
+- Souscription à l'observable pour recevoir les valeurs​
+
+```js
+observable.subscribe({​
+
+  next(x) { console.log('Valeur reçue: ' + x); },​
+
+  error(err) { console.error('Erreur: ' + err); },​
+
+  complete() { console.log('Terminé'); }​
+
+});
+```
+
+### Pratique
+
+- Récupérer une API (possible d'utiliser un outil pour transform JSON into TS)
+- Créer un modèle de données (typage) correspondant aux données renvoyées par l'API et à ce que l'on veut garder/utiliser
+- Créer un service qui va gérer la logique de récupération/renvoi des données
+- Créer un composant pour l'affichage des données reçues
+- Créer une variable d'environnement (```bash ng generate environments```)
+
+### Config
+
+Penser à ajouter dans le `app.config.ts`:
+
+```js title="app.config.ts"
+providers: [
+  //...
+  provideHttpClient()
+  //...
+]
+```

@@ -2,6 +2,7 @@
 
 - [Ressources](#ressources)
   - [Repos GitHub](#repos-github)
+  - [Diverses](#diverses)
 
 ---
 
@@ -13,3 +14,9 @@
 - [Awesome](https://github.com/sindresorhus/awesome) - Tutoriels, docs, ressources sur à peu près tout
 - [Computer Science](https://github.com/ossu/computer-science) - Ressources sciences de l'informatique
 - [First Contributions](https://github.com/firstcontributions/first-contributions) - Bases pour contribuer à l'open source
+
+---
+
+## Diverses
+
+[Hackr.io - Cours, tutos, projets...](https://hackr.io/)
