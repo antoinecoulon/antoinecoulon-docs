@@ -36,8 +36,13 @@ GET /api/data : Récupère toutes les données.
 GET /api/data/<!-- -->:id<!-- --> : Récupère une donnée par son ID.
 POST /api/data : Ajoute une nouvelle donnée (envoyez un JSON avec name et description dans le corps de la requête).
 PUT /api/data/<!-- -->:id<!-- --> : Met à jour une donnée existante (envoyez un JSON avec name et description dans le corps de la requête).
-DELETE /api/data/<!-- -->:id<!-- --> : Supprime une donnée par son ID.
-Avec ces étapes, vous avez une API de base fonctionnelle. Vous pouvez l'étendre en ajoutant plus de fonctionnalités, en connectant une base de données, ou en ajoutant des validations et des authentifications selon vos besoins.</p>]]></content>
+DELETE /api/data/<!-- -->:id<!-- --> : Supprime une donnée par son ID.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pour-aller-plus-loin">Pour aller plus loin<a href="https://antoinecoulon.github.io/antoinecoulon-docs/blog/create-api#pour-aller-plus-loin" class="hash-link" aria-label="Lien direct vers Pour aller plus loin" title="Lien direct vers Pour aller plus loin">​</a></h3>
+<ul>
+<li>Ajouter plus de fonctionnalités</li>
+<li>Connecter une base de données</li>
+<li>Ajouter des validations et des authentifications</li>
+</ul>]]></content>
         <author>
             <name>Antoine Coulon</name>
             <uri>https://github.com/antoinecoulon</uri>
