@@ -109,4 +109,9 @@ GET /api/data/:id : Récupère une donnée par son ID.
 POST /api/data : Ajoute une nouvelle donnée (envoyez un JSON avec name et description dans le corps de la requête).
 PUT /api/data/:id : Met à jour une donnée existante (envoyez un JSON avec name et description dans le corps de la requête).
 DELETE /api/data/:id : Supprime une donnée par son ID.
-Avec ces étapes, vous avez une API de base fonctionnelle. Vous pouvez l'étendre en ajoutant plus de fonctionnalités, en connectant une base de données, ou en ajoutant des validations et des authentifications selon vos besoins.
+
+### Pour aller plus loin
+
+- Ajouter plus de fonctionnalités 
+- Connecter une base de données
+- Ajouter des validations et des authentifications

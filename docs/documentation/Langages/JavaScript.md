@@ -15,3 +15,10 @@ The `let` declaration declares a block-scoped local variable, optionally initial
 ### const
 
 Constants are block-scoped, much like variables declared using the `let` keyword. The value of a constant can’t be changed through reassignment (i.e. by using the assignment operator), and it can’t be re-declared (i.e. through a variable declaration). However, if a constant is an object or array its properties or items can be updated or removed.
+
+```js
+var variable = 1
+let variable2 = "deux"
+const NUMBER = 3
+```
+

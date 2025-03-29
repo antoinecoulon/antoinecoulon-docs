@@ -2,6 +2,7 @@
 
 - [Angular](#angular)
   - [Ressources](#ressources)
+  - [Projets](#projets)
   - [Architecture](#architecture)
   - [Introduction](#introduction)
     - [Single Page Application](#single-page-application)
@@ -48,6 +49,10 @@
 - [Simon DIENY](https://www.youtube.com/channel/UCZqq_ow06Husetd9ICEM2gQ/videos)
 
 ---
+
+## Projets
+
+[ENI - YouTube clone](https://github.com/antoinecoulon/youtube-clone-eni) - *à terminer...*
 
 ## Architecture
 
