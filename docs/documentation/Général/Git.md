@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 description: Git et Versionning
 ---
 
@@ -18,6 +17,7 @@ description: Git et Versionning
 ## Étapes du travail collaboratif
 
 - Cloner le projet (si première fois)
+
 ```bash
 git clone URL_DU_REPO
 
@@ -25,11 +25,13 @@ cd NOM_DU_REPO
 ```
 
 - Créer et basculer sur sa branche personnelle
+
 ```bash
 git checkout -b nom-devX main
 ```
 
 - Développer et enregistrer les changements
+
 ```bash
 git add .
 
@@ -54,6 +56,7 @@ git merge main  # Ou git rebase main (pour un historique plus propre) ← on me
 3. on envoie notre branche locale à jour sur origin
 
 - Envoyer ses changements sur le dépôt distant
+
 ```bash
 git push origin nom-devX ← on envoie notre branche à jour en ligne
 ```
@@ -65,6 +68,7 @@ git push origin nom-devX ← on envoie notre branche à jour en ligne
 - Un autre membre valide la PR :
 
 - Fusionner la branche et mettre à jour main (réalisée par le membre qui valide)
+
 ```bash
 git checkout main ← on se place sur main
 
@@ -74,6 +78,7 @@ git push origin main ← on envoie main en ligne
 ```
 
 - Supprimer la branche locale (si elle n'est plus nécessaire)
+
 ```bash
 git branch -d nom-devX
 ```

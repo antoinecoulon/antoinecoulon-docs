@@ -1,5 +1,4 @@
 ---
-sidebar_position: 7
 description: Notions et cours API
 ---
 
@@ -19,6 +18,7 @@ description: Notions et cours API
 ## Créer son API pour Level Up
 
 ### Étape 1 : Préparer l'environnement
+
 Installer Node.js et npm : Assurez-vous d'avoir Node.js et npm (Node Package Manager) installés sur votre machine. Vous pouvez les télécharger depuis nodejs.org.
 
 Créer un nouveau répertoire pour votre projet :
@@ -33,16 +33,21 @@ Initialiser un projet Node.js :
 ```bash
 npm init -y
 ```
+
 Cela créera un fichier package.json avec les configurations par défaut.
 
 ### Étape 2 : Installer Express.js
+
 Installer Express.js :
+
 ```bash
 npm install express
 ```
 
 ### Étape 3 : Créer le serveur Express
+
 Créer un fichier server.js :
+
 ```js
 const express = require('express');
 const app = express();
@@ -106,13 +111,17 @@ app.listen(port, () => {
 ```
 
 ### Étape 4 : Lancer le serveur
+
 Démarrer le serveur :
+
 ```bash
 node server.js
 ```
-Votre API devrait maintenant être en cours d'exécution sur http://localhost:3000. Vous pouvez tester les différentes routes avec un outil comme Postman ou directement dans votre navigateur pour les requêtes GET.
+
+Votre API devrait maintenant être en cours d'exécution sur `http://localhost:3000`. Vous pouvez tester les différentes routes avec un outil comme Postman ou directement dans votre navigateur pour les requêtes GET.
 
 ### Étape 5 : Tester l'API
+
 GET /api/data : Récupère toutes les données.
 GET /api/data/:id : Récupère une donnée par son ID.
 POST /api/data : Ajoute une nouvelle donnée (envoyez un JSON avec name et description dans le corps de la requête).
@@ -124,7 +133,7 @@ Avec ces étapes, vous avez une API de base fonctionnelle. Vous pouvez l'étendr
 
 On récupèrera nos données d'une meilleure façon à terme.
 
-Pour l'instant, au lieu d'avoir un tableau de données en dur dans le code de gestion des routes (server.js), on va les récupérer dans un fichier à part, comme pour simuler des données récupérées depuis l'extérieur de l'API. 
+Pour l'instant, au lieu d'avoir un tableau de données en dur dans le code de gestion des routes (server.js), on va les récupérer dans un fichier à part, comme pour simuler des données récupérées depuis l'extérieur de l'API.
 
 On créé un dossier '/data' et pour l'exemple nous allons créer des données sur les animaux.
 
@@ -166,10 +175,13 @@ module.exports = animals;
 ```
 
 Grâce à la dernière ligne,
+
 ```js
 module.exports = animals;
 ```
+
 on va pouvoir récupérer ces données dans notre serveur:
+
 ```js title="server.js"
 const data = require('./data/animals');
 ```

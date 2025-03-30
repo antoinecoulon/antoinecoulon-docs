@@ -1,5 +1,4 @@
 ---
-sidebar_position: 8
 description: Notions diverses de dev
 ---
 
