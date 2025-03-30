@@ -26,6 +26,10 @@
     - [Paramètres d'URL](#paramètres-durl)
     - [Paramètres de Query](#paramètres-de-query)
   - [Gestion des Fichiers Statiques](#gestion-des-fichiers-statiques)
+  - [Communication avec le front](#communication-avec-le-front)
+  - [Exemple simple de Token JWT](#exemple-simple-de-token-jwt)
+  - [Connexion à une BDD](#connexion-à-une-bdd)
+    - [Avec Mongoose](#avec-mongoose)
   - [Introduction vers une API REST Basique](#introduction-vers-une-api-rest-basique)
   - [Utilisation de Views avec EJS](#utilisation-de-views-avec-ejs)
     - [Installation de EJS](#installation-de-ejs)
@@ -395,6 +399,104 @@ app.use(express.static('public'));
 ```
 
 Placez un fichier `public/index.html`, et il sera accessible via `http://localhost:3000/index.html`.
+
+---
+
+## Communication avec le front
+
+Attention à la protection CORS:
+
+```js
+const cors = require("cors");
+
+// app.options('*', cors());
+
+app.use(cors({
+    origin: "http://localhost:4200",
+    methods: "GET, POST, PUT, DELETE",
+    allowedHeaders: "Content-Type,Authorization",
+    credentials: true,
+}));
+```
+
+---
+
+## Exemple simple de Token JWT
+
+Importer le module `jsonwebtoken`:
+
+```js
+const jwt = require("jsonwebtoken");
+```
+
+Définir un JWT côté serveur: (*Attention: à cacher dans le `env`*)
+
+```js
+const JWT_SECRET = "my_secret_token";
+```
+
+Associer un token jwt à un utilisateur:
+
+```js
+const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+
+res.status(200).json({ token });
+```
+
+Exemple de vérification avec un middleware:
+
+```js
+const authMiddleware = (req, res, next) => {
+    const token = req.header('Authorization').split(' ')[1];
+
+    if (!token) return res.status(401).json({ message: "Access denied, no token provided."});
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.user = decoded;
+        next();
+    } catch(error) {
+        console.error('Token verification error:', error);
+        res.status(401).json({ message: "Invalid token" });
+    }
+};
+
+app.get("/users", authMiddleware, async (req, res) => {...})
+```
+
+---
+
+## Connexion à une BDD
+
+### Avec Mongoose
+
+```js
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+
+app.use(bodyParser.json());
+
+// Connexion BDD
+mongoose.connect("mongodb://localhost:27017/youtoine", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error:"));
+db.once("open", () => {
+    console.log("Connected to MongoDB");
+});
+
+// Schema + model
+const userSchema = new mongoose.Schema({
+    username: String,
+    email: String,
+    password: String,
+});
+
+const User = mongoose.model("User", userSchema);
+```
 
 ---
 
