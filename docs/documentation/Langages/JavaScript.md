@@ -102,4 +102,6 @@ let complexArray = ["Antoine", 31, true] // composite/complex Array
 let cards = [3, 11]
 cards.push(6)
 console.log(cards) // [3, 11, 6]
+cards.pop()
+console.log(cards) // [3, 11]
 ```
