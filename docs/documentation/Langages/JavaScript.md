@@ -2,6 +2,24 @@
 
 [Roadmap JavaScript](https://roadmap.sh/javascript)
 
+- [JavaScript](#javascript)
+  - [All about variables](#all-about-variables)
+    - [var](#var)
+    - [let](#let)
+    - [const](#const)
+    - [Scope](#scope)
+  - [Data types](#data-types)
+    - [Primitive types](#primitive-types)
+    - [Object](#object)
+    - [typeof Operator](#typeof-operator)
+  - [Arrays](#arrays)
+  - [return](#return)
+  - [Math object](#math-object)
+    - [Math.random()](#mathrandom)
+    - [Math.floor()](#mathfloor)
+
+---
+
 ## All about variables
 
 ### var
@@ -104,4 +122,44 @@ cards.push(6)
 console.log(cards) // [3, 11, 6]
 cards.pop()
 console.log(cards) // [3, 11]
+```
+
+---
+
+## return
+
+The `return` statement ends function execution and specifies a value to be returned to the function caller.
+
+```js
+function getRectArea(width, height) {
+  return width * height;
+}
+console.log(getRectArea(3, 4)); // Expected output: 12
+```
+
+---
+
+## Math object
+
+### Math.random()
+
+Developers often have the need of creating a random generating value (security, games, etc).
+
+```js
+let randomNumber = Math.random() // generates a random number between 0 and 1 (not inclusive of 1)
+```
+
+**`Math.random()`** : 0.000 -> 0.999
+
+**`Math.random()*6`** : 0.000 -> 5.999
+
+### Math.floor()
+
+The `Math.floor()` static method always rounds down and returns the largest integer less than or equal to a given number.
+
+```js
+console.log( Math.floor(5.95) ) // Expected output: 5
+console.log( Math.floor(5.05) ) // Expected output: 5
+console.log( Math.floor(5) ) // Expected output: 5
+console.log( Math.floor(-5.05) ) // Expected output: 6
 ```
