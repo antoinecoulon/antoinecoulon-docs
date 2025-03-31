@@ -17,7 +17,11 @@
   - [Math object](#math-object)
     - [Math.random()](#mathrandom)
     - [Math.floor()](#mathfloor)
+  - [Comparison operators](#comparison-operators)
+    - [Strict Equality Operator (===)](#strict-equality-operator-)
   - [Logical operators](#logical-operators)
+  - [for loops](#for-loops)
+  - [if... else if... else](#if-else-if-else)
 
 ---
 
@@ -167,4 +171,69 @@ console.log( Math.floor(-5.05) ) // Expected output: 6
 
 ---
 
+## Comparison operators
+
+The `==` operator does the type conversion of the operands before comparison, whereas the `===` operator compares the values and the data types of the operands. The O`bject.is()` method determines whether two values are the same value: `Object.is(value1, value2)`. -> [See](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Equality_comparisons_and_sameness#same-value_equality_using_object.is)
+
+### Strict Equality Operator (===)
+
+The strict equality operator `===` compares both the value and the type of two operands. This means that it will only return `true` if both the value and the type are identical.
+
+```js
+"5" === "5"   // true
+"5" === 5   // false
+```
+
 ## Logical operators
+
+There are four logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT), `??` (Nullish Coalescing).
+
+---
+
+## for loops
+
+The [`for` loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) is commonly used to iterate over given sequences or iterate a known number of times and execute a piece of code for each iteration.
+
+## if... else if... else
+
+-> [**See**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else)
+
+```js
+if (condition) {
+  statement1;
+} else if (other condition) {
+  statement2;
+} else {
+  statement3;
+}
+```
+
+---
+
+```js
+// Objects - store data in-depth - composite / complex data type
+// key-value pairs
+
+let course = {
+    title: "Learn CSS Grid for free",
+    lessons: 16,
+    creator: "Per Harald Borgen",
+    length: 63,
+    level: 2,
+    isFree: true,
+    tags: ["html", "css"]
+}
+
+
+console.log( course.tags )
+
+let player = {
+    name: "Per",
+    chips: 200,
+    sayHello: function() {
+        console.log("Heisann!")
+    }
+}
+
+player.sayHello()
+```
