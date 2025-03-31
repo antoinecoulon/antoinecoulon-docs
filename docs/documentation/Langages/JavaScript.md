@@ -17,6 +17,7 @@
   - [Math object](#math-object)
     - [Math.random()](#mathrandom)
     - [Math.floor()](#mathfloor)
+  - [Logical operators](#logical-operators)
 
 ---
 
@@ -163,3 +164,7 @@ console.log( Math.floor(5.05) ) // Expected output: 5
 console.log( Math.floor(5) ) // Expected output: 5
 console.log( Math.floor(-5.05) ) // Expected output: 6
 ```
+
+---
+
+## Logical operators
