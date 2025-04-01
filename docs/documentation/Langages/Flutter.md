@@ -20,6 +20,7 @@
     - [Widgets de Layout](#widgets-de-layout)
     - [Widgets de Contenu](#widgets-de-contenu)
   - [Gestion des états](#gestion-des-états)
+    - [StatefulWidget](#statefulwidget)
 
 ---
 
@@ -414,3 +415,54 @@ body: Container(
 ## Gestion des états
 
 *StatelessWidget / Stateful Widget*: Widget statique contre Widget dynamique.
+
+### StatefulWidget
+
+A chaque mise à jour, ce n'est pas le StatefulWidget qui change, mais le `State<T>` qui rebuild à chaque fois -> `State<StatefulWidget>`. Le Widget en lui-même est immutable.
+
+< Schema >
+
+Exemple:
+
+```dart
+class DynamicContent extends StatefulWidget {
+  @override
+  State<DynamicContent> createState() => _DynamicContentState();
+}
+
+class _DynamicContentState extends State<DynamicContent> {
+  String? _content;
+
+  @override
+  void initState() {
+    super.initState();
+    _content = "Hello World!";
+  }
+
+  void _onPressed() {
+    setState(() {
+      _content = 'Bye!';
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+        children: [
+          ElevatedButton(
+              onPressed: _onPressed,
+              child: Text('Click me !')
+          ),
+          Text('$_content')
+        ]
+    );
+  }
+}
+```
+
+---
+
+- Form (controller, types, inputTypes ? )
+- `Future<T>`
+- Stateful (init, updated, dispose)
+- Thème (theme perso)
