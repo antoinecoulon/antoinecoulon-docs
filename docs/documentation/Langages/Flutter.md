@@ -1153,7 +1153,7 @@ class SettingsScreen extends StatelessWidget {
 
 - Thème (theme perso)
 - DB SQLLite
-[//]: <> Utiliser SQLite pour stocker des tweets localement dans une application Flutter est une excellente approche pour gérer les données de manière persistante. Voici un exemple complet de la façon dont vous pouvez configurer SQLite pour stocker des tweets localement.
+Utiliser SQLite pour stocker des tweets localement dans une application Flutter est une excellente approche pour gérer les données de manière persistante. Voici un exemple complet de la façon dont vous pouvez configurer SQLite pour stocker des tweets localement.
 
 ### Étapes pour utiliser SQLite dans Flutter
 
@@ -1342,4 +1342,4 @@ class _TweetScreenState extends State<TweetScreen> {
 - **`Tweet`** : Classe modèle pour représenter un tweet.
 - **`TweetScreen`** : Widget qui permet à l'utilisateur d'ajouter des tweets et affiche la liste des tweets stockés localement.
 
-En suivant ces étapes, vous pouvez stocker des tweets localement dans une base de données SQLite dans votre application Flutter. <>
+En suivant ces étapes, vous pouvez stocker des tweets localement dans une base de données SQLite dans votre application Flutter.
