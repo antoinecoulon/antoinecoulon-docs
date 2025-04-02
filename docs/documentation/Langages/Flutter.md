@@ -45,12 +45,11 @@
     - [Exemple de nav](#exemple-de-nav)
     - [Avec arguments](#avec-arguments)
   - [Drawer](#drawer)
-    - [Étapes pour utiliser SQLite dans Flutter](#étapes-pour-utiliser-sqlite-dans-flutter)
-      - [1. Ajouter les dépendances](#1-ajouter-les-dépendances)
-      - [2. Créer un modèle de données](#2-créer-un-modèle-de-données)
-      - [3. Configurer la base de données](#3-configurer-la-base-de-données)
-      - [4. Utiliser la base de données dans votre application](#4-utiliser-la-base-de-données-dans-votre-application)
-    - [Explications](#explications)
+  - [Persistance des données (DB SQLite)](#persistance-des-données-db-sqlite)
+    - [Ajouter les dépendances](#ajouter-les-dépendances)
+    - [Créer un modèle de données](#créer-un-modèle-de-données)
+    - [Configurer la base de données](#configurer-la-base-de-données)
+    - [Utiliser la base de données dans votre application](#utiliser-la-base-de-données-dans-votre-application)
 
 ---
 
@@ -1151,13 +1150,11 @@ class SettingsScreen extends StatelessWidget {
 
 ---
 
-- Thème (theme perso)
-- DB SQLLite
-Utiliser SQLite pour stocker des tweets localement dans une application Flutter est une excellente approche pour gérer les données de manière persistante. Voici un exemple complet de la façon dont vous pouvez configurer SQLite pour stocker des tweets localement.
+## Persistance des données (DB SQLite)
 
-### Étapes pour utiliser SQLite dans Flutter
+Nous allons utiliser SQLite pour stocker des tweets localement.
 
-#### 1. Ajouter les dépendances
+### Ajouter les dépendances
 
 Ajoutez les dépendances `sqflite` et `path` à votre fichier `pubspec.yaml` :
 
@@ -1169,9 +1166,9 @@ dependencies:
   path: any
 ```
 
-#### 2. Créer un modèle de données
+### Créer un modèle de données
 
-Créez une classe pour représenter un tweet.
+Si ce n'est pas déjà fait, créez une classe pour représenter un tweet, ou adaptez l'actuelle pour ajouter l'id et les méthodes.
 
 ```dart
 class Tweet {
@@ -1202,7 +1199,7 @@ class Tweet {
 }
 ```
 
-#### 3. Configurer la base de données
+### Configurer la base de données
 
 Créez un fichier pour gérer la base de données.
 
@@ -1257,7 +1254,7 @@ class DatabaseHelper {
 }
 ```
 
-#### 4. Utiliser la base de données dans votre application
+### Utiliser la base de données dans votre application
 
 Vous pouvez maintenant utiliser `DatabaseHelper` pour ajouter et récupérer des tweets dans votre application.
 
@@ -1336,10 +1333,7 @@ class _TweetScreenState extends State<TweetScreen> {
 }
 ```
 
-### Explications
+---
 
-- **`DatabaseHelper`** : Gère la connexion à la base de données SQLite et fournit des méthodes pour ajouter et récupérer des tweets.
-- **`Tweet`** : Classe modèle pour représenter un tweet.
-- **`TweetScreen`** : Widget qui permet à l'utilisateur d'ajouter des tweets et affiche la liste des tweets stockés localement.
-
-En suivant ces étapes, vous pouvez stocker des tweets localement dans une base de données SQLite dans votre application Flutter.
+- Thème (theme perso)
+- Ressources : [appicons](https://www.appicon.co/)
