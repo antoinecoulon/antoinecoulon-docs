@@ -19,8 +19,38 @@
   - [Widgets](#widgets)
     - [Widgets de Layout](#widgets-de-layout)
     - [Widgets de Contenu](#widgets-de-contenu)
-  - [Gestion des états](#gestion-des-états)
-    - [StatefulWidget](#statefulwidget)
+  - [StatefulWidget](#statefulwidget)
+    - [Exemple](#exemple)
+    - [Création d'un Stateful Widget](#création-dun-stateful-widget)
+    - [initState](#initstate)
+    - [didUpdateWidget](#didupdatewidget)
+    - [dispose](#dispose)
+    - [setState](#setstate)
+  - [Forms](#forms)
+    - [Composants principaux d'un Formulaire](#composants-principaux-dun-formulaire)
+    - [Utilisation des Contrôleurs](#utilisation-des-contrôleurs)
+    - [Types de Champs](#types-de-champs)
+    - [Validation et Soumission](#validation-et-soumission)
+  - [Provider](#provider)
+  - [Future](#future)
+    - [Créer un Future](#créer-un-future)
+    - [Utiliser async et await](#utiliser-async-et-await)
+    - [Utiliser then, catchError](#utiliser-then-catcherror)
+    - [Exemple Complet](#exemple-complet)
+  - [Navigation](#navigation)
+    - [Navigator.push](#navigatorpush)
+    - [Navigator.pop](#navigatorpop)
+    - [Navigator.pushNamed](#navigatorpushnamed)
+    - [Configuration des Routes Nommées](#configuration-des-routes-nommées)
+    - [Exemple de nav](#exemple-de-nav)
+    - [Avec arguments](#avec-arguments)
+  - [Drawer](#drawer)
+    - [Étapes pour utiliser SQLite dans Flutter](#étapes-pour-utiliser-sqlite-dans-flutter)
+      - [1. Ajouter les dépendances](#1-ajouter-les-dépendances)
+      - [2. Créer un modèle de données](#2-créer-un-modèle-de-données)
+      - [3. Configurer la base de données](#3-configurer-la-base-de-données)
+      - [4. Utiliser la base de données dans votre application](#4-utiliser-la-base-de-données-dans-votre-application)
+    - [Explications](#explications)
 
 ---
 
@@ -412,17 +442,15 @@ body: Container(
 
 ---
 
-## Gestion des états
+## StatefulWidget
 
 *StatelessWidget / Stateful Widget*: Widget statique contre Widget dynamique.
 
-### StatefulWidget
-
 A chaque mise à jour, ce n'est pas le StatefulWidget qui change, mais le `State<T>` qui rebuild à chaque fois -> `State<StatefulWidget>`. Le Widget en lui-même est immutable.
 
-< Schema >
+![Stateful Widget Lifecycle](/img/flutter_stateful-lifecycle.png)
 
-Exemple:
+### Exemple
 
 ```dart
 class DynamicContent extends StatefulWidget {
@@ -460,9 +488,858 @@ class _DynamicContentState extends State<DynamicContent> {
 }
 ```
 
+### Création d'un Stateful Widget
+
+Un `StatefulWidget` est composé de deux parties principales : le widget lui-même et une classe State associée.
+
+```dart
+class MyStatefulWidget extends StatefulWidget {
+  @override
+  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  // État du widget
+  int _counter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Text('Valeur : $_counter'),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _counter++;
+            });
+          },
+          child: Text('Incrémenter'),
+        ),
+      ],
+    );
+  }
+}
+```
+
+### initState
+
+La méthode `initState` est appelée une seule fois lorsque le widget est inséré dans l'arbre des widgets. Elle est utilisée pour initialiser l'état du widget.
+
+```dart
+@override
+void initState() {
+  super.initState();
+  // Initialisation ici
+  _counter = 0;
+}
+```
+
+### didUpdateWidget
+
+La méthode `didUpdateWidget` est appelée lorsque le framework réinsère le widget dans l'arbre des widgets. Elle est utilisée pour réagir aux changements de configuration du widget.
+
+```dart
+@override
+void didUpdateWidget(covariant MyStatefulWidget oldWidget) {
+  super.didUpdateWidget(oldWidget);
+  // Réagir aux changements ici
+}
+```
+
+### dispose
+
+La méthode `dispose` est appelée lorsque le widget est supprimé de l'arbre des widgets. Elle est utilisée pour libérer les ressources.
+
+```dart
+@override
+void dispose() {
+  // Libérer les ressources ici
+  super.dispose();
+}
+```
+
+### setState
+
+La méthode `setState` est utilisée pour notifier le framework que l'état du widget a changé, ce qui déclenche un rappel de la méthode `build`.
+
+```dart
+setState(() {
+  _counter++;
+});
+```
+
+Voici un *exemple complet*:
+
+```dart
+import 'package:flutter/material.dart';
+
+class CounterWidget extends StatefulWidget {
+  @override
+  _CounterWidgetState createState() => _CounterWidgetState();
+}
+
+class _CounterWidgetState extends State<CounterWidget> {
+  int _counter = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _counter = 0; // Initialisation
+  }
+
+  @override
+  void didUpdateWidget(covariant CounterWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // Réagir aux changements de configuration
+  }
+
+  @override
+  void dispose() {
+    // Libérer les ressources
+    super.dispose();
+  }
+
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text('Valeur : $_counter'),
+        ElevatedButton(
+          onPressed: _incrementCounter,
+          child: Text('Incrémenter'),
+        ),
+      ],
+    );
+  }
+}
+```
+
 ---
 
-- Form (controller, types, inputTypes ? )
-- `Future<T>`
-- Stateful (init, updated, dispose)
+## Forms
+
+Flutter fournit un widget `Form` qui facilite la gestion des formulaires, y compris la validation et la récupération des données saisies.
+
+### Composants principaux d'un Formulaire
+
+- **Form Widget**:
+  
+Le widget Form est un conteneur pour les champs de formulaire. Il gère l'état du formulaire et permet de valider les champs.
+
+```dart
+Form(
+  key: _formKey,
+  child: Column(
+    children: <Widget>[
+      // Champs de formulaire ici
+    ],
+  ),
+);
+```
+
+- **GlobalKey**:
+
+Utilisez une *GlobalKey* pour identifier le formulaire et accéder à son état. Cela permet de valider le formulaire et de réinitialiser les champs.
+
+```dart
+final _formKey = GlobalKey<FormState>();
+```
+
+- **TextFormField**
+
+Le widget `TextFormField` est utilisé pour les champs de texte dans un formulaire. Il s'intègre avec le widget `Form` pour la validation.
+
+```dart
+TextFormField(
+  controller: _controller,
+  decoration: InputDecoration(labelText: 'Enter text'),
+  validator: (value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter some text';
+    }
+    return null;
+  },
+)
+```
+
+### Utilisation des Contrôleurs
+
+- **TextEditingController**
+
+Un TextEditingController est utilisé pour lire le texte saisi dans un champ de texte et pour définir le texte initial.
+
+```dart
+final TextEditingController _controller = TextEditingController();
+
+@override
+void dispose() {
+  _controller.dispose();
+  super.dispose();
+}
+
+TextFormField(
+  controller: _controller,
+  decoration: InputDecoration(labelText: 'Enter text'),
+)
+```
+
+### Types de Champs
+
+- **Champs de Texte**:
+
+`TextFormField` : Pour les entrées de texte.
+`TextField` : Pour les entrées de texte sans validation intégrée.
+
+- **Champs Numériques**:
+
+Utilisez le paramètre `keyboardType` pour spécifier le type de clavier.
+
+```dart
+TextFormField(
+  keyboardType: TextInputType.number,
+  decoration: InputDecoration(labelText: 'Enter a number'),
+)
+```
+
+- **Champs de Mot de Passe**:
+
+Utilisez le paramètre `obscureText` pour masquer le texte saisi.
+
+```dart
+TextFormField(
+  obscureText: true,
+  decoration: InputDecoration(labelText: 'Enter password'),
+)
+```
+
+- **Champs de Courriel**
+
+Utilisez `keyboardType` et un validateur pour les adresses e-mail.
+
+```dart
+TextFormField(
+  keyboardType: TextInputType.emailAddress,
+  decoration: InputDecoration(labelText: 'Enter email'),
+  validator: (value) {
+    if (value == null || value.isEmpty || !value.contains('@')) {
+      return 'Please enter a valid email';
+    }
+    return null;
+  },
+)
+```
+
+### Validation et Soumission
+
+Valider le Formulaire:
+
+Utilisez la méthode `validate()` pour valider tous les champs du formulaire.
+
+```dart
+if (_formKey.currentState!.validate()) {
+  // Si le formulaire est valide, récupérez les données
+  _formKey.currentState!.save();
+}
+```
+
+Réinitialiser le Formulaire:
+
+Utilisez la méthode `reset()` pour réinitialiser les champs du formulaire.
+
+```dart
+_formKey.currentState!.reset();
+```
+
+---
+
+## Provider
+
+Le package `Provider` permet de gérer et de propager l'état de manière efficace à travers l'arbre des widgets sans avoir à passer manuellement les données à chaque niveau.
+
+Ajouter la dépendance:
+
+```yaml title="pubspec.yaml"
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.0
+```
+
+Créer un modèle de données qui étend ChangeNotifier:
+
+```dart title="models/tweetModel.dart"
+class TweetModel with ChangeNotifier {
+  final List<Tweet> _tweets = [];
+
+  List<Tweet> get tweets => _tweets;
+
+  void addTweet(Tweet tweet) {
+    _tweets.add(tweet);
+    notifyListeners();
+  }
+}
+```
+
+Ce dernier est différent du modèle de données Métier (ici Tweet):
+
+```dart title="models/tweet.dart"
+final String author;
+  final String message;
+  final String date;
+
+  Tweet(this.author, this.message, this.date);
+```
+
+Configurer le `Provider` en enveloppant le widget racine avec `ChangeNotifierProvider`:
+
+```dart title="main.dart"
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'tweet_model.dart';
+
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => TweetModel(),
+      child: MyApp(),
+    ),
+  );
+}
+```
+
+Accéder aux données et méthodes du modèle dans les widgets:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'tweet_model.dart';
+
+class TweetList extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final tweetModel = Provider.of<TweetModel>(context);
+
+    return ListView.builder(
+      itemCount: tweetModel.tweets.length,
+      itemBuilder: (context, index) {
+        final tweet = tweetModel.tweets[index];
+        return ListTile(
+          title: Text(tweet.message),
+          subtitle: Text('${tweet.author} - ${tweet.date}'),
+        );
+      },
+    );
+  }
+}
+```
+
+Enfin, mettre à jour l'état en appelant la méthode du modèle: (`Provider.of<TweetModel>(context, listen: false).addTweet(newTweet);`)
+
+---
+
+## Future
+
+`Future<T>` est utilisé pour représenter une valeur potentielle disponible à un certain moment dans le futur. Il est essentiel pour gérer les opérations asynchrones, telles que les appels réseau, la lecture de fichiers, ou toute autre tâche qui ne se termine pas immédiatement.
+
+### Créer un Future
+
+Un Future peut être créé en utilisant une fonction asynchrone marquée avec le mot-clé async.
+
+```dart
+Future<String> fetchUserData() async {
+  await Future.delayed(Duration(seconds: 2)); // Simule un délai
+  return "Données utilisateur";
+}
+```
+
+### Utiliser async et await
+
+Les mots-clés `async` et `await` sont utilisés pour travailler avec des `Future`. `async` marque une fonction comme asynchrone, et `await` pause l'exécution jusqu'à ce que le `Future` soit complété.
+
+```dart
+void getData() async {
+  String data = await fetchUserData();
+  print(data);
+}
+```
+
+### Utiliser then, catchError
+
+Vous pouvez également utiliser les méthodes `then` et `catchError` pour gérer les résultats et les erreurs d'un `Future`.
+
+```dart
+fetchUserData().then((value) {
+  print(value);
+}).catchError((error) {
+  print('Erreur : $error');
+});
+```
+
+### Exemple Complet
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Future Example')),
+        body: FutureBuilderExample(),
+      ),
+    );
+  }
+}
+
+class FutureBuilderExample extends StatelessWidget {
+  Future<String> fetchUserData() async {
+    await Future.delayed(Duration(seconds: 2)); // Simule un délai
+    return "Données utilisateur";
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: FutureBuilder<String>(
+        future: fetchUserData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Text('Erreur : ${snapshot.error}');
+          } else {
+            return Text('Données : ${snapshot.data}');
+          }
+        },
+      ),
+    );
+  }
+}
+```
+
+---
+
+## Navigation
+
+Flutter fournit un système de navigation flexible et puissant via le widget `Navigator`.
+
+### Navigator.push
+
+La méthode `push` est utilisée pour ajouter un nouvel écran à la pile de navigation. Elle prend un `Route` comme argument, généralement créé avec `MaterialPageRoute`.
+
+```dart
+Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => NewScreen()),
+);
+```
+
+### Navigator.pop
+
+La méthode `pop` est utilisée pour retirer l'écran actuel de la pile de navigation et revenir à l'écran précédent.
+
+```dart
+Navigator.pop(context);
+```
+
+### Navigator.pushNamed
+
+La méthode `pushNamed` est utilisée pour naviguer vers un écran identifié par un nom de route. Cela nécessite la configuration de routes nommées dans le `MaterialApp`.
+
+```dart
+Navigator.pushNamed(context, '/newScreen');
+```
+
+### Configuration des Routes Nommées
+
+Pour utiliser `pushNamed`, vous devez définir les routes dans le `MaterialApp`.
+
+```dart
+MaterialApp(
+  initialRoute: '/',
+  routes: {
+    '/': (context) => HomeScreen(),
+    '/newScreen': (context) => NewScreen(),
+  },
+)
+```
+
+### Exemple de nav
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/newScreen': (context) => NewScreen(),
+      },
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Accueil')),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/newScreen');
+          },
+          child: Text('Aller à Nouvel Écran'),
+        ),
+      ),
+    );
+  }
+}
+
+class NewScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Nouvel Écran')),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Retour'),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### Avec arguments
+
+Définir la route:
+
+```dart
+MaterialApp(
+  initialRoute: '/',
+  routes: {
+    '/': (context) => TweetListScreen(),
+    '/tweetDetail': (context) {
+      final tweet = ModalRoute.of(context)?.settings.arguments as Tweet;
+      return TweetDetailScreen(tweet: tweet);
+    },
+  },
+)
+```
+
+Ajouter les arguments au constructeur du nouvel écran.
+
+```dart
+class TweetDetailScreen extends StatelessWidget {
+  final Tweet tweet;
+
+  TweetDetailScreen({required this.tweet});
+
+  @override
+  Widget build(BuildContext context) {
+    // ...
+  }
+}
+```
+
+On définit le lien de navigation sur un bouton par exemple.
+
+```dart
+IconButton(
+  onPressed: () {
+    Navigator.pushNamed(context, '/tweet/detail', arguments: tweet);
+  },
+  // ...
+)
+```
+
+---
+
+## Drawer
+
+Le `Drawer` est un widget de Flutter qui permet d'afficher un panneau de navigation glissant depuis le côté de l'écran.
+
+Le `Drawer` est généralement ajouté à un `Scaffold`. Vous pouvez le personnaliser en ajoutant différents widgets comme `DrawerHeader` (utilisé pour ajouter un en-tête), `ListTile` (utilisé pour ajouter des éléments de liste interactifs), et d'autres widgets de mise en page.
+
+```dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/settings': (context) => SettingsScreen(),
+      },
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Accueil')),
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.blue),
+              child: Text('Menu'),
+            ),
+            ListTile(
+              title: Text('Accueil'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/');
+              },
+            ),
+            ListTile(
+              title: Text('Paramètres'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/settings');
+              },
+            ),
+          ],
+        ),
+      ),
+      body: Center(child: Text('Contenu principal')),
+    );
+  }
+}
+
+class SettingsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Paramètres')),
+      body: Center(child: Text('Écran des paramètres')),
+    );
+  }
+}
+```
+
+---
+
 - Thème (theme perso)
+- DB SQLLite
+[//]: <> Utiliser SQLite pour stocker des tweets localement dans une application Flutter est une excellente approche pour gérer les données de manière persistante. Voici un exemple complet de la façon dont vous pouvez configurer SQLite pour stocker des tweets localement.
+
+### Étapes pour utiliser SQLite dans Flutter
+
+#### 1. Ajouter les dépendances
+
+Ajoutez les dépendances `sqflite` et `path` à votre fichier `pubspec.yaml` :
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  sqflite: any
+  path: any
+```
+
+#### 2. Créer un modèle de données
+
+Créez une classe pour représenter un tweet.
+
+```dart
+class Tweet {
+  final int? id;
+  final String author;
+  final String message;
+  final String date;
+
+  Tweet({this.id, required this.author, required this.message, required this.date});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'author': author,
+      'message': message,
+      'date': date,
+    };
+  }
+
+  factory Tweet.fromMap(Map<String, dynamic> map) {
+    return Tweet(
+      id: map['id'],
+      author: map['author'],
+      message: map['message'],
+      date: map['date'],
+    );
+  }
+}
+```
+
+#### 3. Configurer la base de données
+
+Créez un fichier pour gérer la base de données.
+
+```dart
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import 'tweet.dart';
+
+class DatabaseHelper {
+  static final DatabaseHelper instance = DatabaseHelper._instance();
+  static Database? _db;
+
+  DatabaseHelper._instance();
+
+  String tweetsTable = 'tweet_table';
+  String colId = 'id';
+  String colAuthor = 'author';
+  String colMessage = 'message';
+  String colDate = 'date';
+
+  Future<Database?> get db async {
+    if (_db == null) {
+      _db = await _initDb();
+    }
+    return _db;
+  }
+
+  Future<Database> _initDb() async {
+    String path = join(await getDatabasesPath(), 'tweets.db');
+    final tweetsDb = await openDatabase(path, version: 1, onCreate: _createDb);
+    return tweetsDb;
+  }
+
+  void _createDb(Database db, int version) async {
+    await db.execute(
+      'CREATE TABLE $tweetsTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colAuthor TEXT, $colMessage TEXT, $colDate TEXT)',
+    );
+  }
+
+  Future<List<Tweet>> getTweets() async {
+    final db = await this.db;
+    final maps = await db!.query(tweetsTable);
+    return List.generate(maps.length, (i) {
+      return Tweet.fromMap(maps[i]);
+    });
+  }
+
+  Future<int> addTweet(Tweet tweet) async {
+    final db = await this.db;
+    return await db!.insert(tweetsTable, tweet.toMap());
+  }
+}
+```
+
+#### 4. Utiliser la base de données dans votre application
+
+Vous pouvez maintenant utiliser `DatabaseHelper` pour ajouter et récupérer des tweets dans votre application.
+
+```dart
+import 'package:flutter/material.dart';
+import 'database_helper.dart';
+import 'tweet.dart';
+
+class TweetScreen extends StatefulWidget {
+  @override
+  _TweetScreenState createState() => _TweetScreenState();
+}
+
+class _TweetScreenState extends State<TweetScreen> {
+  final TextEditingController _authorController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
+
+  void _addTweet() async {
+    String author = _authorController.text;
+    String message = _messageController.text;
+    String date = DateTime.now().toString();
+
+    Tweet newTweet = Tweet(author: author, message: message, date: date);
+    await _databaseHelper.addTweet(newTweet);
+
+    setState(() {}); // Met à jour l'interface utilisateur
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Tweets')),
+      body: Column(
+        children: [
+          TextField(
+            controller: _authorController,
+            decoration: InputDecoration(labelText: 'Author'),
+          ),
+          TextField(
+            controller: _messageController,
+            decoration: InputDecoration(labelText: 'Message'),
+          ),
+          ElevatedButton(
+            onPressed: _addTweet,
+            child: Text('Add Tweet'),
+          ),
+          Expanded(
+            child: FutureBuilder<List<Tweet>>(
+              future: _databaseHelper.getTweets(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  final tweets = snapshot.data;
+                  return ListView.builder(
+                    itemCount: tweets?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      final tweet = tweets![index];
+                      return ListTile(
+                        title: Text(tweet.message),
+                        subtitle: Text('${tweet.author} - ${tweet.date}'),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+### Explications
+
+- **`DatabaseHelper`** : Gère la connexion à la base de données SQLite et fournit des méthodes pour ajouter et récupérer des tweets.
+- **`Tweet`** : Classe modèle pour représenter un tweet.
+- **`TweetScreen`** : Widget qui permet à l'utilisateur d'ajouter des tweets et affiche la liste des tweets stockés localement.
+
+En suivant ces étapes, vous pouvez stocker des tweets localement dans une base de données SQLite dans votre application Flutter. <>
