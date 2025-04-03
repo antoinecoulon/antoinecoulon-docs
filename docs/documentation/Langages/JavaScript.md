@@ -231,6 +231,8 @@ let course = {
 }
 console.log( course.tags )
 
+//-----------------------------------------
+
 let player = {
     name: "Per",
     chips: 200,
@@ -240,10 +242,22 @@ let player = {
 }
 player.sayHello()
 
+//-----------------------------------------
+
 let tabs = [
   {url: "http://www.google.com"}
 ]
 console.log(tabs[0].url) // http://www.google.com
+
+//-----------------------------------------
+
+const person = {
+  "Name": "Antoine",
+  "Age": 31
+}
+console.log(Object.keys(person)) // ["Name", "Age"]
+console.log(Object.values(person)) // ["Antoine", "31"]
+console.log(Object.entries(person)) // ["Name", "Age"], ["Antoine", "31"]
 ```
 
 ## Functions parameters/arguments

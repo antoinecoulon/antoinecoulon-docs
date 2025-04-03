@@ -1,6 +1,7 @@
 # Personal portfolio
 
 ---
+
 - [Personal portfolio](#personal-portfolio)
   - [Conception](#conception)
     - [Maquette v1](#maquette-v1)
@@ -8,12 +9,13 @@
   - [Versions](#versions)
   - [Install](#install)
     - [pnpm](#pnpm)
-    - [vite](#vite)
+    - [Vite](#vite)
     - [Tailwind](#tailwind)
     - [TS config](#ts-config)
     - [Vite config](#vite-config)
     - [Shadn](#shadn)
   - [Initialisation du repo Git](#initialisation-du-repo-git)
+  - [Partie PROJETS](#partie-projets)
 
 ---
 
@@ -55,16 +57,21 @@
 ## Install
 
 ### pnpm
+
 Avoir `pnpm` installé:
+
 ```bash
 pnpm -v
 ```
+
 Sinon:
+
 ```bash
 npm install -g pnpm@latest-10
 ```
 
-### vite
+### Vite
+
 ```bash
 pnpm create vite@latest portfolio --template react-ts
 ```
@@ -76,6 +83,7 @@ pnpm add tailwindcss @tailwindcss/vite
 ```
 
 Remplacer tout dans `src/index.css` par:
+
 ```css title="src/index.css"
 @import "tailwindcss";
 ```
@@ -83,6 +91,7 @@ Remplacer tout dans `src/index.css` par:
 ### TS config
 
 Ajoutez compilerOptions:
+
 ```json title="tsconfig.json
 {
   "files": [],
@@ -102,6 +111,7 @@ Ajoutez compilerOptions:
   }
 }
 ```
+
 ```json title="tsconfig.app.json
 {
   "compilerOptions": {
@@ -118,9 +128,11 @@ Ajoutez compilerOptions:
 ```
 
 ### Vite config
+
 ```bash
 pnpm add -D @types/node
 ```
+
 ```ts title="vite.config.ts"
 import path from "path"
 import tailwindcss from "@tailwindcss/vite"
@@ -139,16 +151,19 @@ export default defineConfig({
 ```
 
 ### Shadn
+
 ```bash
 pnpm dlx shadcn@latest init
 ```
 
 Vous pouvez maintenant ajouter des composants:
+
 ```bash
 pnpm dlx shadcn@latest add button
 ```
 
 Cette commande ajoute le composant `Button` au projet:
+
 ```tsx title="src/App.tsx"
 import { Button } from "@/components/ui/button"
 
@@ -165,3 +180,9 @@ export default App
 
 ## Initialisation du repo Git
 
+---
+
+## Partie PROJETS
+
+- portfolio
+- chrome extension
