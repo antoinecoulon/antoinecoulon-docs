@@ -56,6 +56,16 @@
     - [Utiliser les données](#utiliser-les-données)
   - [Thème personnalisé](#thème-personnalisé)
     - [Personnaliser l'icone de l'app](#personnaliser-licone-de-lapp)
+    - [ThemeData](#themedata)
+    - [Utiliser le thème](#utiliser-le-thème)
+    - [Aller plus loin](#aller-plus-loin)
+  - [Utiliser les fonctionnalités du device](#utiliser-les-fonctionnalités-du-device)
+    - [Appareil photo](#appareil-photo)
+      - [Étape 1 : Ajouter les dépendances](#étape-1--ajouter-les-dépendances)
+      - [Étape 2 : Configurer les permissions](#étape-2--configurer-les-permissions)
+      - [Étape 3 : Implémenter la fonctionnalité de la caméra](#étape-3--implémenter-la-fonctionnalité-de-la-caméra)
+      - [Étape 4 : Tester l'application](#étape-4--tester-lapplication)
+      - [Remarques](#remarques)
 
 ---
 
@@ -1415,6 +1425,262 @@ void fetch() async {
 
 - Ressources : [appicons](https://www.appicon.co/)
 
+### ThemeData
+
+Créer un fichier externe:
+
+```dart title="app_theme.dart"
+import 'package:flutter/material.dart';
+
+class AppTheme {
+  static ThemeData get lightTheme {
+    return ThemeData(
+      primaryColor: Colors.deepPurple,
+      accentColor: Colors.deepOrange,
+      scaffoldBackgroundColor: Colors.white,
+      appBarTheme: AppBarTheme(
+        color: Colors.deepPurple,
+        iconTheme: IconThemeData(color: Colors.white),
+      ),
+      textTheme: TextTheme(
+        headline1: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.black),
+        bodyText1: TextStyle(fontSize: 16.0, color: Colors.black87),
+      ),
+      buttonTheme: ButtonThemeData(
+        buttonColor: Colors.deepPurple,
+        textTheme: ButtonTextTheme.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.deepPurple,
+          onPrimary: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.deepPurple),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      ),
+    );
+  }
+
+  static ThemeData get darkTheme {
+    return ThemeData(
+      brightness: Brightness.dark,
+      primaryColor: Colors.deepPurple,
+      accentColor: Colors.deepOrange,
+      scaffoldBackgroundColor: Colors.black,
+      appBarTheme: AppBarTheme(
+        color: Colors.black,
+        iconTheme: IconThemeData(color: Colors.white),
+      ),
+      textTheme: TextTheme(
+        headline1: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.white),
+        bodyText1: TextStyle(fontSize: 16.0, color: Colors.white70),
+      ),
+      buttonTheme: ButtonThemeData(
+        buttonColor: Colors.deepPurple,
+        textTheme: ButtonTextTheme.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          primary: Colors.deepPurple,
+          onPrimary: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.deepPurple),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### Utiliser le thème
+
+```dart title="main.dart"
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Mon Application',
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.system, // Ou ThemeMode.light / ThemeMode.dark
+      home: MyHomePage(),
+    );
+  }
+}
+```
+
+### Aller plus loin
+
+*Couleurs* : Vous pouvez définir des couleurs personnalisées en utilisant Color(0xFFXXXXXX) pour des couleurs hexadécimales.
+
+*Typographie* : Personnalisez davantage les styles de texte en utilisant GoogleFonts ou d'autres packages de polices.
+
+*Formes et ombres* : Utilisez des propriétés comme shape, elevation, et shadowColor pour ajouter des effets visuels.
+
+*Animations* : Intégrez des animations pour des transitions fluides entre les thèmes clairs et sombres.
+
 ---
 
-- Thème (theme perso)
+## Utiliser les fonctionnalités du device
+
+### Appareil photo
+
+Pour accéder et utiliser l'appareil photo d'un téléphone dans une application Flutter, vous pouvez utiliser le package `camera`. Ce package permet de prévisualiser et de capturer des images et des vidéos à partir de la caméra du téléphone.
+
+#### Étape 1 : Ajouter les dépendances
+
+Ajoutez le package `camera` à votre fichier `pubspec.yaml` :
+
+```yaml
+dependencies:
+  flutter:
+    sdk: flutter
+  camera: ^0.10.0+4
+```
+
+Ensuite, exécutez `flutter pub get` pour installer les nouvelles dépendances.
+
+#### Étape 2 : Configurer les permissions
+
+Vous devez configurer les permissions pour accéder à la caméra sur les plateformes Android et iOS.
+
+- Pour *Android*:
+
+Ajoutez les permissions suivantes dans le fichier `AndroidManifest.xml` situé dans `android/app/src/main/` :
+
+```xml
+<uses-permission android:name="android.permission.CAMERA" />
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+```
+
+- Pour *iOS*:
+
+Ouvrez le fichier `Info.plist` situé dans `ios/Runner/` et ajoutez les clés suivantes :
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>Nous avons besoin d'accéder à votre caméra pour capturer des photos.</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>Nous avons besoin d'accéder à votre microphone pour enregistrer des vidéos.</string>
+```
+
+#### Étape 3 : Implémenter la fonctionnalité de la caméra
+
+Voici un exemple de code pour afficher un aperçu de la caméra et capturer une image :
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
+
+List<CameraDescription> cameras;
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  cameras = await availableCameras();
+  runApp(CameraApp());
+}
+
+class CameraApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      home: CameraScreen(),
+    );
+  }
+}
+
+class CameraScreen extends StatefulWidget {
+  @override
+  _CameraScreenState createState() => _CameraScreenState();
+}
+
+class _CameraScreenState extends State<CameraScreen> {
+  CameraController _controller;
+  Future<void> _initializeControllerFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = CameraController(
+      cameras[0],
+      ResolutionPreset.medium,
+    );
+
+    _initializeControllerFuture = _controller.initialize();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Appareil Photo')),
+      body: FutureBuilder<void>(
+        future: _initializeControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return CameraPreview(_controller);
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          try {
+            await _initializeControllerFuture;
+            final image = await _controller.takePicture();
+            // Vous pouvez maintenant utiliser l'image capturée
+            print("Image capturée : ${image.path}");
+          } catch (e) {
+            print(e);
+          }
+        },
+        child: Icon(Icons.camera_alt),
+      ),
+    );
+  }
+}
+```
+
+#### Étape 4 : Tester l'application
+
+Assurez-vous de tester votre application sur un appareil réel, car l'émulateur peut ne pas supporter toutes les fonctionnalités de la caméra.
+
+#### Remarques
+
+- **Permissions** : Assurez-vous que les permissions sont correctement configurées, sinon l'application pourrait planter ou ne pas fonctionner correctement.
+- **Gestion des erreurs** : Ajoutez une gestion des erreurs pour gérer les cas où l'utilisateur refuse les permissions ou si la caméra n'est pas disponible.
+- **Performances** : Utilisez des résolutions appropriées pour éviter les problèmes de performances, surtout sur les appareils plus anciens.
