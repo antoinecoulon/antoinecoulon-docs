@@ -22,6 +22,8 @@
   - [Logical operators](#logical-operators)
   - [for loops](#for-loops)
   - [if... else if... else](#if-else-if-else)
+  - [Objects](#objects)
+  - [Functions parameters/arguments](#functions-parametersarguments)
 
 ---
 
@@ -210,6 +212,8 @@ if (condition) {
 
 ---
 
+## Objects
+
 ```js
 // Objects - store data in-depth - composite / complex data type
 // key-value pairs
@@ -237,3 +241,20 @@ let player = {
 
 player.sayHello()
 ```
+
+## Functions parameters/arguments
+
+```js
+                  // parameters !
+function greetUser(greeting, name) {
+  console.log( `${greeting}, ${name} !!` ) // template literals
+}
+
+          // arguments !!
+greetUser("Hi", "Antoine")
+
+let hi = "Hello"
+greetUser(hi, "Antoine")
+```
+
+---

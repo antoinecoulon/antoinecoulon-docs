@@ -15,6 +15,7 @@ description: Images, icones, animations, sprites...
 - [Aceternity](https://ui.aceternity.com/components/3d-card-effect) - + de components
 
 ---
+
 ## Images / Illustrations
 
 - [Lorem Picsum](https://picsum.photos/) - Générateur d'images aléatoires
@@ -22,24 +23,29 @@ description: Images, icones, animations, sprites...
 - [Undraw](https://undraw.co/illustrations) - Illustrations
 
 ---
+
 ## Couleurs
 
 - [Palette Maker](https://palettemaker.com/)
 - [hue.tools](https://hue.tools/mix?mode=lch)
 
 ---
+
 ## Librairies SVG
 
 - [SVGL](https://svgl.app/) - Icônes SVG Dev Languages
 
 ---
+
 ## Icones
 
 - [Unicornicons](https://unicornicons.com/)
 - [Materiel Icons (Google Fonts)](https://fonts.google.com/icons)
 - [Feather Icons](https://feathericons.com/)
+- [Animated Icons](https://icons.pqoqubbw.dev/)
 
 ---
+
 ## Shapes / Patterns / Motifs
 
 - [PatternPad](https://patternpad.com/) - Patterns et motifs
@@ -48,11 +54,13 @@ description: Images, icones, animations, sprites...
 - [Contrast Ratio](https://contrast-ratio.org/#white-on-hsla%28200%2C0%25%2C0%25%2C.7%29)
 
 ---
+
 ## Backgrounds
 
 - [Animated Backgrounds](https://animatedbackgrounds.me/)
 
 ---
+
 ## Animations
 
 - [Lottie](https://developers.lottiefiles.com/) - Librairie d'animations (JSON)
@@ -62,5 +70,3 @@ description: Images, icones, animations, sprites...
 ## Sprites
 
 - [Spiters Resources](https://www.spriters-resource.com/)
-
-

@@ -50,6 +50,12 @@
     - [Créer un modèle de données](#créer-un-modèle-de-données)
     - [Configurer la base de données](#configurer-la-base-de-données)
     - [Utiliser la base de données dans votre application](#utiliser-la-base-de-données-dans-votre-application)
+  - [API](#api)
+    - [JSON Mapping](#json-mapping)
+    - [Appeler une API](#appeler-une-api)
+    - [Utiliser les données](#utiliser-les-données)
+  - [Thème personnalisé](#thème-personnalisé)
+    - [Personnaliser l'icone de l'app](#personnaliser-licone-de-lapp)
 
 ---
 
@@ -790,10 +796,10 @@ Ce dernier est différent du modèle de données Métier (ici Tweet):
 
 ```dart title="models/tweet.dart"
 final String author;
-  final String message;
-  final String date;
+final String message;
+final String date;
 
-  Tweet(this.author, this.message, this.date);
+Tweet(this.author, this.message, this.date);
 ```
 
 Configurer le `Provider` en enveloppant le widget racine avec `ChangeNotifierProvider`:
@@ -1335,5 +1341,80 @@ class _TweetScreenState extends State<TweetScreen> {
 
 ---
 
-- Thème (theme perso)
+## API
+
+Installer les dépendances:
+
+```bash
+flutter pub add http
+```
+
+Cela ajoute au fichier pubspec.yaml:
+
+```yaml title="pubspec.yaml"
+http: ^1.3.0
+```
+
+### JSON Mapping
+
+*Réponse HTTP* -> *JSON* -> *Objet Dart*
+
+Créer un modèle de données qui représente les données reçues par l'API et explicitement alimenter les attributs !
+
+```dart
+class Tweet {
+  int id;
+  // ... autres propriétés
+
+  Tweet(this.id, ...);
+
+  factory Tweet.fromJson(Map<String, dynamic> json) {
+    return Tweet(
+      id: json["id"],
+      // ... le reste
+    )
+  }
+}
+```
+
+### Appeler une API
+
+Dans un viewModel:
+
+```dart
+void fetch() async {
+  final uri = '' // uri endpoint
+
+  try {
+    var response = await http.get(Uri.parse(uri));
+
+    if (response.statusCode == 200) {
+      // Gérer la réception des données
+    } else {
+      // Gérer erreur http avec l'API
+    }
+  } catch (e) {
+    print('Error: $e');
+  }
+}
+```
+
+### Utiliser les données
+
+```dart
+...Button(
+  onPressed: ...Model.fetch()
+)
+```
+
+---
+
+## Thème personnalisé
+
+### Personnaliser l'icone de l'app
+
 - Ressources : [appicons](https://www.appicon.co/)
+
+---
+
+- Thème (theme perso)
