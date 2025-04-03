@@ -229,8 +229,6 @@ let course = {
     isFree: true,
     tags: ["html", "css"]
 }
-
-
 console.log( course.tags )
 
 let player = {
@@ -240,8 +238,12 @@ let player = {
         console.log("Heisann!")
     }
 }
-
 player.sayHello()
+
+let tabs = [
+  {url: "http://www.google.com"}
+]
+console.log(tabs[0].url) // http://www.google.com
 ```
 
 ## Functions parameters/arguments
