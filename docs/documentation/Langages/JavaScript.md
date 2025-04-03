@@ -24,6 +24,8 @@
   - [if... else if... else](#if-else-if-else)
   - [Objects](#objects)
   - [Functions parameters/arguments](#functions-parametersarguments)
+  - [localStorage](#localstorage)
+  - [Template strings/literals](#template-stringsliterals)
 
 ---
 
@@ -258,3 +260,31 @@ greetUser(hi, "Antoine")
 ```
 
 ---
+
+## localStorage
+
+Permet de stocker des données (Strings) chez un utilisateur, en local dans son navigateur.
+
+```js
+localStorage.setItem("itemName", data) // Stocker
+localStorage.getItem("itemName") // Récupérer/lire
+localStorage.clear() // Effacer les données 
+```
+
+---
+
+## Template strings/literals
+
+Exemple:
+
+```js
+for (let i = 0; i < array.length; i++) {
+  listItems += `
+      <li>
+          <a target="_blank" href="${array[i]}">
+              ${array[i]}
+          </a>
+      </li>
+  `  
+}
+```
