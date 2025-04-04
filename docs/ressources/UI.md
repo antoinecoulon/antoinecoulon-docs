@@ -43,6 +43,7 @@ description: Images, icones, animations, sprites...
 - [Materiel Icons (Google Fonts)](https://fonts.google.com/icons)
 - [Feather Icons](https://feathericons.com/)
 - [Animated Icons](https://icons.pqoqubbw.dev/)
+- [favicon.io](https://favicon.io/) - Favicon generator
 
 ---
 

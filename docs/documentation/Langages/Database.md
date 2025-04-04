@@ -2,14 +2,17 @@
 
 - [Base de données](#base-de-données)
   - [Ressources](#ressources)
-  - [Guide des Opérateurs (MongoDB)](#guide-des-opérateurs-mongodb)
-    - [Opérateurs de Comparaison](#opérateurs-de-comparaison)
-    - [Opérateurs Logiques](#opérateurs-logiques)
-    - [Opérateurs de Tableau](#opérateurs-de-tableau)
-    - [Opérateurs d'Existence](#opérateurs-dexistence)
-    - [Opérateurs de Mise à Jour](#opérateurs-de-mise-à-jour)
-  - [Bonnes Pratiques](#bonnes-pratiques)
+  - [MongoDB](#mongodb)
+    - [Guide des Opérateurs (MongoDB)](#guide-des-opérateurs-mongodb)
+      - [Opérateurs de Comparaison](#opérateurs-de-comparaison)
+      - [Opérateurs Logiques](#opérateurs-logiques)
+      - [Opérateurs de Tableau](#opérateurs-de-tableau)
+      - [Opérateurs d'Existence](#opérateurs-dexistence)
+      - [Opérateurs de Mise à Jour](#opérateurs-de-mise-à-jour)
+    - [Bonnes Pratiques](#bonnes-pratiques)
   - [Notes Importantes](#notes-importantes)
+  - [Firebase](#firebase)
+    - [Firebase \& JS](#firebase--js)
 
 ---
 
@@ -17,13 +20,18 @@
 
 - [MySQL Sample Database](https://www.mysqltutorial.org/getting-started-with-mysql/mysql-sample-database/)
 
-## Guide des Opérateurs (MongoDB)
+---
 
-### Opérateurs de Comparaison
+## MongoDB
+
+### Guide des Opérateurs (MongoDB)
+
+#### Opérateurs de Comparaison
 
 ```sql
 $eq (Égal)
 ```
+
 Compare si une valeur est égale à une valeur spécifiée.
 
 ```sql
@@ -35,6 +43,7 @@ db.users.find({ age: { $eq: 25 } })
 ```sql
 $ne (Non Égal)
 ```
+
 Compare si une valeur n'est pas égale à une valeur spécifiée.
 
 ```sql
@@ -46,6 +55,7 @@ db.products.find({ status: { $ne: "inactive" } })
 ```sql
 $gt (Plus Grand Que)
 ```
+
 Compare si une valeur est supérieure à une valeur spécifiée.
 
 ```sql
@@ -57,6 +67,7 @@ db.products.find({ price: { $gt: 100 } })
 ```sql
 $lt (Plus Petit Que)
 ```
+
 Compare si une valeur est inférieure à une valeur spécifiée.
 
 ```sql
@@ -68,6 +79,7 @@ db.users.find({ age: { $lt: 18 } })
 ```sql
 $gte (Plus Grand ou Égal)
 ```
+
 Compare si une valeur est supérieure ou égale à une valeur spécifiée.
 
 ```sql
@@ -79,6 +91,7 @@ db.products.find({ stock: { $gte: 10 } })
 ```sql
 $lte (Plus Petit ou Égal)
 ```
+
 Compare si une valeur est inférieure ou égale à une valeur spécifiée.
 
 ```sql
@@ -87,11 +100,12 @@ Compare si une valeur est inférieure ou égale à une valeur spécifiée.
 db.products.find({ stock: { $lte: 5 } })
 ```
 
-### Opérateurs Logiques
+#### Opérateurs Logiques
 
 ```sql
 $and
 ```
+
 Combine plusieurs conditions avec un ET logique.
 
 ```sql
@@ -113,6 +127,7 @@ db.products.find({
 ```sql
 $or
 ```
+
 Combine plusieurs conditions avec un OU logique.
 
 ```sql
@@ -134,6 +149,7 @@ db.users.find({
 ```sql
 $not
 ```
+
 Inverse la condition spécifiée.
 
 ```sql
@@ -146,11 +162,12 @@ db.users.find({
 })
 ```
 
-### Opérateurs de Tableau
+#### Opérateurs de Tableau
 
 ```sql
 $in
 ```
+
 Vérifie si une valeur correspond à une des valeurs d'un tableau.
 
 ```sql
@@ -166,6 +183,7 @@ db.products.find({
 ```sql
 $nin
 ```
+
 Vérifie si une valeur ne correspond à aucune des valeurs d'un tableau.
 
 ```sql
@@ -181,6 +199,7 @@ db.users.find({
 ```sql
 $all
 ```
+
 Vérifie si un tableau contient tous les éléments spécifiés.
 
 ```sql
@@ -193,11 +212,12 @@ db.tasks.find({
 })
 ```
 
-### Opérateurs d'Existence
+#### Opérateurs d'Existence
 
 ```sql
 $exists
 ```
+
 Vérifie si un champ existe.
 
 ```sql
@@ -213,6 +233,7 @@ db.users.find({
 ```sql
 $type
 ```
+
 Vérifie le type d'un champ.
 
 ```sql
@@ -225,11 +246,12 @@ db.users.find({
 })
 ```
 
-### Opérateurs de Mise à Jour
+#### Opérateurs de Mise à Jour
 
 ```sql
 $set
 ```
+
 Définit une nouvelle valeur pour un champ.
 
 ```sql
@@ -247,6 +269,7 @@ db.users.updateOne(
 ```sql
 $unset
 ```
+
 Supprime un champ d'un document.
 
 ```sql
@@ -264,6 +287,7 @@ db.users.updateOne(
 ```sql
 $inc
 ```
+
 Incrémente un champ d'une valeur spécifiée.
 
 ```sql
@@ -281,6 +305,7 @@ db.counters.updateOne(
 ```sql
 $push
 ```
+
 Ajoute un élément à un tableau.
 
 ```sql
@@ -298,6 +323,7 @@ db.products.updateOne(
 ```sql
 $pull
 ```
+
 Retire un élément d'un tableau.
 
 ```sql
@@ -312,7 +338,7 @@ db.products.updateOne(
 )
 ```
 
-## Bonnes Pratiques
+### Bonnes Pratiques
 
 1. Utilisez les index appropriés pour optimiser vos requêtes
 2. Combinez les opérateurs pour des requêtes plus précises
@@ -327,3 +353,54 @@ db.products.updateOne(
 - Les valeurs comparées doivent être du même type
 - Certains opérateurs peuvent être combinés
 - Les performances peuvent varier selon les opérateurs utilisés
+
+---
+
+## Firebase
+
+### Firebase & JS
+
+*Real Time Database* - Voir dans la console Firebase, la config du projet, pour l'implémentation:
+
+```js
+import { initializeApp } from '...' // CDN version (possible de faire avec npm: from "firebase/app")
+import {
+    getDatabase,
+    ref,
+    push,
+    onValue,
+    remove
+} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js"
+
+// Webapp Firebase config
+const firebaseConfig = {
+    // apiKey: ...
+    // authDomain: ...
+    databaseURL: 'DATABASE_URL'
+    // projectId: ...
+    // storageBucket: ...
+    // messagingSenderId: ...
+    // appId: ...
+}
+
+const app = initializeApp(firebaseConfig) // Init
+const database = getDatabase(app) // DB
+const referenceInDB = ref(database, "leads") // Créer une référence de la DB en y passant la variable db et le nom de la ref
+
+// Envoyer des données
+push(referenceInDB, data)
+
+// Récupérer un snapshot des data en DB à chaque changement
+onValue(referenceInDB, function(snapshot) {
+    const snapshotDoesExist = snapshot.exists() // Vérifier qu'il existe
+    if (snapshotDoesExist) {        // Eviter les erreurs
+        const snapshotValues = snapshot.val() // .val() pour obtenir l'objet qui contient la data
+        const leads = Object.values(snapshotValues) // Transforme l'Objet en Array + prend seulement les valeurs, pas les keys
+
+        // ... faire ce qu'on veut de la data
+    }
+})
+
+// Supprime ! TOUTES ! les data de la référence
+remove(referenceInDB) // Attention, supprime le snap et entraine une erreur
+```
