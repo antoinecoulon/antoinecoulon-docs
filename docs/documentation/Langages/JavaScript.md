@@ -1,8 +1,17 @@
 # JavaScript
 
-[Roadmap JavaScript](https://roadmap.sh/javascript)
+---
+
+## Resources
+
+- [Roadmap JavaScript](https://roadmap.sh/javascript)
+- [Repo GitHub learnJS](https://github.com/antoinecoulon/learnJS)
+- [Scrimba course](https://scrimba.com/learn-javascript-c0v)
+
+---
 
 - [JavaScript](#javascript)
+  - [Resources](#resources)
   - [All about variables](#all-about-variables)
     - [var](#var)
     - [let](#let)

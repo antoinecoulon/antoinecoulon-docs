@@ -1,11 +1,18 @@
 # TypeScript
 
-*Première approche en cours Eni: Angular*
-*En plein essor -> à bosser pour React*
+---
+
+## Resources
+
+- [Roadmap](https://roadmap.sh/typescript)
+- GitHub Repo
+- [Scrimba course](https://scrimba.com/learn-typescript-c03c)
 
 ---
 
 - [TypeScript](#typescript)
+  - [Resources](#resources)
+  - [TypeScript vs JavaScript](#typescript-vs-javascript)
   - [Partie 1 : TypeScript pour Débutants](#partie-1--typescript-pour-débutants)
     - [Introduction à TypeScript](#introduction-à-typescript)
     - [1. Installation de TypeScript](#1-installation-de-typescript)
@@ -22,6 +29,13 @@
   - [*Conclusion*](#conclusion)
 
 ---
+
+*learn with Scrimba...*
+
+## TypeScript vs JavaScript
+
+---
+*Première approche en cours Eni...*
 
 ## Partie 1 : TypeScript pour Débutants
 
