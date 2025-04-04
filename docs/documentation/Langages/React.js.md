@@ -5,6 +5,8 @@
 - [React.js](#reactjs)
   - [Ressources](#ressources)
   - [Essential JavaScript for React](#essential-javascript-for-react)
+  - [Scrimba course](#scrimba-course)
+    - [Introduction](#introduction)
   - [Part 1 - Installation avec Vite - Setup](#part-1---installation-avec-vite---setup)
     - [Basics](#basics)
     - [Component props](#component-props)
@@ -34,21 +36,57 @@
 
 ---
 
+## Scrimba course
+
+### Introduction
+
+React utilise une sorte de placeholder pour injecter du code jsx.
+
+Créer une app React from scratch:
+
+```html title="index.html"
+<html>
+    <head>
+        <link rel="stylesheet" href="/index.css">
+    </head>
+    <body>
+
+        <!--    ICI !!!   -->
+        <div id="root"></div>
+
+
+        <script src="/index.jsx" type="module"></script>
+    </body>
+</html>
+```
+
+```ts title="index.jsx"
+import { createRoot } from "react-dom/client"
+
+const root = createRoot(document.querySelector("#root"))
+root.render(<p>Hello from the world of React!</p>)
+```
+
+---
+
 ## Part 1 - Installation avec Vite - Setup
 
 Requirements:
 
 Avoir Node installé, au moins v18 pour utiliser Vite.
+
 ```bash
 node -v
 ```
 
 Initialiser le projet avec Vite:
+
 ```bash
 npm create vite@latest mon-projet -- --template react
 ```
 
 Démarrer le serveur: (partie optionnelle)
+
 ```bash
 npm run dev (-- --open --port 3000)
 ```
@@ -184,6 +222,6 @@ In React:
 
 ## Part 2 - Learn building a todo app
 
-**developer.mozilla.org/**
+On React docs at **developer.mozilla.org/**
 
 Follow along the MDN Web Docs tutorial and build a Todo app
