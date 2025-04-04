@@ -32,8 +32,11 @@
   - [Math object](#math-object)
     - [Math.random()](#mathrandom)
     - [Math.floor()](#mathfloor)
-  - [Comparison operators](#comparison-operators)
+  - [Operators](#operators)
+    - [Arithmetic operators](#arithmetic-operators)
+    - [Equality](#equality)
     - [Strict Equality Operator (===)](#strict-equality-operator-)
+    - [Comparison operators](#comparison-operators)
   - [Logical operators](#logical-operators)
   - [Loops \& iterations](#loops--iterations)
     - [for loops](#for-loops)
@@ -101,6 +104,8 @@ let variable // undefined
 let variable = null
 let symbol = Symbol("description")
 ```
+
+---
 
 ### Object
 
@@ -263,7 +268,22 @@ console.log( Math.floor(-5.05) ) // Expected output: 6
 
 ---
 
-## Comparison operators
+## Operators
+
+### Arithmetic operators
+
+- `+` (Addition)
+- `-` (Subtraction)
+- `*` (Multiplication)
+- `**` (Exponentiation)
+- `/` (Division)
+- `%` (Modulus i.e. Remainder)
+- `++` (Increment)
+- `--` (Decrement)
+
+- `+`, `+=` (Concatenation)
+
+### Equality
 
 The `==` operator does the type conversion of the operands before comparison, whereas the `===` operator compares the values and the data types of the operands. The O`bject.is()` method determines whether two values are the same value: `Object.is(value1, value2)`. -> [See](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Equality_comparisons_and_sameness#same-value_equality_using_object.is)
 
@@ -275,6 +295,10 @@ The strict equality operator `===` compares both the value and the type of two o
 "5" === "5"   // true
 "5" === 5   // false
 ```
+
+### Comparison operators
+
+The operators that compare values and return true or false. The operators include: `>`, `<`, `>=`, `<=`, `==`, `===`, `!=` and `!==`.
 
 ## Logical operators
 
@@ -301,6 +325,8 @@ The [`for` loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Referen
 ---
 
 ## Conditional statements
+
+When you write code, you often want to perform different actions for different decisions. You can use conditional statements in your code to do this.
 
 ### if... else if... else
 
@@ -365,6 +391,8 @@ console.log(Object.entries(person)) // ["Name", "Age"], ["Antoine", "31"]
 ```
 
 ## Functions parameters/arguments
+
+> [See](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#function_parameters)
 
 ```js
                   // parameters !

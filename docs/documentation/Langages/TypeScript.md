@@ -25,6 +25,8 @@
       - [Omit](#omit)
     - [possibly undefined](#possibly-undefined)
     - [functions return type](#functions-return-type)
+    - [...spread operator](#spread-operator)
+    - [Generics](#generics)
   - [ENI course](#eni-course)
     - [Partie 1 : TypeScript pour Débutants](#partie-1--typescript-pour-débutants)
       - [Introduction à TypeScript](#introduction-à-typescript)
@@ -231,7 +233,7 @@ function getPizzaDetails( identifier: string | number ) {
 
 `Partial<Type>`
 
-Construit un `type` à partir de `Type` avec toutes les propriétés optionnelles. Exemple:
+Construit un `type` à partir de `Type` avec toutes les propriétés optionnelles. [See](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype)
 
 ```ts
 type Todo {
@@ -257,7 +259,7 @@ const todo2 = updateTodo(todo1, {
 
 `Omit<Type, Keys>`
 
-Construit un `type` en prenant toutes les propriétés de `Type` puis en supprimant les `Keys` (string literal, union string literals). Exemple:
+Construit un `type` en prenant toutes les propriétés de `Type` puis en supprimant les `Keys` (string literal, union string literals). [See](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)
 
 ```ts
 interface Todo {
@@ -337,6 +339,52 @@ function getUser(): User | undefined {
 function rollDice(): number {
     return 6    // retourne un type number
 }
+```
+
+---
+
+### ...spread operator
+
+```js
+function addNewUser(newUser: any): User {
+    const user: User = {
+        id: nextUserId++,
+        ...newUser      // ajoute le reste des propriétés de newUser
+    }
+    users.push(user)
+    return user
+}
+```
+
+---
+
+### Generics
+
+It's like a placeholder for a type: [See](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
+```js
+const gameScores = [14, 21, 33, 42, 59]
+const favoriteThings = ["raindrops on roses", "whiskers on kittens", "bright copper kettles", "warm woolen mittens"];
+const voters = [{ name: "Alice", age: 42 }, { name: "Bob", age: 77 }]
+
+function getLastItem<T>(array: T[]): T { // T est une convention, on pourrait 
+    return array[array.length - 1]    // mettre <Type>, ou même <Blahblahblah>
+}
+
+console.log(getLastItem(gameScores))    // 59
+console.log(getLastItem(favoriteThings))// "warm woolen mittens"
+console.log(getLastItem(voters))        //{ name: "Bob", age: 77 }
+
+//-------------------------------------------------------------------------------------
+
+function addToArray<T>(array: T[], item: T): T[] {
+    array.push(item)
+    return array
+}
+
+// On type l'appel de la fonction EXPLICITEMENT !
+addToArray<Pizza>(menu, {id: nextPizzaId++, name: "Chicken Bacon Ranch", price: 12 })
+addToArray<Order>(orderQueue, { id: nextOrderId++, pizza: menu[2], status: "completed" })
 ```
 
 ---
