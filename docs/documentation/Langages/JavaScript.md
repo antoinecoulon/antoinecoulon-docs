@@ -21,7 +21,13 @@
     - [Primitive types](#primitive-types)
     - [Object](#object)
     - [typeof Operator](#typeof-operator)
-  - [Arrays](#arrays)
+  - [Data structures](#data-structures)
+    - [Arrays](#arrays)
+    - [Typed Arrays](#typed-arrays)
+    - [Keyed Collections](#keyed-collections)
+      - [Map](#map)
+      - [Set](#set)
+    - [Structured Data (JSON)](#structured-data-json)
   - [return](#return)
   - [Math object](#math-object)
     - [Math.random()](#mathrandom)
@@ -29,8 +35,15 @@
   - [Comparison operators](#comparison-operators)
     - [Strict Equality Operator (===)](#strict-equality-operator-)
   - [Logical operators](#logical-operators)
-  - [for loops](#for-loops)
-  - [if... else if... else](#if-else-if-else)
+  - [Loops \& iterations](#loops--iterations)
+    - [for loops](#for-loops)
+      - [for...of loop](#forof-loop)
+      - [for...in loop](#forin-loop)
+    - [while](#while)
+      - [do...while](#dowhile)
+    - [break / continue](#break--continue)
+  - [Conditional statements](#conditional-statements)
+    - [if... else if... else](#if-else-if-else)
   - [Objects](#objects)
   - [Functions parameters/arguments](#functions-parametersarguments)
   - [localStorage](#localstorage)
@@ -122,7 +135,11 @@ You can use the `typeOf` operator to find the data type of a variable. It return
 
 ---
 
-## Arrays
+## Data structures
+
+A Data structure is a format to organize, manage and store data in a way that allows efficient access and modification.
+
+### Arrays
 
 Indexed Collections are collections that have numeric indices i.e. the collections of data that are ordered by an index value. An array is an ordered set of values that has a numeric index.
 
@@ -141,6 +158,68 @@ console.log(cards) // [3, 11, 6]
 cards.pop()
 console.log(cards) // [3, 11]
 ```
+
+### Typed Arrays
+
+In Javascript, a [typed array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays) is an array-like buffer of binary data. There is no JavaScript property or object named TypedArray, but properties and methods can be used with typed array objects.
+
+### Keyed Collections
+
+[Keyed collections](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Keyed_collections) are data collections that are ordered by key not index. They are associative in nature.
+
+#### Map
+
+[Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) is a collection of keyed data items, just like an Object. But the main difference is that Map allows keys of any type.
+
+#### Set
+
+The [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) object lets you store unique values of any type, whether primitive values or object references. A value in the Set may only occur once; it is unique in the Set’s collection.
+
+### Structured Data (JSON)
+
+JavaScript Object Notation (JSON) is a standard text-based format for representing structured data based on JavaScript object syntax. It is commonly used for transmitting data in web applications.
+
+```json
+{
+  "squadName": "Super hero squad",
+  "homeTown": "Metro City",
+  "formed": 2016,
+  "secretBase": "Super tower",
+  "active": true,
+  "members": [
+    {
+      "name": "Molecule Man",
+      "age": 29,
+      "secretIdentity": "Dan Jukes",
+      "powers": ["Radiation resistance", "Turning tiny", "Radiation blast"]
+    },
+    {
+      "name": "Madame Uppercut",
+      "age": 39,
+      "secretIdentity": "Jane Wilson",
+      "powers": [
+        "Million tonne punch",
+        "Damage resistance",
+        "Superhuman reflexes"
+      ]
+    },
+    {
+      "name": "Eternal Flame",
+      "age": 1000000,
+      "secretIdentity": "Unknown",
+      "powers": [
+        "Immortality",
+        "Heat Immunity",
+        "Inferno",
+        "Teleportation",
+        "Interdimensional travel"
+      ]
+    }
+  ]
+}
+```
+
+[Working with JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON)
 
 ---
 
@@ -203,11 +282,27 @@ There are four logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT)
 
 ---
 
-## for loops
+## Loops & iterations
+
+### for loops
 
 The [`for` loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) is commonly used to iterate over given sequences or iterate a known number of times and execute a piece of code for each iteration.
 
-## if... else if... else
+#### for...of loop
+
+#### for...in loop
+
+### while
+
+#### do...while
+
+### break / continue
+
+---
+
+## Conditional statements
+
+### if... else if... else
 
 -> [**See**](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else)
 

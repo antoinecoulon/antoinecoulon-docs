@@ -778,6 +778,8 @@ _formKey.currentState!.reset();
 
 Le package `Provider` permet de gérer et de propager l'état de manière efficace à travers l'arbre des widgets sans avoir à passer manuellement les données à chaque niveau.
 
+Le provider peut être partagé par toute l'app s'il est renseigné au niveau de runApp() plutôt qu'au niveau de chaque route indépendantes = *partage des propriétés du provider*
+
 Ajouter la dépendance:
 
 ```yaml title="pubspec.yaml"
