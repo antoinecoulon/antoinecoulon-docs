@@ -9,6 +9,7 @@ description: Images, icones, animations, sprites...
 - [AtroposJs](https://atroposjs.com/) - 3D hover effects
 - [Toggles.dev](https://toggles.dev/) - Theme toggles
 - [Uiball](https://uiball.com/ldrs/) - Loaders
+- [AnimeJS](https://animejs.com/)
 
 - [ShadcnUI](https://ui.shadcn.com/docs) - Components (Tailwind, React, etc)
 - [ShadcnUI color customizer](https://customizer.railly.dev/)
