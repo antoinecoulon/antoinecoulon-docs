@@ -40,17 +40,34 @@
   - [Logical operators](#logical-operators)
   - [Loops \& iterations](#loops--iterations)
     - [for loops](#for-loops)
-      - [for...of loop](#forof-loop)
-      - [for...in loop](#forin-loop)
+      - [for...of](#forof)
+      - [for...in](#forin)
     - [while](#while)
       - [do...while](#dowhile)
     - [break / continue](#break--continue)
   - [Conditional statements](#conditional-statements)
     - [if... else if... else](#if-else-if-else)
+    - [Switch](#switch)
   - [Objects](#objects)
-  - [Functions parameters/arguments](#functions-parametersarguments)
+  - [Functions](#functions)
+    - [Functions parameters/arguments](#functions-parametersarguments)
+    - [Arrow functions](#arrow-functions)
+    - [Built-in functions](#built-in-functions)
+    - [Recursion](#recursion)
+    - [Timing events](#timing-events)
   - [localStorage](#localstorage)
   - [Template strings/literals](#template-stringsliterals)
+  - [Operators (2)](#operators-2)
+    - [Conditional operator (Ternary op.)](#conditional-operator-ternary-op)
+    - [Unary operators](#unary-operators)
+  - [Exceptions](#exceptions)
+    - [throw](#throw)
+    - [try, catch, finally](#try-catch-finally)
+    - [Error objects](#error-objects)
+      - [Types of Errors](#types-of-errors)
+  - [Working with APIs](#working-with-apis)
+    - [Fetch](#fetch)
+    - [XMLHttpRequest](#xmlhttprequest)
 
 ---
 
@@ -312,15 +329,97 @@ There are four logical operators in JavaScript: `||` (OR), `&&` (AND), `!` (NOT)
 
 The [`for` loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for) is commonly used to iterate over given sequences or iterate a known number of times and execute a piece of code for each iteration.
 
-#### for...of loop
+```js
+for (let i = 0; i < 9; i++) {
+  console.log(i); // 0 / 1 / 2 / 3 / 4 / 5 / 6 / 7 / 8
+}
+```
 
-#### for...in loop
+#### for...of
+
+The [`for...of` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) executes a loop that operates on a sequence of values sourced from an iterable object. Iterable objects include instances of built-ins such as Array, String, TypedArray, Map, Set, NodeList (and other DOM collections), as well as the arguments object, generators produced by generator functions, and user-defined iterables.
+
+```js
+const array1 = ["a", "b", "c"];
+
+for (const element of array1) {
+  console.log(element); // "a" / "b" / "c"
+}
+```
+
+#### for...in
+
+The [`for...in` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in) iterates over all enumerable string properties of an object (ignoring properties keyed by symbols), including inherited enumerable properties.
+
+```js
+const object = { a: 1, b: 2, c: 3 };
+
+for (const property in object) {
+  console.log(`${property}: ${object[property]}`); // "a:1" / "b:2" / "c:3"
+}
+```
 
 ### while
 
+The [`while` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/while) creates a loop that executes a specified statement as long as the test condition evaluates to `true`. The condition is evaluated before executing the statement.
+
+```js
+let n = 0;
+
+while (n < 3) {
+  n++;
+}
+
+console.log(n); // 3
+```
+
 #### do...while
 
+The [`do...while` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/do...while) creates a loop that executes a specified statement until the test condition evaluates to `false`. The condition is evaluated after executing the statement, resulting in the specified statement executing at least once.
+
+```js
+let result = "";
+let i = 0;
+
+do {
+  i = i + 1;
+  result = result + i;
+} while (i < 5);
+
+console.log(result); // "12345"
+```
+
 ### break / continue
+
+[`break` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/break), without a label reference, can only be used to jump out of a loop or a switch block.
+
+```js
+let i = 0;
+
+while (i < 6) {
+  if (i === 3) {
+    break;
+  }
+  i = i + 1;
+}
+
+console.log(i); // 3
+```
+
+[`continue` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/continue), with or without a label reference, can only be used to skip one loop iteration.
+
+```js
+let text = "";
+
+for (let i = 0; i < 10; i++) {
+  if (i === 3) {
+    continue;
+  }
+  text = text + i;
+}
+
+console.log(text); // "012456789"
+```
 
 ---
 
@@ -339,6 +438,28 @@ if (condition) {
   statement2;
 } else {
   statement3;
+}
+```
+
+### Switch
+
+The [`switch` statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) evaluates an expression, matching the expression’s value against a series of `case` clauses, and executes statements after the first `case` clause with a matching value, until a `break` statement is encountered. The `default` clause of a `switch` statement will be jumped to if no `case` matches the expression’s value.
+
+```js
+switch (expression) {
+  case value1:
+    //Statements executed when the result of expression matches value1
+    break;
+  case value2:
+    //Statements executed when the result of expression matches value2
+    break;
+  ...
+  case valueN:
+    //Statements executed when the result of expression matches valueN
+    break;
+  default:
+    //Statements executed when none of the values match the value of the expression
+    break;
 }
 ```
 
@@ -390,7 +511,11 @@ console.log(Object.values(person)) // ["Antoine", "31"]
 console.log(Object.entries(person)) // ["Name", "Age"], ["Antoine", "31"]
 ```
 
-## Functions parameters/arguments
+## Functions
+
+[Functions](https://www.codeguage.com/courses/js/functions-basics) exist so we can reuse code. They are blocks of code that execute whenever they are invoked.
+
+### Functions parameters/arguments
 
 > [See](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#function_parameters)
 
@@ -407,6 +532,33 @@ let hi = "Hello"
 greetUser(hi, "Antoine")
 ```
 
+### Arrow functions
+
+A new way of creating functions:
+
+```js
+const sayHello = () => {
+    console.log(`Hello from Arrow Function !`);
+}
+```
+
+### Built-in functions
+
+JavaScript offers a variety of [built-in functions](https://www.tutorialspoint.com/javascript/javascript_builtin_functions.htm) that simplify common tasks.
+
+### Recursion
+
+Recursion is when a function invokes itself. Such a function is called a *recursive function*. > [See](https://developer.mozilla.org/en-US/docs/Glossary/Recursion)
+
+### Timing events
+
+The [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout) runs a function after the specified period expires. Times are declared in milliseconds.
+
+The [setInterval()](https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval) method helps us to repeatedly execute a function after a fixed delay. It returns a unique interval ID which can later be used by the clearInterval() method, which stops further repeated execution of the function.
+
+setInterval() is similar to setTimeout, with a difference. Instead of running the callback function once, it will run it forever, at the specific time interval you specify (in milliseconds):
+
+> [See](https://javascript.info/settimeout-setinterval)
 ---
 
 ## localStorage
@@ -436,3 +588,114 @@ for (let i = 0; i < array.length; i++) {
   `  
 }
 ```
+
+---
+
+## Operators (2)
+
+### Conditional operator (Ternary op.)
+
+Conditional operator also known as [Ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator) is the only JS operator that takes three operands.
+
+Syntax:
+
+`condition ? val_for_true : val_for_false`
+
+```js
+const status = age >= 18 ? "adult" : "minor";
+```
+
+### Unary operators
+
+JavaScript [Unary Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#unary_operators) are the special operators that consider a single operand and perform all the types of operations on that single operand.
+
+- `delete`
+- `void`
+- `typeof`
+- `!`
+- `~`
+- `+`
+- `-`
+- `await`
+
+---
+
+## Exceptions
+
+In JavaScript, all [exceptions](https://rollbar.com/guides/javascript/how-to-throw-exceptions-in-javascript) are simply objects.
+
+### throw
+
+The [`throw` statement](https://javascript.info/try-catch#throw-operator) allows you to create a custom error. It "throws" (generates) an error. The technical term for this is:
+
+The throw statement throws an exception.
+
+The exception can be a JavaScript String, a Number, a Boolean or an Object:
+
+```js
+throw "Too big";  // throw a text
+throw 500;        // throw a number
+throw false;      // throw a boolean
+throw person;     // throw an object
+```
+
+*Note*: Using `throw` with `try` and `catch`, lets you control program flow and generate custom error messages.
+
+### try, catch, finally
+
+Inside the try code block we have the code to run, inside the catch block we handle the errors, and inside the finally block we have code that runs after the execution of the previous code blocks, regardless of the result.
+
+```js
+try {
+  // Block of code to try
+}
+catch(err) {
+  // Block of code to handle errors
+}
+finally {
+  // Block of code to be executed regardless of the try / catch result
+}
+```
+
+> See [Javascript Errors](https://www.w3schools.com/js/js_errors.asp)
+
+### Error objects
+
+When a runtime error occurs, a new `Error` object is created and thrown. With this `Error` object, we can determine the type of the Error and handle it according to its type. *> [See](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)*
+
+#### Types of Errors
+
+- AggregateError - A collection of errors thrown simultaneously.
+- EvalError - An error occurred during the evaluation of a JavaScript expression.
+- InternalError - An internal JavaScript error, often indicating a bug in the engine.
+- RangeError - A value is outside the allowed range for a given operation.
+- ReferenceError - A variable or object is referenced before it’s declared or doesn’t exist.
+- SyntaxError - The code contains incorrect syntax, preventing it from being parsed.
+
+```js
+try {
+  willGiveErrorSometime();
+} catch (error) {
+  if (error instanceof RangeError) {
+    rangeErrorHandler(error);
+  } else if (error instanceof ReferenceError) {
+    referenceErrorHandle(error);
+  } else {
+    errorHandler(error);
+  }
+}
+```
+
+---
+
+## Working with APIs
+
+When working with remote APIs, you need a way to interact with those APIs. Modern JavaScript provides two native ways to send HTTP requests to remote servers, XMLHttpRequest and Fetch.
+
+### Fetch
+
+The [`fetch()` method](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) in JavaScript is used to request to the server and load the information on the webpages. The request can be of any APIs that return the data of the format JSON or XML. This method returns a promise.
+
+### XMLHttpRequest
+
+[`XMLHttpRequest` (XHR)](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest) is a built-in browser object that can be used to interact with server. XHR allows you to update data without having to reload a web page. Despite the word XML in its name, XHR not only used to retrieve data with XML format, we can use it with any type of data, like JSON, file(s), and much more.

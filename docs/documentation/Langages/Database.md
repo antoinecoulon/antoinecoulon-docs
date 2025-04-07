@@ -2,6 +2,12 @@
 
 - [Base de données](#base-de-données)
   - [Ressources](#ressources)
+  - [SQL Server](#sql-server)
+  - [Transact-SQL](#transact-sql)
+    - [Variables](#variables)
+    - [Conditionnelles](#conditionnelles)
+    - [Output](#output)
+    - [Curseurs](#curseurs)
   - [MongoDB](#mongodb)
     - [Guide des Opérateurs (MongoDB)](#guide-des-opérateurs-mongodb)
       - [Opérateurs de Comparaison](#opérateurs-de-comparaison)
@@ -19,6 +25,152 @@
 ## Ressources
 
 - [MySQL Sample Database](https://www.mysqltutorial.org/getting-started-with-mysql/mysql-sample-database/)
+
+---
+
+## SQL Server
+
+TODO...
+
+---
+
+## Transact-SQL
+
+### Variables
+
+```sql
+-- définir une variable
+DECLARE @nom VARCHAR(50)='Dupont';
+
+-- afficher le nom dans l'onglet "resultat"
+SELECT @nom;
+
+-- valoriser ma variable
+DECLARE @id_client INT;
+SELECT @id_client=id_client, @nom=nom FROM Clients WHERE id_client=-142;
+
+-- afficher le nom dans l'onglet "message"
+PRINT CONCAT('ID: ' , @id_client);
+PRINT 'Nom: ' + @nom;
+```
+
+### Conditionnelles
+
+```sql
+-- case par valeur
+SELECT id_commande AS "n° de commande",
+CASE statut
+WHEN 'EL' THEN 'En livraison'
+WHEN 'LI' THEN 'Livrée'
+ELSE 'Erreur'
+END etatStatut
+FROM Commandes
+
+-- case par condition
+SELECT id_commande AS "n° de commande",
+CASE
+WHEN DATEDIFF(DAY,date_cmd,GETDATE())>=14 THEN 'plus de deux semaines'
+WHEN DATEDIFF(DAY,date_cmd,GETDATE())>=7 THEN 'plus d''une semaine'
+ELSE 'moins d''une semaine'
+END etat
+FROM Commandes;
+
+--IF avec une seule instruction
+--DECLARE @nbClient INT
+--SELECT @nbClient= COUNT(*) FROM Clients
+--IF @nbClient > 5
+--PRINT CONCAT('nb de clients: ',@nbClient);
+--ELSE
+--PRINT 'moins de 5 clients';
+
+DECLARE @nbClient INT;
+DECLARE @nbFixe INT;
+SELECT @nbClient= COUNT(*), @nbFixe= (SELECT COUNT(fixe) FROM Clients WHERE fixe IS NOT NULL)
+IF @nbClient > 5
+BEGIN
+PRINT CONCAT('nb de clients: ',@nbClient);
+PRINT CONCAT('nb de fixe: ',@nbFixe);
+END
+ELSE
+PRINT 'moins de 5 clients';
+
+--amorçage
+DECLARE @i INT = 1;
+WHILE @i <= 10
+BEGIN
+PRINT CONCAT('7 x ',@i,' = ',7*@i);
+SELECT @i = @i + 1;
+END
+```
+
+### Output
+
+```sql
+-- clause Output
+INSERT INTO Clients
+(id_client, nom, prenom, date_naissance, ville, portable)
+OUTPUT INSERTED.*
+VALUES
+(-153, 'Holmes', 'Sherlock', '10/12/2003', DEFAULT, '0758595456');
+
+BEGIN TRAN suppression;
+DELETE Clients
+OUTPUT deleted.*
+WHERE id_client < 0;
+
+ROLLBACK TRAN suppression;
+
+BEGIN TRAN modification;
+UPDATE Clients set prenom = NULL
+OUTPUT deleted.id_client, deleted.prenom avant, inserted.prenom apres
+
+ROLLBACK TRAN modification;
+
+BEGIN TRAN inserer;
+DECLARE @tclients TABLE (
+    id_client INT PRIMARY KEY,
+    nom VARCHAR(50),
+    prenom VARCHAR(40),
+    date_naissance DATE,
+    ville VARCHAR(50),
+    fixe NUMERIC(10)
+    );
+INSERT INTO Clients (id_client, nom, prenom, date_naissance, ville, fixe)
+OUTPUT inserted.id_client, inserted.nom, inserted.prenom, inserted.date_naissance, inserted.ville, inserted.fixe INTO @tclients
+VALUES(-154, 'Watson', 'John', '10/12/2000', DEFAULT, '0251534565');
+SELECT * FROM @tclients;
+DECLARE @date_naissance DATE;
+SELECT @date_naissance= date_naissance FROM @tclients;
+PRINT @date_naissance;
+```
+
+### Curseurs
+
+```sql
+-- Déclarer le Curseur
+DECLARE cClients CURSOR FOR SELECT noCli, nom, prenom FROM Clients WHERE noCli < 5;
+
+-- Ouvrir le curseur
+OPEN cClients;
+
+-- Fetch (je récupère les colonnes du SELECT)
+DECLARE @id INT;
+DECLARE @nom VARCHAR(30);
+DECLARE @prenom VARCHAR(30);
+FETCH NEXT FROM cClients INTO @id, @nom, @prenom;
+-- Parcourir les lignes
+WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- Traiter les données puis fetch ligne suivante
+        PRINT CONCAT('client n°', @id, ' : ', @prenom, ' ', @nom);
+        FETCH NEXT FROM cClients INTO @id, @nom, @prenom;
+    END
+
+-- Fermer le curseur
+CLOSE cClients;
+-- Libérer le curseur
+DEALLOCATE cClients;
+```
 
 ---
 
