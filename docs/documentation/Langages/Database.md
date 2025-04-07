@@ -8,6 +8,9 @@
     - [Conditionnelles](#conditionnelles)
     - [Output](#output)
     - [Curseurs](#curseurs)
+      - [Clause FOR UPDATE](#clause-for-update)
+      - [Clause CURRENT OF](#clause-current-of)
+      - [Exemple complet de Curseur](#exemple-complet-de-curseur)
   - [MongoDB](#mongodb)
     - [Guide des Opérateurs (MongoDB)](#guide-des-opérateurs-mongodb)
       - [Opérateurs de Comparaison](#opérateurs-de-comparaison)
@@ -170,6 +173,44 @@ WHILE @@FETCH_STATUS = 0
 CLOSE cClients;
 -- Libérer le curseur
 DEALLOCATE cClients;
+```
+
+#### Clause FOR UPDATE
+
+Au moment de la déclaration du curseur. Pose des verrous.
+
+```sql
+DECLARE cFiches CURSOR FOR
+SELECT noFic, etat FROM Fiches WHERE etat = 'EC' FOR UPDATE OF etat;
+```
+
+#### Clause CURRENT OF
+
+Indique la ligne pointée par le curseur. Dans la restriction d’une instruction UPDATE ou DELETE.
+
+```sql
+UPDATE Fiches SET etat = 'RE' WHERE CURRENT OF cFiches;
+```
+
+#### Exemple complet de Curseur
+
+```sql
+DECLARE cFiches CURSOR FOR SELECT noFic, etat FROM Fiches WHERE etat = 'EC' FOR UPDATE OF etat;
+DECLARE @noFic NUMERIC(6);
+DECLARE @etat CHAR(2);
+DECLARE @nbEC INT;
+OPEN cFiches;
+FETCH NEXT FROM cFiches INTO @noFic, @etat;
+WHILE @@FETCH_STATUS = 0
+ BEGIN
+SELECT @nbEC = COUNT(*) FROM LignesFic WHERE noFic = @noFic AND retour IS NULL;
+ PRINT CONCAT(@noFic, ' -> ', @nbEC);
+ IF @nbEC = 0
+UPDATE Fiches SET etat = 'RE' WHERE CURRENT OF cFiches;
+FETCH NEXT FROM cFiches INTO @noFic, @etat;
+ END
+CLOSE cFiches;
+DEALLOCATE cFiches;
 ```
 
 ---

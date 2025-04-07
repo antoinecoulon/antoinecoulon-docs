@@ -73,6 +73,7 @@ root.render(<p>Hello from the world of React!</p>)
 ### Installation avec Vite - Setup
 
 [Vite](https://vitejs.dev/)
+[Doc](https://vite.dev/guide/)
 
 Requirements:
 
@@ -137,5 +138,13 @@ export default App;
 #### JSX
 
 [JSX](https://www.w3schools.com/react/react_jsx.asp) stands for JavaScript XML. It allows writing HTML in JavaScript and converts the HTML tags into React elements.
+
+JSX and React are *two separate things*. They’re often used together, but you can use them independently of each other. JSX is a syntax extension, while React is a JavaScript library.
+
+The **rules of JSX** are:
+
+- Return a single root element (use `<Fragment> ... </Fragment>`, often written `<> ... </>`)
+- Close all the tags (`<img ... />`, `<li>...</li>`, etc)
+- camelCase most of the things ('className', 'strokeWidth', etc)
 
 #### Props vs State
