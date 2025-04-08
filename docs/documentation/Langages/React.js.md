@@ -16,6 +16,7 @@
     - [Props](#props)
       - [Mapping components](#mapping-components)
       - [props key](#props-key)
+      - [Objects as props](#objects-as-props)
 
 ---
 
@@ -320,6 +321,44 @@ const entryElements = data.map((entry) => {
             googleMapsLink={entry.googleMapsLink}
             dates={entry.dates}
             text={entry.text}
+        />
+    )
+})
+```
+
+#### Objects as props
+
+You can pass an entire Object as props if its properties matches the data properties:
+
+```jsx
+const entryElements = data.map((entry) => {
+    return (
+      <Entry
+          key={entry.id}
+          entry={entry}
+      />
+    )
+})
+```
+
+```jsx
+<div className="main-image-container">
+    <img 
+        className="main-image"
+        src={props.entry.img.src}
+        alt={props.entry.img.alt}
+    />
+</div>
+```
+
+You can also use the spread object as prop:
+
+```jsx
+const entryElements = data.map((entry) => {
+    return (
+        <Entry
+            key={entry.id}
+            {...entry} // Will spread the entire object with all its properties
         />
     )
 })
