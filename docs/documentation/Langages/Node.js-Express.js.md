@@ -16,6 +16,8 @@
     - [Utiliser un Package](#utiliser-un-package)
     - [node / nodemon](#node--nodemon)
   - [Ressources Supplémentaires](#ressources-supplémentaires)
+  - [npm](#npm)
+    - [How to npm](#how-to-npm)
   - [Express.js - Introduction](#expressjs---introduction)
   - [Installation d'Express.js](#installation-dexpressjs)
   - [Création d'un Serveur Simple](#création-dun-serveur-simple)
@@ -249,6 +251,94 @@ nodemon app.js
 - Documentation officielle : [nodejs.org/docs](https://nodejs.org/docs/)
 - npm : [npmjs.com](https://www.npmjs.com/)
 - Tutoriels et Cours en Ligne : [freeCodeCamp](https://www.freecodecamp.org/), [MDN Web Docs](https://developer.mozilla.org/)
+
+---
+
+## npm
+
+npm is the default package manager for the JavaScript runtime environment Node.js.
+
+[Interactive tutorial](https://github.com/workshopper/how-to-npm)
+
+### How to npm
+
+Install/**MAJ** npm (require Node.js):
+
+```bash
+npm install npm -g
+```
+
+Créer son **compte**:
+
+```bash
+npm adduser
+npm whoami
+```
+
+Setup a project:
+
+```bash
+npm init [--scope=<username>]
+git init
+```
+
+Install a **dependency** (files are installed in `/node_modules` and version is written in `package.json`):
+
+```bash
+npm install <module_name>
+```
+
+See installed dependencies:
+
+```bash
+npm ls
+```
+
+npm can be used as **a task runner** with its `scripts` property. In order to help remind you to do this, npm puts an "always failing" test in there by default.
+
+First, create a file `test.js`. it's where you'll write your tests. The test has to exit without throwing an error, or else the test fails.
+
+Then, edit your `package.json` file to make your scripts section looks like this instead:
+
+```json
+"scripts": {
+    "test": "node test.js"
+},
+```
+
+Now you can run `npm test` to launch the test file.
+
+It's important to **add metadata** to your project in `package.json`, you can write directly in this file or run `npm init` again.
+
+It's very easy for all npm users to publish their modules and share them with the world. Packages get into the registry by using:
+
+```bash
+npm publish
+```
+
+Every package in npm has a version number associated with it.
+
+```bash
+npm version
+```
+
+Update outdated packages:
+
+```bash
+npm outdated
+```
+
+Or update all your deps to the max version you allow in your `package.json`:
+
+```bash
+npm update
+```
+
+Remove deps:
+
+```bash
+npm uninstall
+```
 
 ---
 

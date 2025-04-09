@@ -17,6 +17,8 @@
       - [Mapping components](#mapping-components)
       - [props key](#props-key)
       - [Objects as props](#objects-as-props)
+  - [Events](#events)
+  - [State](#state)
 
 ---
 
@@ -363,3 +365,36 @@ const entryElements = data.map((entry) => {
     )
 })
 ```
+
+---
+
+## Events
+
+The way we can handle events in React is close to the way we did with HTML.
+
+```jsx
+function App() {
+  
+  function handleClick() {
+    console.log("I was clicked!")
+  }
+  
+  return (
+    <main className="container">
+      <img
+        src="https://picsum.photos/640/360"
+        alt="Placeholder image from Picsum"
+      />
+      <button onClick={handleClick}>Click me</button>
+    </main>
+  )
+}
+```
+
+If we had put `()` after the name of the function we called, this function would be running as far as the component was called too. It works fine just with the `onClick={handleClick}` attribute. There is more event response handler like Keyboard events etc.
+
+Some [Mouse events functions](https://react.dev/reference/react-dom/components/common#mouseevent-handler) and [React responding events doc](https://react.dev/learn/responding-to-events)
+
+---
+
+## State
