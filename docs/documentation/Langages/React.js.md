@@ -5,6 +5,7 @@
 - [React.js](#reactjs)
   - [Ressources](#ressources)
   - [Requirements: essential JavaScript for React](#requirements-essential-javascript-for-react)
+  - [Roadmap](#roadmap)
   - [Introduction](#introduction)
     - [Créer une app React from scratch](#créer-une-app-react-from-scratch)
     - [Installation avec Vite - Setup](#installation-avec-vite---setup)
@@ -42,6 +43,14 @@
 - [Template literals](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Template_literals)
 - [Ternary Operators](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)
 - [ES Modules and Import / Export Syntax](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)
+
+---
+
+## Roadmap
+
+"What topic should I explore next ?"
+
+![Roadmap](/img/react_fullstack-roadmap.jpg)
 
 ---
 

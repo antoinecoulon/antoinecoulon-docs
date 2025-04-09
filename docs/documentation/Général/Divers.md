@@ -20,6 +20,7 @@ description: Notions diverses de dev
     - [Attaque CSRF (cross-site request forgery)](#attaque-csrf-cross-site-request-forgery)
     - [Attaque par force brute](#attaque-par-force-brute)
     - [En résumé, pour se protéger](#en-résumé-pour-se-protéger)
+  - [Sécurité (2)](#sécurité-2)
 
 ---
 
@@ -391,3 +392,5 @@ Mais le site pouvait-il faire quelque chose pour arrêter cette attaque ?
 - [fail2ban](https://www.fail2ban.org/)
 
 ---
+
+## Sécurité (2)
