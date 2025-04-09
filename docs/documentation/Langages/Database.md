@@ -11,6 +11,14 @@
       - [Clause FOR UPDATE](#clause-for-update)
       - [Clause CURRENT OF](#clause-current-of)
       - [Exemple complet de Curseur](#exemple-complet-de-curseur)
+    - [Exceptions](#exceptions)
+    - [Procédures \& fonctions stockées](#procédures--fonctions-stockées)
+      - [Procédures](#procédures)
+      - [Fonctions scalaires](#fonctions-scalaires)
+      - [Fonctions table](#fonctions-table)
+    - [Triggers / Déclencheurs](#triggers--déclencheurs)
+      - [Déclencheur AFTER](#déclencheur-after)
+      - [Déclencheur INSTEAD OF](#déclencheur-instead-of)
   - [MongoDB](#mongodb)
     - [Guide des Opérateurs (MongoDB)](#guide-des-opérateurs-mongodb)
       - [Opérateurs de Comparaison](#opérateurs-de-comparaison)
@@ -199,18 +207,320 @@ DECLARE cFiches CURSOR FOR SELECT noFic, etat FROM Fiches WHERE etat = 'EC' FOR 
 DECLARE @noFic NUMERIC(6);
 DECLARE @etat CHAR(2);
 DECLARE @nbEC INT;
+
 OPEN cFiches;
 FETCH NEXT FROM cFiches INTO @noFic, @etat;
 WHILE @@FETCH_STATUS = 0
- BEGIN
-SELECT @nbEC = COUNT(*) FROM LignesFic WHERE noFic = @noFic AND retour IS NULL;
- PRINT CONCAT(@noFic, ' -> ', @nbEC);
- IF @nbEC = 0
-UPDATE Fiches SET etat = 'RE' WHERE CURRENT OF cFiches;
-FETCH NEXT FROM cFiches INTO @noFic, @etat;
- END
+    BEGIN
+        SELECT @nbEC = COUNT(*) FROM LignesFic WHERE noFic = @noFic AND retour IS NULL;
+        PRINT CONCAT(@noFic, ' -> ', @nbEC);
+        IF @nbEC = 0
+            UPDATE Fiches SET etat = 'RE' WHERE CURRENT OF cFiches;
+            FETCH NEXT FROM cFiches INTO @noFic, @etat;
+    END
 CLOSE cFiches;
 DEALLOCATE cFiches;
+```
+
+### Exceptions
+
+Un message d'exception comprend:
+
+- Un numéro d'erreur (prédifinie: 0 à 50 000, personnalisée: 50 000 à 2 147 483 647)
+- Un niveau de criticité (de 0 (information) à 25 (problème grave))
+- Un état (info complémentaire, de 0 à 255)
+- La localisation (numéro de ligne)
+- Le message
+
+```sql
+THROW 50001, 'Exception levée par l''utilisateur', 1;
+
+-- avec un message personnalisé
+DECLARE @message VARCHAR(100) = 'Exception levée par l''utilisateur ' + USER;
+THROW 50002, @message, 1;
+
+-- message personnalisé multilingue
+EXEC sp_addmessage 50003, 17, 'Exception in english', @lang='us_english', @replace='replace';
+EXEC sp_addmessage 50003, 17, 'Exception en français', @lang='Français', @replace='replace';
+DECLARE @messageFR NVARCHAR(100) = FORMATMESSAGE(50003);
+THROW 50003, @messageFR, 1;
+```
+
+Gérer les exceptions:
+
+```sql
+BEGIN TRY
+    IF(RAND()<0.5)
+        THROW 50006, 'Erreur', 1
+    PRINT 'Pas de levée d''exception';
+END TRY
+BEGIN CATCH
+    PRINT 'Récupération de l''exception levée';
+END CATCH;
+
+-- Traitement:
+BEGIN CATCH
+    PRINT 'Récupération de l''exception levée';
+    PRINT CONCAT('Message : ', ERROR_MESSAGE());
+    PRINT CONCAT('Numéro : ', ERROR_NUMBER());
+    PRINT CONCAT('Criticité : ', ERROR_SEVERITY());
+    PRINT CONCAT('État : ', ERROR_STATE());
+END CATCH;
+```
+
+### Procédures & fonctions stockées
+
+Avantages des procédures et fonctions stockées:
+
+- Performances
+  - Stockées dans la base de données
+  - Vérifiées (analyse syntaxique et sémantique) et compilées à la création
+- Sécurité
+  - Possibilité de donner des droits un utilisateur uniquement sur certaines procédures et fonctions
+- Green IT
+
+#### Procédures
+
+Déclarer une procédure:
+
+```sql
+GO
+CREATE OR ALTER PROC hw AS
+PRINT 'Hello World!';
+GO
+```
+
+Appeler une procédure:
+
+```sql
+EXEC hw; --Messages: Hello World!
+```
+
+Avec des paramètres:
+
+```sql
+-- Params en entrée (IN)
+CREATE OR ALTER PROCEDURE articlePlusLoue(@codeCat VARCHAR(4) = '%') AS
+BEGIN
+    DECLARE @refArt CHAR(3) = (SELECT a.refart FROM LignesFic l
+        INNER JOIN Articles a ON l.refArt = a.refArt
+        INNER JOIN Modeles m ON a.noModele = m.noModele
+        WHERE codeCate LIKE @codeCat GROUP BY a.refArt ORDER BY COUNT(*) DESC
+        OFFSET 0 ROW FETCH NEXT 1 ROW ONLY);
+    IF @codeCat = '%'
+        PRINT 'L''article le plus loué toutes catégories confondues';
+    ELSE
+        PRINT CONCAT('L''article le plus loué de la catégorie ', @codeCat)
+        PRINT(CONCAT('est la référence ', @refArt));
+END;
+
+EXECUTE articlePlusLoue;
+EXECUTE articlePlusLoue 'FOA';
+
+-- Params en sortie (OUT)
+CREATE OR ALTER PROCEDURE separeDate @date DATE,
+                                    @jour INT OUT,
+                                    @mois INT OUT,
+                                    @annee INT OUT AS
+BEGIN
+    SELECT @jour = DAY(@date);
+    SELECT @mois = MONTH(@date);
+    SELECT @annee = YEAR(@date);
+END;
+
+DECLARE @j INT; DECLARE @m INT; DECLARE @a INT;
+EXECUTE separeDate '17/05/2023', @j OUT, @m OUT, @a OUT;
+SELECT @j jour, @m mois, @a année;
+```
+
+#### Fonctions scalaires
+
+Déclarer une fonction scalaire:
+
+```sql
+CREATE OR ALTER FUNCTION nbClients() RETURNS INT AS
+BEGIN
+    DECLARE @nb INT
+    SELECT @nb = COUNT(*) FROM Clients;
+    RETURN @nb;
+END;
+```
+
+Appeler cette fonction:
+
+```sql
+SELECT dbo.nbClients() nbClientsTotal;
+
+DECLARE @nb INT;
+EXECUTE @nb = dbo.nbClients;
+PRINT CONCAT('nbClients : ', @nb);
+```
+
+Avec paramètres:
+
+```sql
+CREATE OR ALTER FUNCTION nbFiches(@noCli NUMERIC(6) = 2)
+RETURNS INT AS
+BEGIN
+    DECLARE @nb NUMERIC(6);
+    SELECT @nb = COUNT(*) FROM Fiches WHERE noCli = @noCli;
+    RETURN @nb;
+END;
+
+SELECT dbo.nbFiches(1) nbFichesDuClient;
+SELECT dbo.nbFiches(DEFAULT) nbFichesDuClient;
+DECLARE @nbF INT;
+EXECUTE @nbF = dbo.nbFiches 1;
+PRINT @nbF;
+EXECUTE @nbF = dbo.nbFiches;
+PRINT @nbF;
+```
+
+#### Fonctions table
+
+Déclarer une fonction table:
+
+```sql
+CREATE OR ALTER FUNCTION articlesDe(@codeCat CHAR(4), @codeGam CHAR(2)) RETURNS TABLE AS
+RETURN SELECT noModele, designation
+    FROM Modeles
+    WHERE codeCate = @codeCat AND codeGam = @codeGam;
+
+-- avec plusieurs instructions
+CREATE OR ALTER FUNCTION analyseModele()
+RETURNS @stats TABLE(noModele INT PRIMARY KEY, nbExemplaires INT,
+                    nbLocations INT, dureeMoyenneLocation INT) AS
+BEGIN
+    INSERT INTO @stats
+        SELECT noModele, COUNT(DISTINCT a.refArt), COUNT(*), AVG(DATEDIFF(DAY, depart, retour))
+        FROM LignesFic l INNER JOIN Articles a ON l.refArt = a.refArt
+        WHERE retour IS NOT NULL
+        GROUP BY noModele
+    RETURN;
+END;
+```
+
+Appeler cette fonction:
+
+```sql
+SELECT * FROM analyseModele();
+```
+
+Avec paramètres:
+
+```sql
+CREATE OR ALTER FUNCTION nbFiches(@noCli NUMERIC(6) = 2)
+RETURNS INT AS
+BEGIN
+    DECLARE @nb NUMERIC(6);
+    SELECT @nb = COUNT(*) FROM Fiches WHERE noCli = @noCli;
+    RETURN @nb;
+END;
+
+SELECT dbo.nbFiches(1) nbFichesDuClient;
+SELECT dbo.nbFiches(DEFAULT) nbFichesDuClient;
+DECLARE @nbF INT;
+EXECUTE @nbF = dbo.nbFiches 1;
+PRINT @nbF;
+EXECUTE @nbF = dbo.nbFiches;
+PRINT @nbF;
+```
+
+### Triggers / Déclencheurs
+
+Le principe de fonctionnement des déclencheurs:
+
+- Instructions exécutées automatiquement lors d’une instruction *INSERT*, *UPDATE* ou *DELETE*
+- Permet l’automatisation de comportements
+- Intégrité complexe des données
+
+#### Déclencheur AFTER
+
+- Seule dans son lot d’instructions
+- S’exécute après l’exécution de l’instruction le déclenchant
+- L’instruction doit vérifier toutes les contraintes d’intégrité
+
+```sql
+-- déclaration:
+GO
+CREATE OR ALTER TRIGGER upd_clients ON Clients
+FOR UPDATE AS
+PRINT 'Maj table des clients';
+GO
+
+-- effet:
+UPDATE Clients SET nom='DUPONT' WHERE nom='DUPOND';
+-- Maj table des clients
+-- (2 lignes affectées)
+
+-- fonction Update()
+CREATE OR ALTER TRIGGER upd_clients ON Clients
+FOR UPDATE AS
+IF UPDATE(nom)
+    PRINT 'Changement de nom d''un client';
+
+UPDATE Clients SET nom='DUPOND' WHERE nom='DUPONT';
+-- Changement de nom d'un client
+-- (2 lignes affectées)
+
+-- exemple avec lien non transférable:
+CREATE OR ALTER TRIGGER upd_fiches ON Fiches
+FOR UPDATE AS
+IF UPDATE(noCli)
+    THROW 50008, 'Impossible de changer le propriétaire d''une fiche', 1;
+```
+
+Même si c'est à éviter pour des questions de performances, il est aussi possible d'utiliser des curseurs dans les déclencheurs.
+
+#### Déclencheur INSTEAD OF
+
+- Seule dans son lot d’instructions
+- S’exécute à la place de l’instruction le déclenchant
+- L’instruction ne vérifie pas nécessairement les contraintes d’intégrité
+
+```sql
+CREATE OR ALTER TRIGGER iof_ins_clients ON Clients
+INSTEAD OF INSERT AS
+IF EXISTS(SELECT * FROM Clients c INNER JOIN INSERTED i ON c.noCli = i.noCli)
+    OR EXISTS(SELECT * FROM INSERTED WHERE noCli IS NULL)
+BEGIN
+    PRINT 'Numéro de client incorrect ! Il est automatiquement corrigé...';
+    DECLARE @noCli NUMERIC(6);
+    SELECT @noCli = MAX(noCli) FROM Clients;
+    INSERT INTO Clients(noCli, nom, prenom, adresse, cpo, ville)
+        SELECT @noCli + ROW_NUMBER() OVER(ORDER BY noCli),
+                nom, prenom, adresse, cpo, ville FROM INSERTED;
+END
+ELSE
+    INSERT INTO Clients(noCli, nom, prenom, adresse, cpo, ville)
+        SELECT noCli, nom, prenom, adresse, cpo, ville FROM INSERTED;
+
+
+INSERT INTO Clients(noCli, nom, cpo) VALUES(1, 'BOYADJIAN', 44100);
+INSERT INTO Clients(nom, cpo) VALUES('LATOUCHE', 44100);
+INSERT INTO Clients(noCli, nom, cpo) VALUES(50, 'BONS', 44100);
+```
+
+Insertion à travers une vue:
+
+```sql
+CREATE OR ALTER VIEW ClientsAvecFiches AS
+SELECT c.noCli, nom, cpo, ville, noFic, dateCrea, datePaye, etat
+FROM Clients c INNER JOIN Fiches f ON c.noCli = f.noCli;
+
+
+CREATE OR ALTER TRIGGER iof_ins_clientsAvecFiches ON ClientsAvecFiches
+INSTEAD OF INSERT AS
+BEGIN
+INSERT INTO Clients(noCli, nom, cpo, ville)
+SELECT DISTINCT noCli, nom, cpo, ville FROM INSERTED;
+INSERT INTO Fiches(noCli, dateCrea, datePaye, etat)
+SELECT noCli, COALESCE(dateCrea, GETDATE()), datePaye, COALESCE(etat, 'EC') FROM INSERTED;
+END;
+
+
+INSERT INTO ClientsAvecFiches(noCli, nom, cpo, ville, etat)
+    VALUES(55, 'BAYARD', 05000, 'Gap', 'EC');
 ```
 
 ---
