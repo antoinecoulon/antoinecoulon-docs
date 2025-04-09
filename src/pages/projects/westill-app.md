@@ -9,7 +9,7 @@
 
 ## Stack
 
-Front: flutter ? react native ? 
+Front: flutter ? react native ?
 
 Back: BaaS clé en main ? (firebase ou appwrite.io), sinon Dart pour flutter ou ??? avec react Nat ?
 

@@ -110,19 +110,18 @@ const config = {
                 label: 'Ressources',
                 to: '/docs/category/ressources',
               },
-              // TODO: Projets
             ],
           },
           {
             title: 'About',
             items: [
               {
-                label: 'TODO: About me',
-                href: '#',
+                label: 'About me',
+                href: '/about',
               },
               {
-                label: 'TODO: Contact',
-                href: '#',
+                label: 'Contact',
+                href: '/contact',
               },
             ],
           },
@@ -134,8 +133,8 @@ const config = {
                 href: 'https://github.com/antoinecoulon',
               },
               {
-                label: 'TODO: ?',
-                href: '#',
+                label: 'Projects',
+                to: '/projects/intro',
               },
             ],
           },

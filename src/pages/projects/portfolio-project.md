@@ -23,7 +23,7 @@
 
 ### Maquette v1
 
-![Maquette](../img/portfolio_maquette-v1.drawio.png)
+![Maquette](../../img/portfolio_maquette-v1.drawio.png)
 
 ---
 

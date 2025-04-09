@@ -35,7 +35,7 @@ const FeatureList = [
       <>
         <Link
           className="button button--secondary button--lg"
-          to="/portfolio-project">
+          to="/projects/portfolio-project">
           Personal portfolio
         </Link>
       </>
