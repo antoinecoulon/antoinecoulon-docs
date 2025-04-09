@@ -18,6 +18,7 @@
       - [Mapping components](#mapping-components)
       - [props key](#props-key)
       - [Objects as props](#objects-as-props)
+  - [Props vs State](#props-vs-state)
   - [Events](#events)
   - [State](#state)
 
@@ -377,6 +378,14 @@ const entryElements = data.map((entry) => {
 
 ---
 
+## Props vs State
+
+Props refers to the properties *being passed into a component* in order for it to **work correctly**, similar to how a function receives parameters. A component receiving props is not allowed to modify those props (they are **immutable**).
+
+State refers to values that are *managed by the component*, similar to variables declared inside a function. Any time you have changing values that should be **saved/displayed**, you'll likely be using **state**.
+
+---
+
 ## Events
 
 The way we can handle events in React is close to the way we did with HTML.
@@ -407,3 +416,42 @@ Some [Mouse events functions](https://react.dev/reference/react-dom/components/c
 ---
 
 ## State
+
+**"View as a function of state"**:
+
+1. *Render*: React runs your function and displays whatever gets returned. The function will only be run again if: it receives new props from above, or its internal state values change.
+2. *setState*: Changing a local, non-state variable doesn't cause React to re-render the component. Changing state with a built-in `setState` function does.
+3. *view = function(state)*: Thus, when state changes and React re-renders your component, something new gets returned and replace what used to be on the page.
+
+In order to manipulate React state, first we have to import `useState` from the React library:
+
+```jsx
+import { useState } from "react" // import React from "react" for this example
+
+export default function App() {
+  const [count, setCount] = React.useState(0)
+
+  function add() {
+    setCount(count + 1)
+  }
+
+  function subtract() {
+    setCount(count - 1)
+  }
+
+  return (
+    <main className="container">
+      <h1>How many times will Bob say "state" in this section?</h1>
+      <div className="counter">
+
+        <button className="minus" onClick={subtract} aria-label="Decrease count">–</button>
+
+        <h2 className="count">{count}</h2>
+
+        <button className="plus" onClick={add} aria-label="Increase count">+</button>
+        
+      </div>
+    </main>
+  )
+}
+```
