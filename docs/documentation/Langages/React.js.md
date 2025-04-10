@@ -21,6 +21,17 @@
   - [Props vs State](#props-vs-state)
   - [Events](#events)
   - [State](#state)
+    - [Aside: ternary operator](#aside-ternary-operator)
+    - [State example](#state-example)
+  - [Forms](#forms)
+    - [Basic JSX form example (the old way)](#basic-jsx-form-example-the-old-way)
+    - [New React form handling](#new-react-form-handling)
+    - [Some input particularities](#some-input-particularities)
+      - [radio](#radio)
+      - [checkbox](#checkbox)
+      - [select and option](#select-and-option)
+      - [Object.fromEntries()](#objectfromentries)
+  - [Conditional rendering](#conditional-rendering)
 
 ---
 
@@ -435,8 +446,19 @@ export default function App() {
     setCount(count + 1)
   }
 
+  /**
+   * Note: if you ever need the old value of state
+   * to help you determine the new value of state,
+   * you should pass a callback function to your
+   * state setter function instead of using
+   * state directly. This callback function will
+   * receive the old value of state as its parameter,
+   * which you can then use to determine your new
+   * value of state. See below:
+   */
+
   function subtract() {
-    setCount(count - 1)
+    setCount(prevCount => prevCount - 1)
   }
 
   return (
@@ -455,3 +477,275 @@ export default function App() {
   )
 }
 ```
+
+### Aside: ternary operator
+
+At this point, the [JS ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator) will be handy, let's have a quick refresh:
+
+```js
+let variable = condition ? ifTrue : ifFalse
+```
+
+With jsx:
+
+```jsx
+return (
+  <main>
+    <h1 className="title">Do I feel like going out tonight?</h1>
+    <button className="value">{isGoingOut ? "Yes" : "No"}</button>
+  </main>
+)
+```
+
+### State example
+
+```jsx
+import React from "react"
+
+export default function App() {
+    
+  const [isGoingOut, setIsGoingOut] = React.useState(false)
+  
+  function changeMind() {
+    setIsGoingOut(prev => !prev)
+  }
+
+  return (
+    <main>
+      <h1 className="title">Do I feel like going out tonight?</h1>
+      <button onClick={changeMind} className="value">{isGoingOut ? "Yes" : "No"}</button>
+    </main>
+  )
+}
+```
+
+Working with an array:
+
+```jsx
+const [myFavoriteThings, setMyFavoriteThings] = React.useState([])
+  
+const allFavoriteThings = ["💦🌹", "😺", "💡🫖", "🔥🧤", "🟤🎁", 
+"🐴", "🍎🥧", "🚪🔔", "🛷🔔", "🥩🍝"]
+const thingsElements = myFavoriteThings.map(thing => <p key={thing}>{thing}</p>)
+
+function addFavoriteThing() {
+  // We'll work on this next, nothing to do here yet.
+  setMyFavoriteThings(prevFavThings => [...prevFavThings, <new item here>])
+}
+```
+
+Working with an object:
+
+```jsx
+export default function App() {
+  const [contact, setContact] = React.useState({
+    firstName: "John",
+    lastName: "Doe",
+    phone: "+1 (212) 555-1212",
+    email: "itsmyrealname@example.com",
+    isFavorite: true
+  })
+  
+  let starIcon = contact.isFavorite ? starFilled : starEmpty
+
+  function toggleFavorite() {
+    setContact(prevContact => {
+      return {
+        ...prevContact,
+        isFavorite: !prevContact.isFavorite
+      }
+    })
+  }
+
+  return (
+    <main>
+      <article className="card"> 
+        <img
+          src={avatar}
+          className="avatar"
+          alt="User profile picture of John Doe"
+        />
+        <div className="info">
+          <button
+            onClick={toggleFavorite}
+            aria-pressed={contact.isFavorite}
+            aria-label={contact.isFavorite ? "Remove from favorites" : "Add to favorites"}
+            className="favorite-button"
+          >
+            <img
+                src={starIcon}
+                alt={contact.isFavorite ? "filled star icon" : "empty star icon"}
+                className="favorite"
+            />
+          </button>
+          <h2 className="name">
+            {contact.firstName} {contact.lastName}
+          </h2>
+          <p className="contact">{contact.phone}</p>
+          <p className="contact">{contact.email}</p>
+        </div>
+
+      </article>
+    </main>
+  )
+}
+```
+
+---
+
+## Forms
+
+Documentation [here](https://react.dev/reference/react-dom/components/form#noun-labs-1201738-(2))! and [here for FormData](https://developer.mozilla.org/en-US/docs/Web/API/FormData/FormData)!
+
+### Basic JSX form example (the old way)
+
+```jsx
+function App() {
+  
+  function handleSubmit(event) {
+    event.preventDefault()  // Block the submit event normal behavior (refreshing the page)
+    const formEl = event.currentTarget  // Get the current target of the event (form)
+    const formData = new FormData(formEl) // New instance of built-in object FormData...
+    const email = formData.get("email") // ...now we can get the data with get("input-name")
+    // Gather the info from the form
+    // Submit it to a backend
+    formEl.reset()  // Reset the form
+  }
+  
+  return (
+    <section>
+      <h1>Signup form</h1>
+      <form onSubmit={handleSubmit} method="post">
+        <label htmlFor="email">Email:</label>
+        <input id="email" type="email" name="email" placeholder="joe@schmoe.com" />
+        <br />
+        
+        <label htmlFor="password">Password:</label>
+        <input id="password" type="password" name="password" />
+        <br />
+        
+        <button>Submit</button>
+        
+      </form>
+    </section>
+  )
+}
+```
+
+### New React form handling
+
+Now, with React 19, we can do all of this in a much simpler way:
+
+```jsx
+function App() {
+  
+  function signUp(formData) { // We directly get the formData object
+    const email = formData.get("email")
+    const password = formData.get("password")
+  }
+  
+  return (
+    <section>
+      <h1>Signup form</h1>
+      <form action={signUp}>  {/* We just pass a function to the "action" attribute */}
+        <label htmlFor="email">Email:</label>
+        <input id="email" type="email" name="email" placeholder="joe@schmoe.com" />
+        <br />
+        
+        <label htmlFor="password">Password:</label>
+        <input id="password" type="password" name="password" />
+        <br />
+        
+        <button>Submit</button>
+        
+      </form>
+    </section>
+  )
+}
+```
+
+### Some input particularities
+
+#### radio
+
+With no `value` attribute, the selected radio input return `on`.
+
+```jsx
+<fieldset>
+  <legend>Employment Status:</legend>
+  <label>
+    <input type="radio" name="employmentStatus" value="unemployed" />
+    Unemployed
+  </label>
+  <label>
+    <input type="radio" name="employmentStatus" value="part-time" />
+    Part-time
+  </label>
+  <label>
+    <input type="radio" name="employmentStatus" value="full-time" />
+    Full-time
+  </label>
+</fieldset>
+```
+
+#### checkbox
+
+```jsx
+function signUp(formData) {
+  const dietaryRestrictions = formData.getAll("dietaryRestrictions")
+  console.log(dietaryRestrictions)
+}
+
+return (
+  <fieldset>
+    <legend>Dietary restrictions:</legend>
+    <label>
+      <input type="checkbox" name="dietaryRestrictions" value="kosher" />
+      Kosher
+    </label>
+    <label>
+      <input type="checkbox" name="dietaryRestrictions" value="vegan" />
+      Vegan
+    </label>
+    <label>
+      <input type="checkbox" name="dietaryRestrictions" defaultChecked={true} value="gluten-free" />
+      Gluten-free
+    </label>
+  </fieldset>
+)
+```
+
+#### select and option
+
+```jsx
+<label htmlFor="favColor">What is your favorite color?</label>
+<select id="favColor" name="favColor" defaultValue="" required>
+  <option value="" disabled>-- Choose a color --</option>
+  <option value="red">Red</option>
+  <option value="orange">Orange</option>
+  <option value="yellow">Yellow</option>
+  <option value="green">Green</option>
+  <option value="blue">Blue</option>
+  <option value="indigo">Indigo</option>
+  <option value="violet">Violet</option>
+</select>
+```
+
+#### Object.fromEntries()
+
+```jsx
+function signUp(formData) {
+  const data = Object.fromEntries(formData)
+  // fromEntries method get only one value from the checkboxes even if there
+  // are several selected. So we have to get checkboxes separain an other way
+  const dietaryRestrictions = formData.getAll("dietaryRestrictions")
+  const allData = {
+    ...data,
+    dietaryRestrictions
+  } 
+}
+```
+
+---
+
+## Conditional rendering
