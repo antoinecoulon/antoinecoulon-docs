@@ -36,6 +36,7 @@
     - [Operator \&\&](#operator-)
   - [Passing data around React](#passing-data-around-react)
     - [Inline styles](#inline-styles)
+    - [Derived state vs Shared state](#derived-state-vs-shared-state)
 
 ---
 
@@ -922,6 +923,52 @@ export default function App() {
 export default function Pad(props) {
   return (
     <button style={{backgroundColor: props.color}}></button>
+  )
+}
+```
+
+### Derived state vs Shared state
+
+If we are a parent component, passing props/state to its children components, but we allow those children to alter their state by theirselves, it will ends with no sync between parents and children components. It's called **derived state** -> [See](https://legacy.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html)
+
+With a **shared state**, we can handle every individual state of the children component from the parent (here we can toggle an individual child from the parent directly):
+
+```jsx
+import React from "react"
+import padsData from "./pads"
+import Pad from "./Pad"
+
+export default function App() {
+  const [pads, setPads] = React.useState(padsData)
+  
+  function toggle() {
+    console.log("Clicked!")
+  }
+  
+  const buttonElements = pads.map(pad => (
+    <Pad toggle={toggle} key={pad.id} color={pad.color} on={pad.on}/>
+  ))
+  
+  return (
+    <main>
+      <div className="pad-container">
+        {buttonElements}
+      </div>
+    </main>
+  )
+}
+
+import React from "react"
+
+export default function Pad(props) {
+  const [on, setOn] = React.useState(props.on)
+  
+  return (
+    <button 
+      style={{backgroundColor: props.color}}
+      className={on ? "on" : undefined}
+      onClick={props.toggle}
+    ></button>
   )
 }
 ```
