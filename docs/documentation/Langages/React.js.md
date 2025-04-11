@@ -21,6 +21,7 @@
       - [More](#more)
   - [Props vs State](#props-vs-state)
   - [Events](#events)
+    - [Example with useState](#example-with-usestate)
   - [State](#state)
     - [Aside: ternary operator](#aside-ternary-operator)
     - [State example](#state-example)
@@ -37,6 +38,9 @@
   - [Passing data around React](#passing-data-around-react)
     - [Inline styles](#inline-styles)
     - [Derived state vs Shared state](#derived-state-vs-shared-state)
+  - [Side effects](#side-effects)
+    - [Functional programming](#functional-programming)
+    - [useEffect](#useeffect)
 
 ---
 
@@ -493,6 +497,28 @@ function App() {
 If we had put `()` after the name of the function we called, this function would be running as far as the component was called too. It works fine just with the `onClick={handleClick}` attribute. There is more event response handler like Keyboard events etc.
 
 Some [Mouse events functions](https://react.dev/reference/react-dom/components/common#mouseevent-handler) and [React responding events doc](https://react.dev/learn/responding-to-events)
+
+### Example with useState
+
+```jsx
+function handleChange(event) {
+  const {value, name} = event.currentTarget
+  setMeme(prevMeme => ({
+    ...prevMeme,
+    [name]: value
+  }))
+}
+
+<label>Top Text
+  <input
+    type="text"
+    placeholder="One does not simply"
+    name="topText"
+    onChange={handleChange}
+    value={meme.topText}
+  />
+</label>
+```
 
 ---
 
@@ -969,6 +995,43 @@ export default function Pad(props) {
       className={on ? "on" : undefined}
       onClick={props.toggle}
     ></button>
+  )
+}
+```
+
+---
+
+## Side effects
+
+### Functional programming
+
+To learn more, see concept of [functional programing](https://www.freecodecamp.org/news/functional-programming-in-javascript/).
+
+We need to dodge the principles of immutability and side effects with React.
+
+### useEffect
+
+`[useEffect](https://react.dev/reference/react/useEffect)` gives us a way to sort of create [an escape hatch](https://react.dev/learn/escape-hatches#synchronizing-with-effects).
+
+The useEffect function takes two parameters: `setup` is a callback function where you put your logic (which causing side effects), optional `dependencies` stop the callback function to re-render if its value hasn't changed since the last re-render. See below:
+
+```jsx
+import React from "react"
+
+export default function App() {
+  const [count, setCount] = React.useState(0)
+  
+  console.log("Rendered!")
+  
+  React.useEffect(() => {
+    console.log("Effect function ran")
+  }, [count])
+  
+  return (
+    <div>
+      <h2>The count is {count}</h2>
+      <button onClick={() => setCount(prevCount => prevCount + 1)}>Add</button>
+    </div>
   )
 }
 ```
