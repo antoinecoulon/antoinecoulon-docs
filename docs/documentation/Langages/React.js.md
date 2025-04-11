@@ -18,6 +18,7 @@
       - [Mapping components](#mapping-components)
       - [props key](#props-key)
       - [Objects as props](#objects-as-props)
+      - [More](#more)
   - [Props vs State](#props-vs-state)
   - [Events](#events)
   - [State](#state)
@@ -32,6 +33,9 @@
       - [select and option](#select-and-option)
       - [Object.fromEntries()](#objectfromentries)
   - [Conditional rendering](#conditional-rendering)
+    - [Operator \&\&](#operator-)
+  - [Passing data around React](#passing-data-around-react)
+    - [Inline styles](#inline-styles)
 
 ---
 
@@ -385,6 +389,71 @@ const entryElements = data.map((entry) => {
         />
     )
 })
+```
+
+#### More
+
+You can also pass functions as props:
+
+```jsx
+export default function App() {
+  const [contact, setContact] = React.useState({
+    firstName: "John",
+    lastName: "Doe",
+    phone: "+1 (212) 555-1212",
+    email: "itsmyrealname@example.com",
+    isFavorite: true
+  })
+
+  function toggleFavorite() {
+    setContact(prevContact => ({
+        ...prevContact,
+        isFavorite: !prevContact.isFavorite
+    }))
+  }
+  
+  return (
+    <main>
+      <article className="card">
+        
+        <img
+          src={avatar}
+          className="avatar"
+          alt="User profile picture of John Doe"
+        />
+        <div className="info">
+          <Star isFilled={contact.isFavorite} handleClick={toggleFavorite} />
+          <h2 className="name">
+            {contact.firstName} {contact.lastName}
+          </h2>
+          <p className="contact">{contact.phone}</p>
+          <p className="contact">{contact.email}</p>
+        </div>
+
+      </article>
+    </main>
+  )
+}
+
+export default function Star(props) {
+    
+  let starIcon = props.isFilled ? starFilled : starEmpty
+  
+  return (
+    <button
+      onClick={props.handleClick}
+      aria-pressed={props.isFilled}
+      aria-label={props.isFilled ? "Remove from favorites" : "Add to favorites"}
+      className="favorite-button"
+    >
+      <img
+        src={starIcon}
+        alt={props.isFilled ? "filled star icon" : "empty star icon"}
+        className="favorite"
+      />
+    </button>
+  )
+}
 ```
 
 ---
@@ -749,3 +818,110 @@ function signUp(formData) {
 ---
 
 ## Conditional rendering
+
+We us conditional rendering when we want to only sometimes display something on the page based on some kind of condition.
+
+### Operator &&
+
+```jsx
+{props.setup && <h3>{props.setup}</h3>} // h3 is rendered only if props.setup exists (is truthy)
+{isShown && <p>{props.punchline}</p>} // p is rendered only if isShown is true
+```
+
+Using this operator can lead to some bugs (like 0 randomly floating in our page because of some falsy value). It's better to use ternary operator with `null` instead.
+
+```jsx
+{props.setup ? <h3>{props.setup}</h3> : null} // h3 is rendered only if props.setup exists (is truthy)
+{isShown ? <p>{props.punchline}</p> : null} // p is rendered only if isShown is true
+```
+
+If the logic is becoming more complex, we can use a traditional if...else block inside a function instead:
+
+```jsx
+const [messages, setMessages] = React.useState(["a", "b"])
+
+function determineText() {
+  if (messages.length === 0) {
+    return "You're all caught up!"
+  } else if (messages.length === 1) {
+    return "You have 1 unread message"
+  } else {
+    return `You have ${messages.length} unread messages`
+  }
+}
+
+return (
+  <div>
+    <h1>{determineText()}</h1>
+  </div>
+)
+```
+
+---
+
+## Passing data around React
+
+In React, you can only pass props (and so, data) downwards, from the parent element to its child element. It's not possible to do this upwards, or to the siblings. To pass data that way, we have to deal with the data in the parent element in order to 'drill' props to the bottom.
+
+![1](/img/react_passing-data-1.PNG)
+
+![2](/img/react_passing-data-2.PNG)
+
+![3](/img/react_passing-data-3.PNG)
+
+![4](/img/react_passing-data-4.PNG)
+
+There are tools, like third party libraries (Redux, Zustand) or using "context", to help us dealing with that...
+
+### Inline styles
+
+```jsx
+import React from "react"
+import padsData from "./pads"
+
+export default function App({ darkMode }) {
+  const [pads, setPads] = React.useState(padsData)
+
+  const styles = {
+    backgroundColor: darkMode ? "#222222" : "#cccccc"
+  }
+
+  const buttonElements = pads.map(pad => (
+    <button style={styles} key={pad.id}></button>
+  ))
+
+  return (
+    <main>
+      <div className="pad-container">
+        {buttonElements}
+      </div>
+    </main>
+  )
+}
+```
+
+Passing props:
+
+```jsx
+export default function App() {
+  const [pads, setPads] = React.useState(padsData)
+
+  const buttonElements = pads.map(pad => (
+    <Pad key={pad.id} color={pad.color} />
+  ))
+  
+  return (
+    <main>
+      <div className="pad-container">
+        {buttonElements}
+      </div>
+    </main>
+  )
+}
+
+export default function Pad(props) {
+  return (
+    <button style={{backgroundColor: props.color}}></button>
+  )
+}
+```
