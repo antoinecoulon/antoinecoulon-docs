@@ -29,6 +29,5 @@
 ### SCSS
 
 - [Doc](https://sass-lang.com/guide/)
-- 
 
 ---
