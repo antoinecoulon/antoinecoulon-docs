@@ -89,7 +89,7 @@ const config = {
           {
             tagName: 'link',
             rel: 'manifest',
-            href: '/img/manifest.json',
+            href: '/site.webmanifest',
           },
           {
             tagName: 'meta',
