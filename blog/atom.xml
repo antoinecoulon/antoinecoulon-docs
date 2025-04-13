@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
+<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://antoinecoulon.github.io/antoinecoulon-docs/blog</id>
     <title>DevDocs | Antoine COULON Blog</title>
@@ -48,5 +48,40 @@ DELETE /api/data/<!-- -->:id<!-- --> : Supprime une donnée par son ID.</p>
             <uri>https://github.com/antoinecoulon</uri>
         </author>
         <category label="Api" term="Api"/>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Technos à explorer !]]></title>
+        <id>https://antoinecoulon.github.io/antoinecoulon-docs/blog/learn-technos</id>
+        <link href="https://antoinecoulon.github.io/antoinecoulon-docs/blog/learn-technos"/>
+        <updated>2025-03-21T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Formations intéressantes]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="formations-intéressantes">Formations intéressantes<a href="https://antoinecoulon.github.io/antoinecoulon-docs/blog/learn-technos#formations-int%C3%A9ressantes" class="hash-link" aria-label="Lien direct vers Formations intéressantes" title="Lien direct vers Formations intéressantes">​</a></h2>
+<ul class="contains-task-list containsTaskList_mC6p">
+<li class="task-list-item"><input type="checkbox" disabled=""> <a href="https://levelup.gitconnected.com/backend-developer-roadmap-2025-the-complete-guide-ae9d12c38c05" target="_blank" rel="noopener noreferrer">Backend Dev Roadmap</a></li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <a href="https://believemy.com/en/courses/formation-typescript" target="_blank" rel="noopener noreferrer">Formation TypeScript</a></li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <a href="https://openclassrooms.com/fr/courses/1894236-apprenez-a-programmer-en-c" target="_blank" rel="noopener noreferrer">Apprendre C++ (OpenClassrooms)</a></li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="quelques-technos-à-explorer">Quelques technos à explorer<a href="https://antoinecoulon.github.io/antoinecoulon-docs/blog/learn-technos#quelques-technos-%C3%A0-explorer" class="hash-link" aria-label="Lien direct vers Quelques technos à explorer" title="Lien direct vers Quelques technos à explorer">​</a></h2>
+<ul class="contains-task-list containsTaskList_mC6p">
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->Go</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->C, C++</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->C#</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->Docker</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->Kubernetes</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->Maven</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->Npm</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->CICD Gitlab Jenkins</li>
+</ul>
+<p><em>video games</em>:</p>
+<ul class="contains-task-list containsTaskList_mC6p">
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->Unity</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->Unreal Engine</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <!-- -->Godot</li>
+</ul>]]></content>
+        <author>
+            <name>Antoine Coulon</name>
+            <uri>https://github.com/antoinecoulon</uri>
+        </author>
+        <category label="Learn" term="Learn"/>
     </entry>
 </feed>
