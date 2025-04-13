@@ -74,12 +74,6 @@ const config = {
     [
       '@docusaurus/plugin-pwa',
       {
-        debug: true,
-        offlineModeActivationStrategies: [
-          'appInstalled',
-          'standalone',
-          'queryString',
-        ],
         pwaHead: [
           {
             tagName: 'link',
@@ -106,6 +100,11 @@ const config = {
             name: 'apple-mobile-web-app-status-bar-style',
             content: '#000',
           },
+          {
+            tagName: 'link',
+            rel: 'apple-touch-icon',
+            href: '/img/apple-touch-icon.png'
+          }
         ],
       },
     ],
