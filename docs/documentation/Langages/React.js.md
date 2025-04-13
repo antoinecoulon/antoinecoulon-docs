@@ -41,6 +41,7 @@
   - [Side effects](#side-effects)
     - [Functional programming](#functional-programming)
     - [useEffect](#useeffect)
+      - [Example fetching an api](#example-fetching-an-api)
 
 ---
 
@@ -1003,15 +1004,22 @@ export default function Pad(props) {
 
 ## Side effects
 
+Side effect is any code that affects or interacts with an outside system (local storage, API, websockets, DOM manipulation).
+
 ### Functional programming
 
 To learn more, see concept of [functional programing](https://www.freecodecamp.org/news/functional-programming-in-javascript/).
 
-We need to dodge the principles of immutability and side effects with React.
+React components are meant to be "pure functions":
+
+- given the same props or state, the component will always return the same content, or UI.
+- rendering and re-rendering a component will never have any kind of side effect on an outside system.
 
 ### useEffect
 
 `[useEffect](https://react.dev/reference/react/useEffect)` gives us a way to sort of create [an escape hatch](https://react.dev/learn/escape-hatches#synchronizing-with-effects).
+
+React run its useEffect function as soon as the component renders for the first time and on every re-render of the component (assuming no dependencies array). It will **NOT** run the effect when the values of the dependencies in the array stay the same between renders.
 
 The useEffect function takes two parameters: `setup` is a callback function where you put your logic (which causing side effects), optional `dependencies` stop the callback function to re-render if its value hasn't changed since the last re-render. See below:
 
@@ -1056,5 +1064,24 @@ export default function App() {
       <button onClick={() => setCount(prevCount => prevCount + 1)}>Add</button>
     </div>
   )
+}
+```
+
+#### Example fetching an api
+
+```jsx
+import { useState, useEffect } from "react"
+
+export default function Example() {
+    
+    const [items, setItems] = useState([]) // we say we're receiving an array of items
+    
+    useEffect(() => {
+        fetch("https://api.example.com/get_items")
+            .then(response => response.json())
+            .then(data => setItems(data)) // on met à jour le state
+    }, []) // empty array of dependencies avoids looping
+
+    // return ...
 }
 ```
