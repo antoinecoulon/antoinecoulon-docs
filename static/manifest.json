@@ -1,19 +1,28 @@
 {
-    "short_name":"DevDocs",
-    "name":"DevDocs",
-    "display":"standalone",
-    "scope": "./",
-  "start_url": "./index.html",
+    "short_name": "DevDocs",
+    "name": "DevDocs",
+    "display": "standalone",
+    "start_url": "/antoinecoulon-docs/",
+    "scope": "/antoinecoulon-docs/",
     "related_applications": [
-        {
-            "platform": "webapp",
-            "url": "https://antoinecoulon.github.io/antoinecoulon-docs/manifest.json"
-        }
+      {
+        "platform": "webapp",
+        "url": "https://antoinecoulon.github.io/antoinecoulon-docs/manifest.json"
+      }
     ],
-    "icons":[
-        {"src":"/img/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},
-        {"src":"/img/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}
+    "icons": [
+      {
+        "src": "/antoinecoulon-docs/img/android-chrome-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/antoinecoulon-docs/img/android-chrome-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
     ],
-    "theme_color":"#ffffff",
-    "background_color":"#ffffff"
-}
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff"
+  }
+  
