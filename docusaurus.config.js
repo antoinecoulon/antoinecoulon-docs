@@ -24,7 +24,7 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'antoinecoulon', // Usually your GitHub org/user name.
   projectName: 'antoinecoulon-docs', // Usually your repo name.
-
+  deploymentBranch: 'gh-pages',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
@@ -84,12 +84,12 @@ const config = {
           {
             tagName: 'link',
             rel: 'icon',
-            href: '/img/favicon.ico',
+            href: '/antoinecoulon-docs/img/favicon.ico',
           },
           {
             tagName: 'link',
             rel: 'manifest',
-            href: '/manifest.json',
+            href: '/antoinecoulon-docs/manifest.json',
           },
           {
             tagName: 'meta',
@@ -109,7 +109,7 @@ const config = {
           {
             tagName: 'link',
             rel: 'apple-touch-icon',
-            href: '/img/apple-touch-icon.png'
+            href: '/antoinecoulon-docs/img/apple-touch-icon.png'
           }
         ],
       },
