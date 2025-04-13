@@ -1035,3 +1035,26 @@ export default function App() {
   )
 }
 ```
+
+In this case, we can also put an empty array as dependencies, and it will trigger the useEffect only one time because the empty array value doesn't change!
+
+```jsx
+import React from "react"
+
+export default function App() {
+  const [count, setCount] = React.useState(0)
+  
+  console.log("Rendered!")
+  
+  React.useEffect(() => {
+    console.log("Effect function ran")
+  }, [])
+  
+  return (
+    <div>
+      <h2>The count is {count}</h2>
+      <button onClick={() => setCount(prevCount => prevCount + 1)}>Add</button>
+    </div>
+  )
+}
+```

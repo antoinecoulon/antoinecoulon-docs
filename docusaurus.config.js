@@ -96,6 +96,16 @@ const config = {
             name: 'theme-color',
             content: '#ffffff',
           },
+          {
+            tagName: 'meta',
+            name: 'apple-mobile-web-app-capable',
+            content: 'yes',
+          },
+          {
+            tagName: 'meta',
+            name: 'apple-mobile-web-app-status-bar-style',
+            content: '#000',
+          },
         ],
       },
     ],
