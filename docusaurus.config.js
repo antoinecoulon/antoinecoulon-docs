@@ -52,7 +52,7 @@ const config = {
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
-            xslt: true,
+            xslt: false,
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
