@@ -9,8 +9,9 @@ Voici un guide étape par étape pour créer une API simple avec des données JS
 
 <!-- truncate -->
 
-**Étape 1 : Préparer l'environnement**
-Installer Node.js et npm : Assurez-vous d'avoir Node.js et npm (Node Package Manager) installés sur votre machine. Vous pouvez les télécharger depuis nodejs.org.
+# Étape 1 : Préparer l'environnement
+
+Installer Node.js et npm : Assurez-vous d'avoir Node.js et npm (*Node Package Manager*) installés sur votre machine. Vous pouvez les télécharger depuis `nodejs.org`.
 
 Créer un nouveau répertoire pour votre projet :
 
@@ -24,16 +25,21 @@ Initialiser un projet Node.js :
 ```bash
 npm init -y
 ```
+
 Cela créera un fichier package.json avec les configurations par défaut.
 
-**Étape 2 : Installer Express.js**
+# Étape 2 : Installer Express.js
+
 Installer Express.js :
+
 ```bash
 npm install express
 ```
 
-**Étape 3 : Créer le serveur Express**
+# Étape 3 : Créer le serveur Express
+
 Créer un fichier server.js :
+
 ```js
 const express = require('express');
 const app = express();
@@ -96,21 +102,29 @@ app.listen(port, () => {
 });
 ```
 
-**Étape 4 : Lancer le serveur**
+# Étape 4 : Lancer le serveur
+
 Démarrer le serveur :
+
 ```bash
 node server.js
 ```
-Votre API devrait maintenant être en cours d'exécution sur http://localhost:3000. Vous pouvez tester les différentes routes avec un outil comme Postman ou directement dans votre navigateur pour les requêtes GET.
 
-**Étape 5 : Tester l'API**
+Votre API devrait maintenant être en cours d'exécution sur `http://localhost:3000`. Vous pouvez tester les différentes routes avec un outil comme Postman ou directement dans votre navigateur pour les requêtes GET.
+
+# Étape 5 : Tester l'API
+
 GET /api/data : Récupère toutes les données.
+
 GET /api/data/:id : Récupère une donnée par son ID.
+
 POST /api/data : Ajoute une nouvelle donnée (envoyez un JSON avec name et description dans le corps de la requête).
+
 PUT /api/data/:id : Met à jour une donnée existante (envoyez un JSON avec name et description dans le corps de la requête).
+
 DELETE /api/data/:id : Supprime une donnée par son ID.
 
-### Pour aller plus loin
+## Pour aller plus loin
 
 - Ajouter plus de fonctionnalités 
 - Connecter une base de données
