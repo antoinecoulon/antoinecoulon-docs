@@ -12,6 +12,11 @@
     ],
     "icons": [
       {
+        "src": "/antoinecoulon-docs/img/favicon.ico",
+        "sizes": "16x16",
+        "type": "image/x-icon"
+      },
+      {
         "src": "/antoinecoulon-docs/img/android-chrome-192x192.png",
         "sizes": "192x192",
         "type": "image/png"
