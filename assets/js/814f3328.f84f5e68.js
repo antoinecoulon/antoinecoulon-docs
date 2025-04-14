@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkantoinecoulon_docs=self.webpackChunkantoinecoulon_docs||[]).push([[7472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Technos \xe0 explorer !","permalink":"/antoinecoulon-docs/blog/learn-technos","unlisted":false,"date":"2025-03-21T00:00:00.000Z"}]}')}}]);
