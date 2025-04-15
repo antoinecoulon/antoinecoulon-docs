@@ -29,14 +29,14 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Projet en cours',
+    title: 'Projets',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
         <Link
           className="button button--secondary button--lg"
-          to="/projects/portfolio-project">
-          Personal portfolio
+          to="/projects/intro">
+          Projets personnels
         </Link>
       </>
     ),

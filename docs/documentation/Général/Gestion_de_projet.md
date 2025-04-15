@@ -10,6 +10,12 @@
   - [L'avant-projet](#lavant-projet)
     - [Outil pour définir le projet : QQOQCCP](#outil-pour-définir-le-projet--qqoqccp)
     - [Outil pour définir le projet : SWOT](#outil-pour-définir-le-projet--swot)
+  - [Identifier les besoins et objectifs](#identifier-les-besoins-et-objectifs)
+    - [Identifier les besoins avec Kano](#identifier-les-besoins-avec-kano)
+    - [S.M.A.R.T](#smart)
+  - [Organiser et cadrer le projet](#organiser-et-cadrer-le-projet)
+    - [Cadrer le périmètre du projet](#cadrer-le-périmètre-du-projet)
+  - [Estimer la qualité, les coûts et les délais](#estimer-la-qualité-les-coûts-et-les-délais)
 
 ---
 
@@ -97,3 +103,101 @@ et opérationnelle du projet.
 La matrice **SWOT** permet l’analyse des *Forces* et *Faiblesses* **internes** ainsi que les *Opportunités* et *Menaces* **externes** d’une entité (entreprises, équipes, personnes …). Son objectif est de faciliter la prise de décisions stratégiques exploitant les atouts, en atténuant les faiblesses, en saisissant les opportunités et en anticipant les menaces.
 
 ---
+
+## Identifier les besoins et objectifs
+
+### Identifier les besoins avec Kano
+
+Le diagramme de KANO va nous permettre de mettre en
+évidence 3 types de besoins.
+
+**Basiques** (ou *obligatoires*) : caractéristiques de base que les utilisateurs s'attendent à trouver. Leur présence n'entraîne pas nécessairement satisfaction, mais leur absence cause une insatisfaction importante.
+
+**Excitants** (ou *attrayants*) : caractéristiques qui lorsqu’elles sont présentes suscitent la satisfaction des utilisateurs. Cependant, leur absence ne provoque pas d’insatisfaction forte.
+
+**Indifférents** (ou *neutres*) : Ce sont des caractéristiques pour lesquelles la présence ou l'absence n'affectent pas significativement la satisfaction des utilisateurs.
+
+![Kano](/img/gestion-projet_kano.PNG)
+
+L'utilisation du diagramme de Kano implique les étapes suivantes :
+
+*Collecte des fonctionnalités possibles* : Identifiez les fonctionnalités qui répondraient au besoin (via sondage ou brainstorming)
+
+*Évaluation du niveau des fonctionnalités* : Attribuez un niveau de satisfaction si elle est présente, et d'insatisfaction si elle est absente. (voir tableau slide suivant)
+
+*Classification* : Classez chaque caractéristique dans l'une des catégories excitantes, basiques ou indifférentes en fonction des réponses des utilisateurs.
+
+*Création du Diagramme de Kano* : Représentez graphiquement les résultats pour visualiser la nature de la satisfaction des utilisateurs en fonction de la présence ou de l'absence des caractéristiques.
+
+![Kano2](/img/gestion-projet_kano2.PNG)
+
+### S.M.A.R.T
+
+A ce stade du cours, nous avons défini un contexte et des besoins. Nous allons maintenant devoir formuler des objectifs qui répondent aux besoins de manière intelligente. Et pour cela nous allons utiliser la méthode **S.M.A.R.T**
+
+*Exemple*:
+
+*Besoin* : Améliorer la satisfaction client.
+
+*Objectif* (mal défini) : Augmenter la satisfaction client.
+
+*Objectif* **S.M.A.R.T** : Augmenter le taux de satisfaction client *de 10 %* d'ici *à la fin du prochain trimestre* en mettant en œuvre des *mesures spécifiques de rétroaction* et d'*amélioration des services*.
+
+![SMART](/img/gestion-projet_smart.PNG)
+
+---
+
+## Organiser et cadrer le projet
+
+**Organiser un Projet** : Structurer les ressources et les responsabilités pour atteindre les objectifs de manière efficace.
+
+**Cadrer un Projet** : Définir clairement les objectifs, ainsi que la portée et les limites du projet.
+
+### Cadrer le périmètre du projet
+
+Le périmètre de votre projet, est toute la zone qui concerne votre travail et uniquement le vôtre. Mais il inclut également vos ressources.
+
+*Ex*: Un architecte immobilier intervient sur le projet de construction d’une maison. Il a 3 mois et un budget de 10K€ pour faire les plans et fournir des conseils sur son périmètre d’action (architecture). Et c’est tout, le reste des tâches du projet n’est pas dans sa zone de projet.
+
+Il est **crucial** de définir clairement et de **documenter** le périmètre du projet **dès le depart**.
+Cela aide à minimiser les risques liés aux modifications et à assurer le succès du projet.
+
+---
+
+## Estimer la qualité, les coûts et les délais
+
+Pour pouvoir estimer les ressources dont nous allons avoir besoin, il faut savoir les mesurer. Pour cela nous allons :
+
+- définir un KPI : Key Performance Indicator (Indicateur clé de performance) pour mesurer la qualité
+- définir un coût et le mesurer
+- définir un délai et le mesurer
+
+Les **KPI** (*Key Performance Indicator*) sont des indicateurs clés de performance qui mesurent l'efficacité et la performance d'une activité ou d'un processus. Ils sont utilisés pour suivre l'avancement des projets, identifier les domaines d'amélioration et prendre des décisions éclairées.
+
+Le coût d’un projet peut dans certains cas être variable. En France, il s'exprimera le plus souvent en Euros, en Kilo euros (1000€)
+
+Le coût d'un projet comprend l’ensemble des dépenses du projet :
+
+*Coûts directs* :
+
+- Ressources humaines : salaires, primes, avantages sociaux, etc.
+- Matériaux : composants, fournitures, etc.
+- Équipements : machines, outils, etc.
+- Services : consultants, sous-traitants, etc.
+
+*Coûts indirects* :
+
+- Gestion du projet : planification, suivi, contrôle, etc.
+- Communications : réunions, documentation, etc.
+- Formation : développement des compétences, etc.
+- Logistique : transport, stockage, etc.
+
+Pour pouvoir estimer les **délais** il est important d’avoir en tête au moins trois notions :
+
+- Jour Homme (JH) : Un jour Homme représente une journée de travail d'une personne.
+- Équivalent Temps Plein (ETP) : L'ETP représente la quantité de travail d’une personne à temps-plein (35h)
+- Délais de traitement : le délai de traitement en gestion de projet est la durée pour accomplir une tâche spécifique, du début à la fin. Quand on fait appel à un service, le délai de traitement est la durée pour accomplir une tâche spécifique, du début à la fin d’une prestation. Cette valeur est souvent contractualisée.
+
+La **règle de Brooks** stipule que : "rajouter des personnes à un projet en retard le
+retardera davantage". En d'autres termes, l'ajout de ressources humaines supplémentaires à un projet déjà en cours peut entraîner des coûts de communication, de coordination et de formation
+supplémentaires, ce qui va ralentir le projet plutôt que de l'accélérer.

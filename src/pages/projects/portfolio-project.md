@@ -186,3 +186,6 @@ export default App
 
 - portfolio
 - chrome extension
+- meme generator
+- chef claude
+- dice game

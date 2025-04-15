@@ -42,6 +42,7 @@
     - [Functional programming](#functional-programming)
     - [useEffect](#useeffect)
       - [Example fetching an api](#example-fetching-an-api)
+  - [Aside: nanoid](#aside-nanoid)
 
 ---
 
@@ -1000,6 +1001,16 @@ export default function Pad(props) {
 }
 ```
 
+Passing function parameters:
+
+```jsx
+function hold(id) {
+  setDice(prevDice => prevDice.map(
+    die => die.id === id ? {...die, isHeld: !die} : die
+  ))
+}
+```
+
 ---
 
 ## Side effects
@@ -1084,4 +1095,32 @@ export default function Example() {
 
     // return ...
 }
+```
+
+---
+
+## Aside: nanoid
+
+The "nanoid" package can generate unique ID which can be very useful for mapping keys:
+
+```jsx
+const [dice, setDice] = useState(generateAllNewDice())
+
+function generateAllNewDice() {
+  return new Array(10)
+    .fill(0)
+    .map(() => ({
+      value: Math.ceil(Math.random() * 6),
+      isHeld: false,
+      id: nanoid()
+    }))
+}
+
+const diceElements = dice.map(dieObj => <Die key={dieObj.id} value={dieObj.value} />)
+
+return (
+  <div className="dice-container">
+    {diceElements}
+  </div>
+)
 ```
