@@ -1017,6 +1017,8 @@ function hold(id) {
 
 Side effect is any code that affects or interacts with an outside system (local storage, API, websockets, DOM manipulation).
 
+Warning: [you might not need an side effect](https://react.dev/learn/you-might-not-need-an-effect) !
+
 ### Functional programming
 
 To learn more, see concept of [functional programing](https://www.freecodecamp.org/news/functional-programming-in-javascript/).
