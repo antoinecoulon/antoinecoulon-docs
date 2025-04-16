@@ -23,6 +23,7 @@
   - [Events](#events)
     - [Example with useState](#example-with-usestate)
   - [State](#state)
+    - [Pass a function as state](#pass-a-function-as-state)
     - [Aside: ternary operator](#aside-ternary-operator)
     - [State example](#state-example)
   - [Forms](#forms)
@@ -43,6 +44,9 @@
     - [useEffect](#useeffect)
       - [Example fetching an api](#example-fetching-an-api)
   - [Aside: nanoid](#aside-nanoid)
+  - [Accessing and manipulating DOM](#accessing-and-manipulating-dom)
+    - [useRef](#useref)
+  - [Aside: project planning](#aside-project-planning)
 
 ---
 
@@ -576,6 +580,14 @@ export default function App() {
 }
 ```
 
+### Pass a function as state
+
+When we pass a function as state, like in `const [dice, setDice] = useState(generateAllNewDice())`, the function will be called at every re-render of the component, even if it doesn't use the body of that function. We can call a function like this instead, to save a little of performance:
+
+```jsx
+const [dice, setDice] = useState(() => generateAllNewDice())
+```
+
 ### Aside: ternary operator
 
 At this point, the [JS ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator) will be handy, let's have a quick refresh:
@@ -959,6 +971,12 @@ export default function Pad(props) {
 
 If we are a parent component, passing props/state to its children components, but we allow those children to alter their state by theirselves, it will ends with no sync between parents and children components. It's called **derived state** -> [See](https://legacy.reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html)
 
+```jsx
+const [dice, setDice] = useState(() => generateAllNewDice()) // State
+const gameWon = dice.every(die => die.isHeld) &&
+        dice.every(die => die.value === dice[0].value) // Derived state of Dice
+```
+
 With a **shared state**, we can handle every individual state of the children component from the parent (here we can toggle an individual child from the parent directly):
 
 ```jsx
@@ -1126,3 +1144,44 @@ return (
   </div>
 )
 ```
+
+---
+
+## Accessing and manipulating DOM
+
+### useRef
+
+In React, the preferred way to access a DOM node is by using a ref.
+
+At its core, refs allows us to save values between the render cycles without actually triggering a rerender itself.
+
+We can create a ref by pulling in the useRef hook and then simply calling useRef(). When we want to access a node, we usually initialize the ref variable with `null`. We then give a `ref` attribute to the element in the DOM we want to access to.
+
+```jsx
+const buttonRef = useRef(null)
+
+return (
+  <button ref={buttonRef} className="button">
+      Button we want to access to
+  </button>
+)
+```
+
+We can console.log this ref to see what it contains:
+
+```jsx
+console.log(buttonRef) // > {current: null}
+
+// After accessing the ref
+console.log(buttonRef) // > {current: <button class='button'>}
+```
+
+---
+
+## Aside: project planning
+
+When we first begin a new project, it could be useful to ask ourselves some questions and to think about the whole project structure ahead of coding.
+
+- What are the main containers of elements I need in this app?
+- What values will need to be saved in state vs. what values can be derived from state? (or just What values do we need to save or know?)
+- How will the user interact with the app ? What events do I need to handle?

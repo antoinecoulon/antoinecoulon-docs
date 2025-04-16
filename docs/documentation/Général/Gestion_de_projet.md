@@ -16,6 +16,13 @@
   - [Organiser et cadrer le projet](#organiser-et-cadrer-le-projet)
     - [Cadrer le périmètre du projet](#cadrer-le-périmètre-du-projet)
   - [Estimer la qualité, les coûts et les délais](#estimer-la-qualité-les-coûts-et-les-délais)
+  - [Planifier](#planifier)
+    - [Introduction](#introduction)
+    - [Planning antérieur et rétroplanning](#planning-antérieur-et-rétroplanning)
+    - [Planning macro et micro](#planning-macro-et-micro)
+    - [Chemin critique et dépendance](#chemin-critique-et-dépendance)
+  - [Communication](#communication)
+    - [Matrice RACI](#matrice-raci)
 
 ---
 
@@ -201,3 +208,81 @@ Pour pouvoir estimer les **délais** il est important d’avoir en tête au moin
 La **règle de Brooks** stipule que : "rajouter des personnes à un projet en retard le
 retardera davantage". En d'autres termes, l'ajout de ressources humaines supplémentaires à un projet déjà en cours peut entraîner des coûts de communication, de coordination et de formation
 supplémentaires, ce qui va ralentir le projet plutôt que de l'accélérer.
+
+---
+
+## Planifier
+
+### Introduction
+
+Pour cela nous avons quelques concepts de bases :
+
+- Planning antérieur et rétroplanning
+- Planning macro et micro
+- PDCA (Plan, Do, Check, Act)
+- Jalon et effet tunnel
+
+Ainsi que les 3 principaux outils qui vous serviront à planifier :
+
+- PERT
+- Gantt
+- Kanban
+
+### Planning antérieur et rétroplanning
+
+**Planning antérieur** : (le plus commun)
+
+On part de la date de début connue, pour planifier les étapes vers la date de fin
+
+**Rétroplanning** :
+
+On part de la date de fin, pour planifier les étapes vers la date de début.
+
+### Planning macro et micro
+
+Le **Macro-planning** :
+
+Est une approche de planification centrée sur la vision d'ensemble, identifiant les grandes phases et jalons clés d'un projet. Il est souvent représenté par *un diagramme de Gantt*
+
+Le **Micro-planning** :
+
+Est une méthode de planification détaillée axée sur l'élaboration spécifique des tâches et des échéanciers à courtterme. Il sera souvent représenté sous forme d’*un Kanban*
+
+### Chemin critique et dépendance
+
+Les **Dépendances** :
+
+Sont les liens logiques entre les différentes tâches d'un projet. Elles indiquent l'ordre dans lequel les activités doivent être effectuées et influent sur la durée totale du projet.
+
+*Exemple* : Pour cuire un gâteau, il faut préchauffer le four avant.
+
+Le **Chemin Critique** :
+
+Est l’enchainement de tâches qui détermine la durée totale la plus courte du projet. Il représente les étapes les plus longues et les plus dépendantes, définissant la limite minimale de temps pour achever le projet.
+
+---
+
+## Communication
+
+Maintenant que nous savons gérer notre démarrage de projet, il va falloir *interagir* avec les autres parties prenantes du projet et donc **communiquer** !!!
+
+### Matrice RACI
+
+Elle est aussi appelée "*Matrice de responsabilité*".
+
+![Raci](/img/gestion-projet_raci.PNG)
+
+Elle est constituée de 3 zones:
+
+- Dans la colonne de gauche vous listez l’ensemble des Activité/tache à réaliser (que vous avez normalement listées dans votre WBS)
+- Dans la ligne du haut, notés les interlocuteurs du projet
+- Enfin, vous attribuez une responsabilité à chaque interlocuteur pour une tâche donnée
+
+Les responsabilités possibles sont les suivantes :
+
+- **Responsible** / *Réalisateur*. (Celui qui fait)
+- **Accountable** / *Approbateur*. (Celui qui contrôle si la tâche est faite)
+- **Consulted** / *Consulté*. (Celui à qui on demande son avis sur la tâche)
+- **Informed** / *Informé*. (Celui qu’on informe que la tâche est faite pour qu’il puisse avancer)
+
+(Il faut un A et un R au minimum pour chacune des tâches.)
