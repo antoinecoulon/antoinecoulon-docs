@@ -23,6 +23,8 @@
     - [Chemin critique et dépendance](#chemin-critique-et-dépendance)
   - [Communication](#communication)
     - [Matrice RACI](#matrice-raci)
+  - [Modèles de gestion de projet](#modèles-de-gestion-de-projet)
+  - [La gestion des risques](#la-gestion-des-risques)
 
 ---
 
@@ -286,3 +288,24 @@ Les responsabilités possibles sont les suivantes :
 - **Informed** / *Informé*. (Celui qu’on informe que la tâche est faite pour qu’il puisse avancer)
 
 (Il faut un A et un R au minimum pour chacune des tâches.)
+
+---
+
+## Modèles de gestion de projet
+
+Un modèle de gestion de projet c’est un cadre conceptuel avec une méthodologie structurée utilisé pour planifier, exécuter et contrôler les activités d'un projet. Il fournit une structure qui guide les équipes tout au long du cycle de vie du projet, en
+définissant des processus, des phases et des étapes pour atteindre les objectifs fixés. Les modèles de gestion de projet peuvent varier en fonction de la nature du projet, des
+besoins spécifiques de l'organisation et des normes de l'industrie.
+
+Les principaux modèles:
+
+- **L’anarchie** (ou autogestion): Bien plus souvent utilisée qu’on ne le pense
+- **En cascade** (ou séquentiel): Qui est la plus connue et encore largement utilisée
+- **En V**: Qui est une adaptation entre l’agilité et la cascade
+- **En agilité**: Qui est très plébiscité, mais demande un véritable apprentissage pour être fonctionnel
+
+---
+
+## La gestion des risques
+
+Un risque, c’est la possibilité qu'un événement potentiellement indésirable se produise et ait un impact négatif sur projet. Il représente l'incertitude et la probabilité d'une perte, d'un dommage ou d'un écart par rapport aux attentes.
