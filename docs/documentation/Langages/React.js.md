@@ -39,6 +39,7 @@
   - [Passing data around React](#passing-data-around-react)
     - [Inline styles](#inline-styles)
     - [Derived state vs Shared state](#derived-state-vs-shared-state)
+    - [Lazy state initialization](#lazy-state-initialization)
   - [Side effects](#side-effects)
     - [Functional programming](#functional-programming)
     - [useEffect](#useeffect)
@@ -1027,6 +1028,14 @@ function hold(id) {
     die => die.id === id ? {...die, isHeld: !die} : die
   ))
 }
+```
+
+### Lazy state initialization
+
+If we just call our function in state, React will re-run that function at every re-render, even if we don't get a new value returned, it causes some performance issues. We can instead use lazy state initialization:
+
+```jsx
+const [dice, setDice] = useState(() => generateAllNewDice())
 ```
 
 ---
