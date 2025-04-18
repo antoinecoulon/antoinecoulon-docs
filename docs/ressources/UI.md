@@ -22,6 +22,8 @@ description: Images, icones, animations, sprites...
 - [Lorem Picsum](https://picsum.photos/) - Générateur d'images aléatoires
 - [Avatar Placeholder](https://avatar-placeholder.iran.liara.run/) - Générateur d'avatar style placeholder
 - [Undraw](https://undraw.co/illustrations) - Illustrations
+- [TinyPNG](https://tinypng.com/)
+- [Dither it!](https://ditherit.com/)
 
 ---
 
