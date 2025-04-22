@@ -36,8 +36,8 @@ De [React](https://roadmap.sh/react) vers -> React Native
 - [X] [JavaScript](https://roadmap.sh/typescript) [re-learn](https://javascript.info/)
 - [X] [TypeScript](https://roadmap.sh/typescript) basics
 - [X] React basics
-  - [] Components
-  - [] Rendering
+  - [X] Components
+  - [X] Rendering
   - [] Hooks
   - [] Routers
   - [] State management
