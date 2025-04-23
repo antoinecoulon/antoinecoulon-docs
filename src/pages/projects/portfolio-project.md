@@ -5,16 +5,14 @@
 - [Personal portfolio](#personal-portfolio)
   - [Conception](#conception)
     - [Maquette v1](#maquette-v1)
-  - [Stack](#stack)
+  - [Stack technique](#stack-technique)
   - [Versions](#versions)
-  - [Install](#install)
-    - [pnpm](#pnpm)
-    - [Vite](#vite)
-    - [Tailwind](#tailwind)
-    - [TS config](#ts-config)
-    - [Vite config](#vite-config)
-    - [Shadn](#shadn)
-  - [Initialisation du repo Git](#initialisation-du-repo-git)
+  - [Synthèse projet portfolio – Version 1 (phase 1)](#synthèse-projet-portfolio--version-1-phase-1)
+    - [Objectif](#objectif)
+    - [Cible](#cible)
+    - [Structure initiale (Single Page Application avec ancrages ou routing)](#structure-initiale-single-page-application-avec-ancrages-ou-routing)
+    - [Identité visuelle](#identité-visuelle)
+  - [Étapes de développement (pro posées comme une feuille de route Agile)](#étapes-de-développement-pro-posées-comme-une-feuille-de-route-agile)
   - [Partie PROJETS](#partie-projets)
 
 ---
@@ -23,164 +21,91 @@
 
 ### Maquette v1
 
-![Maquette](../../img/portfolio_maquette-v1.drawio.png)
+...en cours...
 
 ---
 
-## Stack
+## Stack technique
 
-- React.js
-- TypeScript
-
-- Vite
-
+- React + Vite
+- TypeScript **??**
 - Tailwind CSS
-- Shadn
+- Shadcn/UI (pour composants réutilisables)
+- Versioning Git avec des commits propres et fréquents
+- Déploiement prévu sur GitHub pages
 
 ---
 
 ## Versions
 
-*v1 (todo):*
-
-- [ ] Design de base (Header/Main/Footer)
-- [x] Maquette
-- [ ] Documentation
-- [ ] Screens:
-  - [ ] Home
-  - [ ] Projets
-  - [ ] About
-  - [ ] Contact
+*v1 (todo):* -> Home, About, Skills, Projects, Parcours, Contact (sans form)
 
 ---
 
-## Install
+## Synthèse projet portfolio – Version 1 (phase 1)
 
-### pnpm
+### Objectif
 
-Avoir `pnpm` installé:
+Valoriser tes projets personnels et tes compétences techniques.
 
-```bash
-pnpm -v
-```
+Vitrine évolutive : ajout de projets/certificats au fil du temps.
 
-Sinon:
+### Cible
 
-```bash
-npm install -g pnpm@latest-10
-```
+Public non spécifique (donc UX claire, navigation intuitive, responsive first).
 
-### Vite
+### Structure initiale (Single Page Application avec ancrages ou routing)
 
-```bash
-pnpm create vite@latest portfolio --template react-ts
-```
+**Accueil**: Introduction, titre accrocheur, lien vers projets
+**À propos**: Qui tu es, ton parcours, ta philosophie dev
+**Compétences**: Langages, frameworks, outils (pictos + niveaux éventuels)
+**Projets**: Liste filtrable ou classée, avec liens vers GitHub/démos
+**Parcours / Certifs**: Timeline ou cartes, avec captures
+**Contact**: En attente pour V2 (formulaire, backend léger)
 
-### Tailwind
+### Identité visuelle
 
-```bash
-pnpm add tailwindcss @tailwindcss/vite
-```
+Style moderne & clean, inspiration développeur.
 
-Remplacer tout dans `src/index.css` par:
+Couleurs et typographie : à définir ensemble (prochaine étape).
 
-```css title="src/index.css"
-@import "tailwindcss";
-```
+SPA avec routing.
 
-### TS config
+Image de profil/avatar : plus tard.
 
-Ajoutez compilerOptions:
-
-```json title="tsconfig.json
-{
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
-}
-```
-
-```json title="tsconfig.app.json
-{
-  "compilerOptions": {
-    // ...
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
-    // ...
-  }
-}
-```
-
-### Vite config
-
-```bash
-pnpm add -D @types/node
-```
-
-```ts title="vite.config.ts"
-import path from "path"
-import tailwindcss from "@tailwindcss/vite"
-import react from "@vitejs/plugin-react"
-import { defineConfig } from "vite"
-
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-})
-```
-
-### Shadn
-
-```bash
-pnpm dlx shadcn@latest init
-```
-
-Vous pouvez maintenant ajouter des composants:
-
-```bash
-pnpm dlx shadcn@latest add button
-```
-
-Cette commande ajoute le composant `Button` au projet:
-
-```tsx title="src/App.tsx"
-import { Button } from "@/components/ui/button"
-
-function App() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-svh">
-      <Button>Click me</Button>
-    </div>
-  )
-}
-
-export default App
-```
-
-## Initialisation du repo Git
+Animations : à intégrer dans une future itération avec Framer Motion.
 
 ---
+
+## Étapes de développement (pro posées comme une feuille de route Agile)
+
+Sprint 0: Initialisation projet, structure, routing SPA
+Sprint 1: Accueil + layout global (Navbar/Footer)
+Sprint 2: À propos + Compétences
+Sprint 3: Projets (cards avec liens/captures)
+Sprint 4: Expérience + certificats
+Sprint 5: Responsive, polish, refactor
+Sprint 6 (bonus): Ajout de Framer Motion / backend formulaire de contact
+
+📌 Prochaine étape
+
+🚀 Sprint 0 – Initialisation du projet
+
+**Objectifs:** Créer la base du projet Vite avec React
+
+Configurer Tailwind CSS
+
+Ajouter Shadcn
+
+Organiser l’arborescence de projet (dossiers, routing, composants de base)
+
+Versionner le projet sur GitHub
+
+Déploiement auto
+
+Documentation Carbon
+
+Projet GitHub avec Issues
 
 ## Partie PROJETS
 
