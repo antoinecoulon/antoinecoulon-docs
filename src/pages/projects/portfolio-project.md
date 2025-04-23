@@ -13,7 +13,7 @@
     - [Structure initiale (Single Page Application avec ancrages ou routing)](#structure-initiale-single-page-application-avec-ancrages-ou-routing)
     - [Identité visuelle](#identité-visuelle)
   - [Versions](#versions)
-  - [Étapes de développement (pro posées comme une feuille de route Agile)](#étapes-de-développement-pro-posées-comme-une-feuille-de-route-agile)
+  - [Étapes de développement (proposées comme une feuille de route Agile)](#étapes-de-développement-proposées-comme-une-feuille-de-route-agile)
     - [Sprint 0 – Initialisation du projet](#sprint-0--initialisation-du-projet)
   - [Partie PROJETS](#partie-projets)
 
@@ -30,9 +30,7 @@
 ## Stack technique
 
 - React + Vite
-- TypeScript **??**
 - Tailwind CSS
-- Shadcn/UI (pour composants réutilisables)
 - Versioning Git avec des commits propres et fréquents
 - Déploiement prévu sur GitHub pages
 
@@ -78,7 +76,7 @@ Animations : à intégrer dans une future itération avec Framer Motion.
 
 ---
 
-## Étapes de développement (pro posées comme une feuille de route Agile)
+## Étapes de développement (proposées comme une feuille de route Agile)
 
 - Sprint 0: Initialisation projet, structure, routing SPA
 - Sprint 1: Accueil + layout global (Navbar/Footer)
@@ -92,19 +90,154 @@ Animations : à intégrer dans une future itération avec Framer Motion.
 
 **Objectifs:**
 
-[] Créer la base du projet Vite avec React
+[X] Créer la base du projet Vite avec React
 
-[] Configurer Tailwind CSS
+Initialiser le projet avec Vite:
 
-[] Ajouter Shadcn
+```bash
+npm create vite@latest portfolio
+```
 
-[] Organiser l’arborescence de projet (dossiers, routing, composants de base)
+> Choix:
+>
+> React
+>
+> JavaScript + SWC
 
-[] Versionner le projet sur GitHub
+```bash
+cd portfolio
+npm install
+npm run dev
+```
 
-[] Déploiement auto
+Les logo Vite et React doivent s'afficher sur [http://localhost:5173/].
 
-[] Documentation Carbon
+Ensuite on peut clean les fichiers créés en ne gardant qu'une structure basique (bien penser à enlever tous les import et ce dans tous les fichiers).
+
+[X] Configurer Tailwind CSS
+
+Installer Tailwind CSS (v4) avec `npm`:
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+Configurer Vite:
+
+```js title="vite.config.ts"
+import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+  ],
+})
+```
+
+Importer Tailwind dans `index.css` (tout remplacer si le fichier n'est pas vide):
+
+```css title="index.css"
+@import "tailwindcss";
+```
+
+*Bonus*: installer Prettier et son plugin Tailwind qui organise automatiquement les classes.
+
+```bash
+npm install -D prettier prettier-plugin-tailwindcss
+```
+
+```json title=".prettierrc"
+{
+  "plugins": ["prettier-plugin-tailwindcss"]
+}
+```
+
+Tailwind Intellisense pour VSCode est aussi très pratique (complétion).
+
+[X] Organiser l’arborescence de projet (dossiers, routing, composants de base)
+
+```arduino
+node_modules/
+public/
+src/
+├── components/     # composants réutilisables
+├── pages/          # sections du portfolio (Accueil, À propos…)
+├── routes/         # config du routing (si besoin)
+├── data/           # données statiques (projets, skills…)
+├── App.jsx         # structure principale
+├── index.css       # fichier css principal (import tailwind)
+├── main.jsx        # point d’entrée
+.gitignore          # fichiers ignorés par Git
+.prettierrc         # config Prettier
+.eslint.config.js   # config Eslint
+index.html          # point d'entrée html (balise #root)
+package-lock.json
+package.json
+README.md
+vite.config.js      # config Vite
+```
+
+[X] Versionner le projet sur GitHub
+
+=> [Repo](https://github.com/antoinecoulon/portfolio)
+
+[] Déploiement manuel GitHub pages
+
+Ajouter le `base` dans la config Vite
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react-swc'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss()
+  ],
+  base: '/portfolio/'
+})
+```
+
+Créer un fichier `.github/workflows/deploy.yml`
+
+```yaml
+name: Deploy to GitHub Pages (manual)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+```
+
+Vérifier que `npm run build` construit bien le dossier `dist` à la racine du projet.
+
+Vérifier que les droits de lecture et d'écriture pour les workflows GitHub sont activés (settings repo github).
+
+[] Documentation Carbon (*README.md*)
 
 [] Projet GitHub avec Issues
 
