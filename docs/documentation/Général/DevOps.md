@@ -8,6 +8,7 @@ description: Déploiement de sites et d'applications
   - [Déploiement](#déploiement)
   - [Introduction au DevOps](#introduction-au-devops)
   - [Concepts](#concepts)
+  - [Docker](#docker)
 
 ---
 
@@ -54,3 +55,13 @@ Exemple de workflow CI/CD typique:
   - Production
 
 ![Workflow Schema](/img/devops_workflow.PNG)
+
+---
+
+## Docker
+
+Docker est un outil développé en Go en 2013. Il s'appuie sur une technologie de conteneurisation déjà existante dans le noyau Linux permettant de bien gérer l'isolation des processus dans l'OS.
+
+Pour fonctionner, il s'appuie sur plusieurs outils Linux:
+
+*reprendre cours diapo*:
