@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#000">
 <link rel="apple-touch-icon" href="/antoinecoulon-docs/img/apple-touch-icon.png"><link rel="stylesheet" href="/antoinecoulon-docs/assets/css/styles.8cfe230c.css">
-<script src="/antoinecoulon-docs/assets/js/runtime~main.6a7c8e21.js" defer="defer"></script>
+<script src="/antoinecoulon-docs/assets/js/runtime~main.120b7436.js" defer="defer"></script>
 <script src="/antoinecoulon-docs/assets/js/main.e272aab8.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -100,6 +100,7 @@
 <li>Sprint 4: Expérience + certificats</li>
 <li>Sprint 5: Responsive, polish, refactor</li>
 <li>Sprint 6 (bonus): Ajout de Framer Motion / backend formulaire de contact</li>
+<li>Sprint 7: dark mode, quotes</li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="sprint-0--initialisation-du-projet">Sprint 0 – Initialisation du projet<a href="#sprint-0--initialisation-du-projet" class="hash-link" aria-label="Lien direct vers Sprint 0 – Initialisation du projet" title="Lien direct vers Sprint 0 – Initialisation du projet">​</a></h3>
 <p><strong>Objectifs:</strong></p>
@@ -133,17 +134,30 @@
 <p>Ajouter le <code>base</code> dans la config Vite</p>
 <div class="language-js codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-js codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token keyword module" style="color:#00009f">import</span><span class="token plain"> </span><span class="token imports punctuation" style="color:#393A34">{</span><span class="token imports"> defineConfig </span><span class="token imports punctuation" style="color:#393A34">}</span><span class="token plain"> </span><span class="token keyword module" style="color:#00009f">from</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;vite&#x27;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword module" style="color:#00009f">import</span><span class="token plain"> </span><span class="token imports">react</span><span class="token plain"> </span><span class="token keyword module" style="color:#00009f">from</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;@vitejs/plugin-react-swc&#x27;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword module" style="color:#00009f">import</span><span class="token plain"> </span><span class="token imports">tailwindcss</span><span class="token plain"> </span><span class="token keyword module" style="color:#00009f">from</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;@tailwindcss/vite&#x27;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword module" style="color:#00009f">export</span><span class="token plain"> </span><span class="token keyword module" style="color:#00009f">default</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">defineConfig</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token literal-property property" style="color:#36acaa">plugins</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">[</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token function" style="color:#d73a49">react</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token function" style="color:#d73a49">tailwindcss</span><span class="token punctuation" style="color:#393A34">(</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  </span><span class="token literal-property property" style="color:#36acaa">base</span><span class="token operator" style="color:#393A34">:</span><span class="token plain"> </span><span class="token string" style="color:#e3116c">&#x27;/portfolio/&#x27;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token punctuation" style="color:#393A34">)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copier le code" title="Copier" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <p>Importer le repo GitHub sur Vercel, c&#x27;est tout !</p>
-<p><a href="https://portfolio-owm2jufks-antoines-projects-45a2e942.vercel.app/" target="_blank" rel="noopener noreferrer">Link</a></p>
+<p><a href="https://portfolio-antoinecoulon.vercel.app/" target="_blank" rel="noopener noreferrer">Link</a></p>
 <p>[] Documentation Carbon (<em>README.md</em>)</p>
 <p>[X] Projet GitHub avec Issues</p>
 <p><a href="https://github.com/users/antoinecoulon/projects/5" target="_blank" rel="noopener noreferrer">Link</a></p>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="sprint-1---accueil--layout-global">Sprint 1 - Accueil + layout global<a href="#sprint-1---accueil--layout-global" class="hash-link" aria-label="Lien direct vers Sprint 1 - Accueil + layout global" title="Lien direct vers Sprint 1 - Accueil + layout global">​</a></h3>
+<ul class="contains-task-list containsTaskList_mC6p">
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Header<!-- -->
 <ul>
-<li>[] Header</li>
-<li>[] Navbar</li>
-<li>[] Footer</li>
-<li>[] Accueil</li>
+<li>logo</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Navbar<!-- -->
+<ul>
+<li>apparence</li>
+<li>liens (voir Routing...)</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Footer</li>
+<li>[] Accueil<!-- -->
+<ul>
+<li>contenu</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="partie-projets">Partie PROJETS<a href="#partie-projets" class="hash-link" aria-label="Lien direct vers Partie PROJETS" title="Lien direct vers Partie PROJETS">​</a></h2>
