@@ -15,6 +15,7 @@
   - [Versions](#versions)
   - [Étapes de développement (proposées comme une feuille de route Agile)](#étapes-de-développement-proposées-comme-une-feuille-de-route-agile)
     - [Sprint 0 – Initialisation du projet](#sprint-0--initialisation-du-projet)
+    - [Sprint 1 - Accueil + layout global](#sprint-1---accueil--layout-global)
   - [Partie PROJETS](#partie-projets)
 
 ---
@@ -181,7 +182,7 @@ vite.config.js      # config Vite
 
 => [Repo](https://github.com/antoinecoulon/portfolio)
 
-[] Déploiement manuel GitHub pages
+[X] Déploiement auto Vercel
 
 Ajouter le `base` dans la config Vite
 
@@ -199,47 +200,26 @@ export default defineConfig({
 })
 ```
 
-Créer un fichier `.github/workflows/deploy.yml`
+Importer le repo GitHub sur Vercel, c'est tout !
 
-```yaml
-name: Deploy to GitHub Pages (manual)
-
-on:
-  workflow_dispatch:
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-```
-
-Vérifier que `npm run build` construit bien le dossier `dist` à la racine du projet.
-
-Vérifier que les droits de lecture et d'écriture pour les workflows GitHub sont activés (settings repo github).
+[Link](https://portfolio-owm2jufks-antoines-projects-45a2e942.vercel.app/)
 
 [] Documentation Carbon (*README.md*)
 
-[] Projet GitHub avec Issues
+[X] Projet GitHub avec Issues
+
+[Link](https://github.com/users/antoinecoulon/projects/5)
+
+---
+
+### Sprint 1 - Accueil + layout global
+
+- [] Header
+- [] Navbar
+- [] Footer
+- [] Accueil
+
+---
 
 ## Partie PROJETS
 
