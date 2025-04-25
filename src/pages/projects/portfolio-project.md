@@ -86,6 +86,7 @@ Animations : à intégrer dans une future itération avec Framer Motion.
 - Sprint 4: Expérience + certificats
 - Sprint 5: Responsive, polish, refactor
 - Sprint 6 (bonus): Ajout de Framer Motion / backend formulaire de contact
+- Sprint 7: dark mode, quotes
 
 ### Sprint 0 – Initialisation du projet
 
@@ -202,7 +203,7 @@ export default defineConfig({
 
 Importer le repo GitHub sur Vercel, c'est tout !
 
-[Link](https://portfolio-owm2jufks-antoines-projects-45a2e942.vercel.app/)
+[Link](https://portfolio-antoinecoulon.vercel.app/)
 
 [] Documentation Carbon (*README.md*)
 
@@ -214,10 +215,14 @@ Importer le repo GitHub sur Vercel, c'est tout !
 
 ### Sprint 1 - Accueil + layout global
 
-- [] Header
-- [] Navbar
-- [] Footer
+- [X] Header
+  - logo
+- [X] Navbar
+  - apparence
+  - liens (voir Routing...)
+- [X] Footer
 - [] Accueil
+  - contenu
 
 ---
 
