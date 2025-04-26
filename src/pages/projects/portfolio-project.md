@@ -16,6 +16,9 @@
   - [Étapes de développement (proposées comme une feuille de route Agile)](#étapes-de-développement-proposées-comme-une-feuille-de-route-agile)
     - [Sprint 0 – Initialisation du projet](#sprint-0--initialisation-du-projet)
     - [Sprint 1 - Accueil + layout global](#sprint-1---accueil--layout-global)
+    - [Sprint 2 - A propos + Compétences](#sprint-2---a-propos--compétences)
+    - [Sprint 3 - Projets (cards avec liens/captures)](#sprint-3---projets-cards-avec-lienscaptures)
+    - [Sprint 4 - Expérience + certificats](#sprint-4---expérience--certificats)
   - [Partie PROJETS](#partie-projets)
 
 ---
@@ -221,8 +224,33 @@ Importer le repo GitHub sur Vercel, c'est tout !
   - apparence
   - liens (voir Routing...)
 - [X] Footer
-- [] Accueil
-  - contenu
+- [X] Accueil
+  - contenu (à continuer plus tard...)
+
+---
+
+### Sprint 2 - A propos + Compétences
+
+- [X] Page 'A propos'
+- [X] Page 'Compétences'
+- [X] Routing
+- [X] Adapter navbar (liens)
+
+---
+
+### Sprint 3 - Projets (cards avec liens/captures)
+
+- [X] Page 'Projet'
+  - [X] Accordeon placeholder
+
+---
+
+### Sprint 4 - Expérience + certificats
+
+- [X] Page 'Parcours'
+- [X] Timeline
+  - Expériences formations
+- [] Certificats
 
 ---
 
