@@ -48,6 +48,11 @@
   - [Accessing and manipulating DOM](#accessing-and-manipulating-dom)
     - [useRef](#useref)
   - [Aside: project planning](#aside-project-planning)
+  - [children](#children)
+  - [props spreading](#props-spreading)
+  - [props destructuring](#props-destructuring)
+  - [prop drilling](#prop-drilling)
+  - [Compound components](#compound-components)
 
 ---
 
@@ -1194,3 +1199,17 @@ When we first begin a new project, it could be useful to ask ourselves some ques
 - What are the main containers of elements I need in this app?
 - What values will need to be saved in state vs. what values can be derived from state? (or just What values do we need to save or know?)
 - How will the user interact with the app ? What events do I need to handle?
+
+---
+
+## children
+
+## props spreading
+
+## props destructuring
+
+---
+
+## prop drilling
+
+## Compound components
