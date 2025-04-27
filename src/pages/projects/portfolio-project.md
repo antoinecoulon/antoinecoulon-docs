@@ -19,6 +19,7 @@
     - [Sprint 2 - A propos + Compétences](#sprint-2---a-propos--compétences)
     - [Sprint 3 - Projets (cards avec liens/captures)](#sprint-3---projets-cards-avec-lienscaptures)
     - [Sprint 4 - Expérience + certificats](#sprint-4---expérience--certificats)
+    - [Sprint 4.5 - Replace Tailwind](#sprint-45---replace-tailwind)
     - [Sprint 5 - Responsive, polish, refactor](#sprint-5---responsive-polish-refactor)
 
 ---
@@ -34,7 +35,6 @@
 ## Stack technique
 
 - React + Vite
-- Tailwind CSS
 - Versioning Git avec des commits propres et fréquents
 - Déploiement prévu sur GitHub pages
 
@@ -119,46 +119,6 @@ Les logo Vite et React doivent s'afficher sur [http://localhost:5173/].
 
 Ensuite on peut clean les fichiers créés en ne gardant qu'une structure basique (bien penser à enlever tous les import et ce dans tous les fichiers).
 
-[X] Configurer Tailwind CSS
-
-Installer Tailwind CSS (v4) avec `npm`:
-
-```bash
-npm install tailwindcss @tailwindcss/vite
-```
-
-Configurer Vite:
-
-```js title="vite.config.ts"
-import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
-export default defineConfig({
-  plugins: [
-    tailwindcss(),
-  ],
-})
-```
-
-Importer Tailwind dans `index.css` (tout remplacer si le fichier n'est pas vide):
-
-```css title="index.css"
-@import "tailwindcss";
-```
-
-*Bonus*: installer Prettier et son plugin Tailwind qui organise automatiquement les classes.
-
-```bash
-npm install -D prettier prettier-plugin-tailwindcss
-```
-
-```json title=".prettierrc"
-{
-  "plugins": ["prettier-plugin-tailwindcss"]
-}
-```
-
-Tailwind Intellisense pour VSCode est aussi très pratique (complétion).
-
 [X] Organiser l’arborescence de projet (dossiers, routing, composants de base)
 
 ```arduino
@@ -170,10 +130,9 @@ src/
 ├── routes/         # config du routing (si besoin)
 ├── data/           # données statiques (projets, skills…)
 ├── App.jsx         # structure principale
-├── index.css       # fichier css principal (import tailwind)
+├── index.css       # fichier css principal 
 ├── main.jsx        # point d’entrée
 .gitignore          # fichiers ignorés par Git
-.prettierrc         # config Prettier
 .eslint.config.js   # config Eslint
 index.html          # point d'entrée html (balise #root)
 package-lock.json
@@ -193,12 +152,10 @@ Ajouter le `base` dans la config Vite
 ```js
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss()
   ],
   base: '/portfolio/'
 })
@@ -251,6 +208,12 @@ Importer le repo GitHub sur Vercel, c'est tout !
 - [X] Timeline
   - Expériences formations
 - [] Certificats
+
+---
+
+### Sprint 4.5 - Replace Tailwind (v0.1.0)
+
+- [] Fix all components CSS
 
 ---
 
