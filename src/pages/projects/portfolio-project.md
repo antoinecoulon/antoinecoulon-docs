@@ -19,7 +19,7 @@
     - [Sprint 2 - A propos + Compétences](#sprint-2---a-propos--compétences)
     - [Sprint 3 - Projets (cards avec liens/captures)](#sprint-3---projets-cards-avec-lienscaptures)
     - [Sprint 4 - Expérience + certificats](#sprint-4---expérience--certificats)
-  - [Partie PROJETS](#partie-projets)
+    - [Sprint 5 - Responsive, polish, refactor](#sprint-5---responsive-polish-refactor)
 
 ---
 
@@ -254,10 +254,11 @@ Importer le repo GitHub sur Vercel, c'est tout !
 
 ---
 
-## Partie PROJETS
+### Sprint 5 - Responsive, polish, refactor
 
-- portfolio
-- chrome extension
-- meme generator
-- chef claude
-- dice game
+- [] Partie PROJETS
+  - portfolio
+  - chrome extension
+  - meme generator
+  - chef claude
+  - dice game
