@@ -8,3 +8,4 @@ description: Design Patterns en dev
 - SOLID
 - Singleton
 - Observer
+- Inversion of Control (IoC)

@@ -58,13 +58,20 @@
 
 ## Ressources
 
-> - [Ultimate React Resources](https://dev.to/themeselection/ultimate-reactjs-resources-for-web-developers-2021-424c)
-> - [UVCanvas](https://uvcanvas.com/) - React animated backgrounds library
-> - [HeroUI](https://www.heroui.com/) - React UI library
-> - [Fancy Components](https://www.fancycomponents.dev/)
-> - [AnimeJS](https://animejs.com/)
->
-> [Documentation officielle](https://fr.react.dev/)
+- [Ultimate React Resources](https://dev.to/themeselection/ultimate-reactjs-resources-for-web-developers-2021-424c)
+- [Libraries](https://medium.com/@ryanblakes/best-react-component-libraries-in-2025-and-how-to-use-them-2fa97a76e893)
+  - ShadCN/UI
+  - Chakra UI
+  - MUI (Material)
+  - Radix UI
+  - Ant Design
+
+- [UVCanvas](https://uvcanvas.com/) - React animated backgrounds library
+- [HeroUI](https://www.heroui.com/) - React UI library
+- [Fancy Components](https://www.fancycomponents.dev/)
+- [AnimeJS](https://animejs.com/)
+  
+[Documentation officielle](https://fr.react.dev/)
 
 ---
 

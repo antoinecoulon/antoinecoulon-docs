@@ -214,9 +214,14 @@ Importer le repo GitHub sur Vercel, c'est tout !
 ### Sprint 4.5 - Replace Tailwind (v0.1.0)
 
 - [] Fix all components CSS
-  - [] Projects: carousel
+  - [X] Home
+  - [X] Projects: carousel
     - [react-awesome-slider](https://github.com/rcaferati/react-awesome-slider) ? Non, deprecated
-    - [swiperjs](https://swiperjs.com/) ?
+    - [swiperjs](https://swiperjs.com/) ? YES
+  - [] Compétences
+    - [keen-slider](https://keen-slider.io/examples) ? Carousel 360
+  - [] Parcours
+  - [] A propos
 
 ---
 

@@ -14,6 +14,8 @@ description: Architecture
 
 - **BO**: Business Object | Données métiers (pas une couche classique = transversal, accesible par les différentes couches)
 
+*Couplage faible / fort*:
+
 *Architecture n-tiers*:
 
 *Server-side rendering*:
