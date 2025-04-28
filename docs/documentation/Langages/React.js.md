@@ -58,6 +58,7 @@
 
 ## Ressources
 
+> - [Ultimate React Resources](https://dev.to/themeselection/ultimate-reactjs-resources-for-web-developers-2021-424c)
 > - [UVCanvas](https://uvcanvas.com/) - React animated backgrounds library
 > - [HeroUI](https://www.heroui.com/) - React UI library
 > - [Fancy Components](https://www.fancycomponents.dev/)
