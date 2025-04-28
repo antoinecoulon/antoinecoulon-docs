@@ -19,7 +19,7 @@
     - [Sprint 2 - A propos + Compétences](#sprint-2---a-propos--compétences)
     - [Sprint 3 - Projets (cards avec liens/captures)](#sprint-3---projets-cards-avec-lienscaptures)
     - [Sprint 4 - Expérience + certificats](#sprint-4---expérience--certificats)
-    - [Sprint 4.5 - Replace Tailwind](#sprint-45---replace-tailwind)
+    - [Sprint 4.5 - Replace Tailwind (v0.1.0)](#sprint-45---replace-tailwind-v010)
     - [Sprint 5 - Responsive, polish, refactor](#sprint-5---responsive-polish-refactor)
 
 ---
@@ -214,12 +214,15 @@ Importer le repo GitHub sur Vercel, c'est tout !
 ### Sprint 4.5 - Replace Tailwind (v0.1.0)
 
 - [] Fix all components CSS
+  - [] Projects: carousel
+    - [react-awesome-slider](https://github.com/rcaferati/react-awesome-slider) ? Non, deprecated
+    - [swiperjs](https://swiperjs.com/) ?
 
 ---
 
 ### Sprint 5 - Responsive, polish, refactor
 
-- [] Partie PROJETS
+- [] Partie PROJETS - Refaire les projets, + perso, français, opérationnels
   - portfolio
   - chrome extension
   - meme generator
