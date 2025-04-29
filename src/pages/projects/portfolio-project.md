@@ -21,6 +21,7 @@
     - [Sprint 4 - Expérience + certificats](#sprint-4---expérience--certificats)
     - [Sprint 4.5 - Replace Tailwind (v0.1.0)](#sprint-45---replace-tailwind-v010)
     - [Sprint 5 - Responsive, polish, refactor](#sprint-5---responsive-polish-refactor)
+    - [Sprint 6 - Contact form](#sprint-6---contact-form)
 
 ---
 
@@ -222,8 +223,8 @@ Importer le repo GitHub sur Vercel, c'est tout !
     - [keen-slider](https://keen-slider.io/examples) ? Carousel 360
   - [X] Parcours
     - [chakraUI timeline](https://www.chakra-ui.com/docs/components/timeline#examples)
-  - [] A propos
-  - [] Vérifier que les classes Tailwind ne trainent pas
+  - [X] A propos
+  - [X] Vérifier que les classes Tailwind ne trainent pas
 
 ---
 
@@ -235,3 +236,11 @@ Importer le repo GitHub sur Vercel, c'est tout !
   - meme generator
   - chef claude
   - dice game
+- [] Partie PARCOURS - Retravailler timeline
+- [] Partie ABOUT - Photo + text
+- [] Partie SKILLS - Vrais données
+- [] Partie HOME - Changer police ?
+
+---
+
+### Sprint 6 - Contact form
