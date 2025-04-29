@@ -220,7 +220,8 @@ Importer le repo GitHub sur Vercel, c'est tout !
     - [swiperjs](https://swiperjs.com/) ? YES
   - [X] Compétences
     - [keen-slider](https://keen-slider.io/examples) ? Carousel 360
-  - [] Parcours
+  - [X] Parcours
+    - [chakraUI timeline](https://www.chakra-ui.com/docs/components/timeline#examples)
   - [] A propos
   - [] Vérifier que les classes Tailwind ne trainent pas
 
