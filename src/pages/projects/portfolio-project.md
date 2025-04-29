@@ -218,10 +218,11 @@ Importer le repo GitHub sur Vercel, c'est tout !
   - [X] Projects: carousel
     - [react-awesome-slider](https://github.com/rcaferati/react-awesome-slider) ? Non, deprecated
     - [swiperjs](https://swiperjs.com/) ? YES
-  - [] Compétences
+  - [X] Compétences
     - [keen-slider](https://keen-slider.io/examples) ? Carousel 360
   - [] Parcours
   - [] A propos
+  - [] Vérifier que les classes Tailwind ne trainent pas
 
 ---
 

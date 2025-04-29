@@ -13,12 +13,14 @@
   - [Basic structure](#basic-structure)
   - [Components basics](#components-basics)
     - [Functional components](#functional-components)
-    - [JSX](#jsx)
-    - [Props](#props)
-      - [Mapping components](#mapping-components)
-      - [props key](#props-key)
-      - [Objects as props](#objects-as-props)
-      - [More](#more)
+  - [JSX](#jsx)
+  - [Curly braces](#curly-braces)
+  - [Fragments](#fragments)
+  - [Props](#props)
+    - [Mapping components](#mapping-components)
+    - [props key](#props-key)
+    - [Objects as props](#objects-as-props)
+    - [More](#more)
   - [Props vs State](#props-vs-state)
   - [Events](#events)
     - [Example with useState](#example-with-usestate)
@@ -26,6 +28,7 @@
     - [Pass a function as state](#pass-a-function-as-state)
     - [Aside: ternary operator](#aside-ternary-operator)
     - [State example](#state-example)
+    - [Controlled components](#controlled-components)
   - [Forms](#forms)
     - [Basic JSX form example (the old way)](#basic-jsx-form-example-the-old-way)
     - [New React form handling](#new-react-form-handling)
@@ -53,6 +56,12 @@
   - [props destructuring](#props-destructuring)
   - [prop drilling](#prop-drilling)
   - [Compound components](#compound-components)
+  - [Rendering](#rendering)
+  - [Hooks](#hooks)
+  - [Purity](#purity)
+  - [Portals](#portals)
+  - [Suspense](#suspense)
+  - [Error Boundaries](#error-boundaries)
 
 ---
 
@@ -71,7 +80,8 @@
 - [Fancy Components](https://www.fancycomponents.dev/)
 - [AnimeJS](https://animejs.com/)
   
-[Documentation officielle](https://fr.react.dev/)
+- [Documentation officielle](https://fr.react.dev/)
+- [Cheatsheet](https://zerotomastery.io/cheatsheets/react-cheat-sheet/?utm_content=CS+-+React+-+Email+1B+%28non-members%29&utm_medium=email_action&utm_source=customer.io)
 
 ---
 
@@ -207,7 +217,7 @@ function App() {
 export default App;
 ```
 
-### JSX
+## JSX
 
 [JSX](https://www.w3schools.com/react/react_jsx.asp) stands for JavaScript XML. It allows writing HTML in JavaScript and converts the HTML tags into React elements.
 
@@ -232,7 +242,35 @@ const x = 5;
 const myElement = <h1>{(x) < 10 ? "Hello" : "Goodbye"}</h1>;
 ```
 
-### Props
+---
+
+## Curly braces
+
+![CurlyBraces](/img/react_curly-braces.PNG)
+
+Unlike HTML, which is static and unchanging, the benefit of using React is that you can use dynamic JavaScript values in your JSX.
+
+If you have data, you can display it in your JSX using curly braces.
+
+Curly braces accept values like strings and numbers directly.
+
+You can use them to make your attributes dynamic, and you can style React elements using a JavaScript object within the curly braces.
+
+---
+
+## Fragments
+
+JavaScript functions can only return one thing. In React, you can only return one parent element from a component, so you can't do this without getting a big error.
+
+We could fix this by wrapping these components in a `<div>`, but maybe you don't want to add another element to the page. Instead, you can use an empty component called a React fragment.
+
+![Fragments](/img/react_fragments.PNG)
+
+---
+
+## Props
+
+![Props](/img/react_props2.PNG)
 
 Essentially **React component props** are used to pass data from component to component. You can pass data from one component to another by defining custom HTML attributes to which you assign your data with JSX's syntax:
 
@@ -332,7 +370,7 @@ export default function Entry(props) {
 }
 ```
 
-#### Mapping components
+### Mapping components
 
 We often use the [Array.map()](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method to iterate through an array containing the data we want to display, and create a new array defining all the components we need.
 
@@ -354,7 +392,7 @@ export default function App() {
 }
 ```
 
-#### props key
+### props key
 
 Behind the scenes, React uses the key attribute to associate the rendered element with its place in the rendered list. Basically it's the identifier for the item element in the list element. When you iterate through an array for example, like we did, you have to pass a unique key (id) to each of its iteration. As simple as:
 
@@ -378,7 +416,7 @@ const entryElements = data.map((entry) => {
 })
 ```
 
-#### Objects as props
+### Objects as props
 
 You can pass an entire Object as props if its properties matches the data properties:
 
@@ -416,7 +454,7 @@ const entryElements = data.map((entry) => {
 })
 ```
 
-#### More
+### More
 
 You can also pass functions as props:
 
@@ -543,6 +581,20 @@ function handleChange(event) {
 ---
 
 ## State
+
+To manage data in our React apps, we need to use state — not that kind of state, though!
+
+State is like a snapshot from a camera; it's a picture of our app at any given time.
+
+To manage state, we also can't use JavaScript variables, as they don't cause our app to re-render.
+
+Instead, we use special functions like **useState** and **useReducer**. useState takes an argument that serves as the starting value of the state variable (which is likes in this example) and returns an array containing the state variable and a function to update that state.
+
+Using our button example, we could also update the number of times the button's been clicked with the update function `setClicks` and display it in the button with the state variable likes.
+
+![State1](/img/react_state.PNG)
+
+![State2](/img/react_state2.PNG)
 
 **"View as a function of state"**:
 
@@ -714,6 +766,24 @@ export default function App() {
   )
 }
 ```
+
+### Controlled components
+
+![ControlledComponents](/img/react_controlled-component.PNG)
+
+![ControlledComponents](/img/react_controlled-component2.PNG)
+
+Controlled components use State values to have more predictable behavior.
+
+Here's an example of a controlled component where the value typed into the input is being put into State and controlled by the state variable value.
+
+Here's how it works:
+
+The user types, and `setValue` puts what the user typed into State.
+
+The state value is then updated, and finally, the input uses that updated State as its value.
+
+Controlled components are a great pattern to use because if we want to change the component's behavior, we just need to change the state that controls it.
 
 ---
 
@@ -1212,12 +1282,116 @@ When we first begin a new project, it could be useful to ask ourselves some ques
 
 ## children
 
+So, wait — can you pass anything as a prop?
+
+Yes, you can!
+
+You can even pass other components as props using the children prop.
+
+If you make opening and closing tags for a component, you can pass other components in between them.
+
+These passed components are called children, and you can access them on the children prop of the parent component.
+
+It's great for something called composition, which is about organizing our React components in the most optimal way.
+
+The children prop is really useful for creating layout components when you want your children to have the same common layout.
+
 ## props spreading
 
 ## props destructuring
 
----
-
 ## prop drilling
 
 ## Compound components
+
+---
+
+## Rendering
+
+But how does React take all my amazing code and make it display something in the browser?
+
+That process is called rendering.
+
+React does this for us, but it's important to know how it works because sometimes we can do a bad thing and cause it to infinitely re-render, which crashes our app.
+
+The way React knows how and when to render our application is by using something called the virtual DOM, also known as the VDOM.
+
+Okay, but what does DOM mean?
+
+DOM stands for Document Object Model, which is what every browser uses to model all the HTML elements on a web page.
+
+When you draw it out, it kind of looks like a tree.
+
+![Rendering](/img/react_rendering.PNG)
+
+Here's the complete rendering process in React:
+
+- If the state of our React app changes, then React updates the virtual DOM, which is quicker to update than the real DOM.
+- Then, React uses a process called diffing to compare the updated virtual DOM to a previous version to see what's changed.
+- Once it sees what's different, React uses a process called reconciliation to update the real DOM with the changes that it found.
+
+---
+
+## Hooks
+
+There are five main types of hooks:
+
+- State hooks like useState and useReducer help you manage state within React components.
+- Context hooks, such as useContext, let you pass data through React context.
+- Ref hooks, such as useRef, let you reference things like HTML elements.
+- Effect hooks, like useEffect, let you connect with external systems like browser APIs.
+- Performance hooks, like useMemo and useCallback, can improve performance by preventing unnecessary work.
+
+You'll use all of these hooks at some point, but the majority of the time, you'll likely use just three hooks in your React components: useState, useEffect, and useRef.
+
+---
+
+## Purity
+
+![Purity](/img/react_purity.PNG)
+
+Pure React components mean that the same input should always return the same output.
+
+To keep a React component pure, it should only return its JSX and not change any objects or variables that existed before rendering.
+
+The Cup component in this example is impure because it changes the variable count during render, which exists outside the component.
+
+This leads to the JSX having the wrong output when it is used more than once.
+
+---
+
+## Portals
+
+Portals, on the other hand, are kind of like context but for components.
+
+Portals let you move React components into any HTML element you select.
+
+Portals are great for components that can't be displayed properly because of their parent component's styles — for example, displaying modals, dropdown menus, and tooltips.
+
+To create a portal, just use the createPortal function.
+
+Pass your component to it and choose the HTML element where you'd like your React component to appear.
+
+---
+
+## Suspense
+
+Suspense is a special component that helps you handle loading a component or its data.
+
+Suspense is helpful for components that take some time to fetch data.
+
+It provides a better user experience by showing a fallback component, like a loading spinner, until the data is available instead of showing nothing.
+
+Suspense is also useful if you're lazily loading a component, which lets us load a component only when it's needed.
+
+---
+
+## Error Boundaries
+
+Since React apps are all JavaScript, errors that happen during rendering can totally break your app.
+
+Error boundaries are components that let you catch app-breaking errors and show a fallback component to tell the user what happened.
+
+For example, our app will crash if we run this code because it throws an error when there's no user.
+
+To prevent our app from crashing, we'll first add an error boundary to display a fallback component with a more helpful error message for the user.

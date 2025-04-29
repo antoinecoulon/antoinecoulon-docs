@@ -11,6 +11,9 @@
     - [Lombok](#lombok)
   - [Tests](#tests)
     - [Exemple de test](#exemple-de-test)
+  - [Spring Data](#spring-data)
+    - [Spring Data JPA](#spring-data-jpa)
+      - [ORM et Entité](#orm-et-entité)
 
 ---
 
@@ -159,3 +162,73 @@ public class ClientTest {
     }
 }
 ```
+
+---
+
+## Spring Data
+
+Spring Data est un projet Spring pour simplifier l’interaction avec les différents stockages de données.
+
+Spring Data introduit la notion de **Repository**:
+
+`Repository<T, ID>`
+
+- **T** → correspond au type de l’objet géré par le repository
+- **ID** → correspond au type de la clef de l’objet
+
+Un repository est une abstraction nous permettant de manipuler les objets du domaine métier.
+
+### Spring Data JPA
+
+Spring Data JPA est le module pour interagir avec une base de données relationnelles.
+
+![JPA](/img/java_jpa.PNG)
+
+Spring Data JPA interagit avec les bases de données relationnelles en **mappant les BO** sous forme d’entités JPA • Spring Data JPA fournit l’interface `JpaRepository<T,ID>`. Pour l’utiliser il faut intégrer le starter du même nom
+
+Dans la couche DAL, il faut déclarer des Repository:
+
+- Des interfaces héritant de JpaRepository
+- Pour chaque entités JPA (BO) Spring Data JPA créera à l’exécution la classe d’implémentation correspondante
+
+```java
+public interface EmployeRepository 
+    extends JpaRepository<Employe, Integer>{}
+```
+
+Déclaration de la DataSource dans le fichier application.properties ou application.yml (Les informations à définir sont les mêmes):
+
+- Chaine de connexion
+- Utilisateur de base de données
+- Et son mot de passe
+
+```yml title="application.yml"
+#Connection to DB
+spring: 
+  datasource: 
+    url: jdbc:sqlserver://localhost;databasename=DEMO_ENI_ECOLE; 
+    username: sa 
+    password: Pa$$w0rd
+```
+
+#### ORM et Entité
+
+**ORM** (Object-Relational Mapping): Permet de mettre en correspondance le modèle de données relationnel et le modèle objets (entités)
+
+![ORM](/img/java_orm.PNG)
+
+JPA est une spécification d’ORM pour Java:
+
+![ORM](/img/java_orm2.PNG)
+
+**Entité** est une classe dont les instances peuvent être persistantes:
+
+- Utilisation d'*annotations*
+  - Sur la classe : @Entity, @Table
+  - Sur les attributs : @Column, @Id , @GeneratedValue
+- La classe doit respecter le *design pattern POJO* (Plained Old Java Object)
+  - Attributs privés
+  - Getter/Setter
+  - Constructeur sans paramètre
+  - equals
+  - toString
