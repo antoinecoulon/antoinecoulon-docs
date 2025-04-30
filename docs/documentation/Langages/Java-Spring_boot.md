@@ -14,6 +14,8 @@
   - [Spring Data](#spring-data)
     - [Spring Data JPA](#spring-data-jpa)
       - [ORM et Entité](#orm-et-entité)
+      - [Exemple d'entité](#exemple-dentité)
+      - [Spring repository](#spring-repository)
 
 ---
 
@@ -232,3 +234,71 @@ JPA est une spécification d’ORM pour Java:
   - Constructeur sans paramètre
   - equals
   - toString
+
+#### Exemple d'entité
+
+```java
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity // Définit une entité, qui va créer une table correspondante en BDD
+public class Personne { 
+  
+  @Id   // ID Obligatoire
+  private Long id;
+
+  private String prenom;
+  
+  …
+}
+```
+
+Quelques annotations facultatives :
+
+- @Table : définir le nom de la table en base de données
+- @GeneratedValue : Définir une clé primaire auto-générée par la base de données
+  - L’attribut strategy permet de préciser comment la clé doit être générée
+- @Column : permet de définir
+  - le nom de la colonne (attribut name),
+  - la longueur maximum (attribut length)
+  - si la colonne en BD accepte les valeurs nulles ou non (attribut nullable)
+  - si un index unique doit être créé  (attribut unique)
+- @Transient : indique que l’attribut ne sera pas mappé(et donc non persisté) dans la table
+- @Basic : annotation par défaut pour un attribut
+  - Peut permettre d’utiliser les attributs fetch (LAZY/EAGER)
+  - Et optional : l’attribut peut être nul ou non
+
+```java
+@Entity 
+@Table(name = "PERSONNES") 
+public class Personne  { 
+  
+  @Id 
+  @GeneratedValue 
+  private Long id; 
+  
+  @Column(length = 50, nullable = false) 
+  private String prenom; 
+  
+  @Basic(optional = false) 
+  private String nom; 
+  
+  @Transient 
+  private Integer age;
+  
+  …
+}
+```
+
+#### Spring repository
+
+```java
+package fr.eni.demoWeb; 
+
+import org.springframework.data.jpa.repository.JpaRepository; 
+import fr.eni.demoWeb.bo.Personne; 
+
+public interface PersonneRepository extends JpaRepository<Personne, Long>{ 
+  // Rien à rajouter, les méthodes (CRUD) sont déjà définies par JpaRepository
+}
+```
