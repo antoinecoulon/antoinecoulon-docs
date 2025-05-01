@@ -15,7 +15,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#000">
 <link rel="apple-touch-icon" href="/antoinecoulon-docs/img/apple-touch-icon.png"><link rel="stylesheet" href="/antoinecoulon-docs/assets/css/styles.8cfe230c.css">
-<script src="/antoinecoulon-docs/assets/js/runtime~main.8760cf43.js" defer="defer"></script>
+<script src="/antoinecoulon-docs/assets/js/runtime~main.93253281.js" defer="defer"></script>
 <script src="/antoinecoulon-docs/assets/js/main.5ee0e29d.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -53,6 +53,8 @@
 <li><a href="#sprint-45---replace-tailwind-v010">Sprint 4.5 - Replace Tailwind (v0.1.0)</a></li>
 <li><a href="#sprint-5---responsive-polish-refactor">Sprint 5 - Responsive, polish, refactor</a></li>
 <li><a href="#sprint-6---contact-form">Sprint 6 - Contact form</a></li>
+<li><a href="#sprint-7---remplir-sections">Sprint 7 - Remplir sections</a></li>
+<li><a href="#sprint-71---refonte-projet-chrome-extension">Sprint 7.1 - Refonte projet chrome extension</a></li>
 </ul>
 </li>
 </ul>
@@ -209,22 +211,45 @@
 </ul>
 <hr>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="sprint-5---responsive-polish-refactor">Sprint 5 - Responsive, polish, refactor<a href="#sprint-5---responsive-polish-refactor" class="hash-link" aria-label="Lien direct vers Sprint 5 - Responsive, polish, refactor" title="Lien direct vers Sprint 5 - Responsive, polish, refactor">​</a></h3>
-<ul>
-<li>[] Partie PROJETS - Refaire les projets, + perso, français, opérationnels<!-- -->
-<ul>
-<li>portfolio</li>
-<li>chrome extension</li>
-<li>meme generator</li>
-<li>chef claude</li>
-<li>dice game</li>
-</ul>
-</li>
-<li>[] Partie PARCOURS - Retravailler timeline</li>
-<li>[] Partie ABOUT - Photo + text</li>
-<li>[] Partie SKILLS - Vrais données</li>
-<li>[] Partie HOME - Changer police ?</li>
+<ul class="contains-task-list containsTaskList_mC6p">
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Partie PROJETS</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Partie PARCOURS - Retravailler timeline</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Partie ABOUT - Photo + text</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Partie SKILLS - Vrais données</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Partie HOME - Changer police ?</li>
 </ul>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sprint-6---contact-form">Sprint 6 - Contact form<a href="#sprint-6---contact-form" class="hash-link" aria-label="Lien direct vers Sprint 6 - Contact form" title="Lien direct vers Sprint 6 - Contact form">​</a></h3></article></div><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#conception" class="table-of-contents__link toc-highlight">Conception</a><ul><li><a href="#maquette" class="table-of-contents__link toc-highlight">Maquette</a></li></ul></li><li><a href="#stack-technique" class="table-of-contents__link toc-highlight">Stack technique</a></li><li><a href="#synthèse-projet-portfolio--version-1-phase-1" class="table-of-contents__link toc-highlight">Synthèse projet portfolio – Version 1 (phase 1)</a><ul><li><a href="#objectif" class="table-of-contents__link toc-highlight">Objectif</a></li><li><a href="#cible" class="table-of-contents__link toc-highlight">Cible</a></li><li><a href="#structure-initiale-single-page-application-avec-ancrages-ou-routing" class="table-of-contents__link toc-highlight">Structure initiale (Single Page Application avec ancrages ou routing)</a></li><li><a href="#identité-visuelle" class="table-of-contents__link toc-highlight">Identité visuelle</a></li></ul></li><li><a href="#versions" class="table-of-contents__link toc-highlight">Versions</a></li><li><a href="#étapes-de-développement-proposées-comme-une-feuille-de-route-agile" class="table-of-contents__link toc-highlight">Étapes de développement (proposées comme une feuille de route Agile)</a><ul><li><a href="#sprint-0--initialisation-du-projet" class="table-of-contents__link toc-highlight">Sprint 0 – Initialisation du projet</a></li><li><a href="#sprint-1---accueil--layout-global" class="table-of-contents__link toc-highlight">Sprint 1 - Accueil + layout global</a></li><li><a href="#sprint-2---a-propos--compétences" class="table-of-contents__link toc-highlight">Sprint 2 - A propos + Compétences</a></li><li><a href="#sprint-3---projets-cards-avec-lienscaptures" class="table-of-contents__link toc-highlight">Sprint 3 - Projets (cards avec liens/captures)</a></li><li><a href="#sprint-4---expérience--certificats" class="table-of-contents__link toc-highlight">Sprint 4 - Expérience + certificats</a></li><li><a href="#sprint-45---replace-tailwind-v010" class="table-of-contents__link toc-highlight">Sprint 4.5 - Replace Tailwind (v0.1.0)</a></li><li><a href="#sprint-5---responsive-polish-refactor" class="table-of-contents__link toc-highlight">Sprint 5 - Responsive, polish, refactor</a></li><li><a href="#sprint-6---contact-form" class="table-of-contents__link toc-highlight">Sprint 6 - Contact form</a></li></ul></li></ul></div></div></div></main></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/antoinecoulon-docs/docs/category/documentation">Documentation</a></li><li class="footer__item"><a class="footer__link-item" href="/antoinecoulon-docs/docs/category/ressources">Ressources</a></li></ul></div><div class="col footer__col"><div class="footer__title">About</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/antoinecoulon-docs/about">About me</a></li><li class="footer__item"><a class="footer__link-item" href="/antoinecoulon-docs/contact">Contact</a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/antoinecoulon" target="_blank" rel="noopener noreferrer" class="footer__link-item">Profil GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a class="footer__link-item" href="/antoinecoulon-docs/projects/intro">Projects</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Antoine COULON - Tous droits réservés. Construit grâce à Docusaurus.</div></div></div></footer></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sprint-6---contact-form">Sprint 6 - Contact form<a href="#sprint-6---contact-form" class="hash-link" aria-label="Lien direct vers Sprint 6 - Contact form" title="Lien direct vers Sprint 6 - Contact form">​</a></h3>
+<ul class="contains-task-list containsTaskList_mC6p">
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Form contact basique</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Responsive</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sprint-7---remplir-sections">Sprint 7 - Remplir sections<a href="#sprint-7---remplir-sections" class="hash-link" aria-label="Lien direct vers Sprint 7 - Remplir sections" title="Lien direct vers Sprint 7 - Remplir sections">​</a></h3>
+<ul>
+<li>[] Remplir sections avec de vraies données<!-- -->
+<ul class="contains-task-list containsTaskList_mC6p">
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Home</li>
+<li>[] Projects<!-- -->
+<ul>
+<li>[] Refaire les projets, + perso, français, opérationnels<!-- -->
+<ul>
+<li>portfolio</li>
+<li>[] chrome extension</li>
+<li>[] meme generator</li>
+<li>[] chef claude</li>
+<li>[] dice game</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Skills</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Parcours</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->About</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <!-- -->Contact</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sprint-71---refonte-projet-chrome-extension">Sprint 7.1 - Refonte projet chrome extension<a href="#sprint-71---refonte-projet-chrome-extension" class="hash-link" aria-label="Lien direct vers Sprint 7.1 - Refonte projet chrome extension" title="Lien direct vers Sprint 7.1 - Refonte projet chrome extension">​</a></h3></article></div><div class="col col--2"><div class="tableOfContents_bqdL thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#conception" class="table-of-contents__link toc-highlight">Conception</a><ul><li><a href="#maquette" class="table-of-contents__link toc-highlight">Maquette</a></li></ul></li><li><a href="#stack-technique" class="table-of-contents__link toc-highlight">Stack technique</a></li><li><a href="#synthèse-projet-portfolio--version-1-phase-1" class="table-of-contents__link toc-highlight">Synthèse projet portfolio – Version 1 (phase 1)</a><ul><li><a href="#objectif" class="table-of-contents__link toc-highlight">Objectif</a></li><li><a href="#cible" class="table-of-contents__link toc-highlight">Cible</a></li><li><a href="#structure-initiale-single-page-application-avec-ancrages-ou-routing" class="table-of-contents__link toc-highlight">Structure initiale (Single Page Application avec ancrages ou routing)</a></li><li><a href="#identité-visuelle" class="table-of-contents__link toc-highlight">Identité visuelle</a></li></ul></li><li><a href="#versions" class="table-of-contents__link toc-highlight">Versions</a></li><li><a href="#étapes-de-développement-proposées-comme-une-feuille-de-route-agile" class="table-of-contents__link toc-highlight">Étapes de développement (proposées comme une feuille de route Agile)</a><ul><li><a href="#sprint-0--initialisation-du-projet" class="table-of-contents__link toc-highlight">Sprint 0 – Initialisation du projet</a></li><li><a href="#sprint-1---accueil--layout-global" class="table-of-contents__link toc-highlight">Sprint 1 - Accueil + layout global</a></li><li><a href="#sprint-2---a-propos--compétences" class="table-of-contents__link toc-highlight">Sprint 2 - A propos + Compétences</a></li><li><a href="#sprint-3---projets-cards-avec-lienscaptures" class="table-of-contents__link toc-highlight">Sprint 3 - Projets (cards avec liens/captures)</a></li><li><a href="#sprint-4---expérience--certificats" class="table-of-contents__link toc-highlight">Sprint 4 - Expérience + certificats</a></li><li><a href="#sprint-45---replace-tailwind-v010" class="table-of-contents__link toc-highlight">Sprint 4.5 - Replace Tailwind (v0.1.0)</a></li><li><a href="#sprint-5---responsive-polish-refactor" class="table-of-contents__link toc-highlight">Sprint 5 - Responsive, polish, refactor</a></li><li><a href="#sprint-6---contact-form" class="table-of-contents__link toc-highlight">Sprint 6 - Contact form</a></li><li><a href="#sprint-7---remplir-sections" class="table-of-contents__link toc-highlight">Sprint 7 - Remplir sections</a></li><li><a href="#sprint-71---refonte-projet-chrome-extension" class="table-of-contents__link toc-highlight">Sprint 7.1 - Refonte projet chrome extension</a></li></ul></li></ul></div></div></div></main></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/antoinecoulon-docs/docs/category/documentation">Documentation</a></li><li class="footer__item"><a class="footer__link-item" href="/antoinecoulon-docs/docs/category/ressources">Ressources</a></li></ul></div><div class="col footer__col"><div class="footer__title">About</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/antoinecoulon-docs/about">About me</a></li><li class="footer__item"><a class="footer__link-item" href="/antoinecoulon-docs/contact">Contact</a></li></ul></div><div class="col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://github.com/antoinecoulon" target="_blank" rel="noopener noreferrer" class="footer__link-item">Profil GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a></li><li class="footer__item"><a class="footer__link-item" href="/antoinecoulon-docs/projects/intro">Projects</a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Antoine COULON - Tous droits réservés. Construit grâce à Docusaurus.</div></div></div></footer></div>
 </body>
 </html>
