@@ -22,6 +22,8 @@
     - [Sprint 4.5 - Replace Tailwind (v0.1.0)](#sprint-45---replace-tailwind-v010)
     - [Sprint 5 - Responsive, polish, refactor](#sprint-5---responsive-polish-refactor)
     - [Sprint 6 - Contact form](#sprint-6---contact-form)
+    - [Sprint 7 - Remplir sections](#sprint-7---remplir-sections)
+    - [Sprint 7.1 - Refonte projet chrome extension](#sprint-71---refonte-projet-chrome-extension)
 
 ---
 
@@ -230,17 +232,35 @@ Importer le repo GitHub sur Vercel, c'est tout !
 
 ### Sprint 5 - Responsive, polish, refactor
 
-- [] Partie PROJETS - Refaire les projets, + perso, français, opérationnels
-  - portfolio
-  - chrome extension
-  - meme generator
-  - chef claude
-  - dice game
-- [] Partie PARCOURS - Retravailler timeline
-- [] Partie ABOUT - Photo + text
-- [] Partie SKILLS - Vrais données
-- [] Partie HOME - Changer police ?
+- [X] Partie PROJETS
+- [X] Partie PARCOURS - Retravailler timeline
+- [X] Partie ABOUT - Photo + text
+- [X] Partie SKILLS - Vrais données
+- [X] Partie HOME - Changer police ?
 
 ---
 
 ### Sprint 6 - Contact form
+
+- [X] Form contact basique
+- [X] Responsive
+
+---
+
+### Sprint 7 - Remplir sections
+
+- [] Remplir sections avec de vraies données
+  - [X] Home
+  - [] Projects
+    - [] Refaire les projets, + perso, français, opérationnels
+      - portfolio
+      - [] chrome extension
+      - [] meme generator
+      - [] chef claude
+      - [] dice game
+  - [X] Skills
+  - [X] Parcours
+  - [X] About
+  - [X] Contact
+
+### Sprint 7.1 - Refonte projet chrome extension
