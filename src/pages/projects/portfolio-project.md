@@ -23,7 +23,12 @@
     - [Sprint 5 - Responsive, polish, refactor](#sprint-5---responsive-polish-refactor)
     - [Sprint 6 - Contact form](#sprint-6---contact-form)
     - [Sprint 7 - Remplir sections](#sprint-7---remplir-sections)
-    - [Sprint 7.1 - Refonte projet chrome extension](#sprint-71---refonte-projet-chrome-extension)
+    - [Sprint 7.1 - Compléter About](#sprint-71---compléter-about)
+    - [Sprint 7.2 - Refonte projet chrome extension](#sprint-72---refonte-projet-chrome-extension)
+    - [Sprint 7.3 - Refonte projet meme generator](#sprint-73---refonte-projet-meme-generator)
+    - [Sprint 7.4 - Refonte projet chef claude](#sprint-74---refonte-projet-chef-claude)
+    - [Sprint 7.5 - Refonte projet dice game](#sprint-75---refonte-projet-dice-game)
+    - [Sprint 7.6 - Refonte projet 2D game portfolio](#sprint-76---refonte-projet-2d-game-portfolio)
 
 ---
 
@@ -210,13 +215,12 @@ Importer le repo GitHub sur Vercel, c'est tout !
 - [X] Page 'Parcours'
 - [X] Timeline
   - Expériences formations
-- [] Certificats
 
 ---
 
 ### Sprint 4.5 - Replace Tailwind (v0.1.0)
 
-- [] Fix all components CSS
+- [X] Fix all components CSS
   - [X] Home
   - [X] Projects: carousel
     - [react-awesome-slider](https://github.com/rcaferati/react-awesome-slider) ? Non, deprecated
@@ -263,4 +267,17 @@ Importer le repo GitHub sur Vercel, c'est tout !
   - [X] About
   - [X] Contact
 
-### Sprint 7.1 - Refonte projet chrome extension
+### Sprint 7.1 - Compléter About
+
+- [] Certificats
+- [] Liens
+
+### Sprint 7.2 - Refonte projet chrome extension
+
+### Sprint 7.3 - Refonte projet meme generator
+
+### Sprint 7.4 - Refonte projet chef claude
+
+### Sprint 7.5 - Refonte projet dice game
+
+### Sprint 7.6 - Refonte projet 2D game portfolio

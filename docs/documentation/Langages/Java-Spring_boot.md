@@ -16,6 +16,11 @@
       - [ORM et Entité](#orm-et-entité)
       - [Exemple d'entité](#exemple-dentité)
       - [Spring repository](#spring-repository)
+    - [Héritage](#héritage)
+      - [SINGLE\_TABLE](#single_table)
+      - [JOINED](#joined)
+      - [TABLE\_PER\_CLASS](#table_per_class)
+    - [Gestion des collections de base](#gestion-des-collections-de-base)
 
 ---
 
@@ -300,5 +305,172 @@ import fr.eni.demoWeb.bo.Personne;
 
 public interface PersonneRepository extends JpaRepository<Personne, Long>{ 
   // Rien à rajouter, les méthodes (CRUD) sont déjà définies par JpaRepository
+}
+```
+
+---
+
+### Héritage
+
+Trois stratégies pour enregistrer une hiérarchie de classes en base :
+
+- **SINGLE_TABLE** :
+  - Chaque hiérarchie d'entités JPA est enregistrée dans une table unique
+  - Stratégie efficace pour les modèles de faible profondeur d'héritage
+- **JOINED** :
+  - Chaque entité JPA est enregistrée dans sa propre table
+  - Les entités d'une hiérarchie sont en jointure les unes des autres
+  - Stratégie inefficace dans le cas de hiérarchies trop importantes
+- **TABLE_PER_CLASS** :
+  - Seules les entités associées à des classes concrètes sont enregistrées dans leur propre table
+  - Efficace, notamment dans le cas des hiérarchies importantes
+
+#### SINGLE_TABLE
+
+Toute la hiérarchie de classes est enregistrée dans une seule table: **@Entity** sur chaque classe *et* **@Inheritance(strategy=InheritanceType.SINGLE_TABLE)** sur la classe mère.
+
+Autant de colonnes que de champs persistants différents.
+
+Utilisation d'une colonne supplémentaire discriminante: **@DiscriminatorColumn(name="TYPE_ENTITE")** sur la classe mère *et* **@DiscriminatorValue("...")** sur chacune des classes de la hiérarchie.
+
+```java
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "DISCR")
+@DiscriminatorValue(value = "V")
+public class Voiture {
+  @Id 
+  @GeneratedValue(strategy = GenerationType.AUTO) 
+  private Integer id; 
+  
+  private String marque;
+}
+
+// -------
+
+@Entity 
+@DiscriminatorValue(value="B") 
+public class Berline extends Voiture { 
+  private String couleurCuir;
+}
+
+// -------
+
+@Entity 
+@DiscriminatorValue(value="C") 
+public class VoitureDeCourse extends Voiture { 
+  public String ecurie;
+}
+```
+
+![Heritage1](/img/java_heritage1.PNG)
+
+#### JOINED
+
+Autant de tables qu'il y a de classes annotées @Entity dans la hiérarchie: **@Entity** sur chaque classe et **@Inheritance(strategy=InheritanceType.JOINED)** sur la classe mère.
+
+Chaque table possède ses propres champs.
+
+Les tables "filles" possèdent leurs propres champs et une colonne référence à la table mère.
+
+Possibilité de définir une colonne discriminante.
+
+```java
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED) 
+@DiscriminatorColumn(name="DISCR") 
+@DiscriminatorValue(value="V") 
+public class Voiture { 
+  @Id 
+  @GeneratedValue(strategy = GenerationType.AUTO) 
+  private Integer id; 
+  
+  private String marque;
+}
+
+// -------
+
+@Entity 
+@DiscriminatorValue(value="B") 
+public class Berline extends Voiture { 
+  private String couleurCuir;
+}
+
+// -------
+
+@Entity 
+@DiscriminatorValue(value="C") 
+public class VoitureDeCourse extends Voiture { 
+  public String ecurie;
+}
+```
+
+![Heritage2](/img/java_heritage2.PNG)
+
+#### TABLE_PER_CLASS
+
+Autant de tables qu'il y a de classes concrètes annotées @Entity dans la hiérarchie: **@Entity** sur chaque classe et **@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)** sur la classe mère.
+
+Chaque table possède:
+
+- sa propre clé primaire
+- les colonnes correspondant aux attributs issus de l'héritage
+- ses propres attributs
+
+Pas de colonne discriminante.
+
+```java
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) 
+public class Voiture { 
+  @Id 
+  @GeneratedValue(strategy = GenerationType.AUTO) 
+  private Integer id; 
+  
+  private String marque;
+}
+
+// -------
+
+@Entity 
+public class Berline extends Voiture { 
+  private String couleurCuir;
+}
+
+// -------
+
+@Entity 
+public class VoitureDeCourse extends Voiture { 
+  public String ecurie;
+}
+```
+
+![Heritage3](/img/java_heritage3.PNG)
+
+---
+
+### Gestion des collections de base
+
+- Possibilité d'enregistrer une collection d'éléments simple (String, Date, Integer…) sans avoir besoin de créer une nouvelle classe Entity
+- Utilisation de l'annotation @ElementCollection
+- Possibilité de redéfinir le nom de la table de jointure ainsi que les colonnes
+  - @CollectionTable ( name = "…", joinColumns=@JoinColumn(name = "…", referencedColumnName = "...")
+  - @Column(name="…")
+
+```java
+@Entity
+public class Personne { 
+  @Id 
+  @GeneratedValue(strategy = GenerationType.AUTO) 
+  private int id; 
+  
+  private String nom; 
+  
+  private String prenom; 
+  
+  @ElementCollection(fetch = FetchType.EAGER) 
+  @CollectionTable(name = "Sports", 
+  joinColumns= @JoinColumn(name="id_spo", referencedColumnName="id")) 
+  private List<String> sports;
 }
 ```
