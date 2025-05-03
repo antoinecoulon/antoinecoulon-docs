@@ -11,7 +11,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'DevDocs | Antoine COULON',
-  tagline: 'Site en construction...',
+  tagline: 'Site personnel de prises de notes, documentation dev et suivi de projets.',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -138,7 +138,12 @@ const config = {
           {
             href: 'https://github.com/antoinecoulon/antoinecoulon-docs',
             label: 'GitHub',
-            position: 'right',
+            position: 'left',
+          },
+{
+            href: 'https://portfolio-antoinecoulon.vercel.app/',
+            label: 'Mon Portfolio',
+            position: 'left',
           },
         ],
       },
