@@ -29,14 +29,14 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Projets',
+    title: 'Mon Portfolio',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
         <Link
           className="button button--secondary button--lg"
-          to="/projects/intro">
-          Projets personnels
+          to="https://portfolio-antoinecoulon.vercel.app/">
+          Portfolio professionnel
         </Link>
       </>
     ),
