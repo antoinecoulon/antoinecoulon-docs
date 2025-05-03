@@ -45,8 +45,8 @@ const config = {
           sidebarPath: './sidebars.js',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/antoinecoulon/antoinecoulon-docs/tree/master/',
+          //editUrl:
+            //'https://github.com/antoinecoulon/antoinecoulon-docs/tree/master/',
         },
         blog: {
           showReadingTime: true,
@@ -56,8 +56,8 @@ const config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/antoinecoulon/antoinecoulon-docs/tree/master/',
+          //editUrl:
+            //'https://github.com/antoinecoulon/antoinecoulon-docs/tree/master/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -177,6 +177,10 @@ const config = {
               {
                 label: 'Profil GitHub',
                 href: 'https://github.com/antoinecoulon',
+              },
+{
+                label: 'Portfolio',
+                href: 'https://portfolio-antoinecoulon.vercel.app/',
               },
               {
                 label: 'Projects',
