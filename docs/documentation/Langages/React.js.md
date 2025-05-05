@@ -71,6 +71,7 @@
 - [Libraries](https://medium.com/@ryanblakes/best-react-component-libraries-in-2025-and-how-to-use-them-2fa97a76e893)
   - ShadCN/UI
   - Chakra UI
+  - Smooth UI (animé)
   - MUI (Material)
   - Radix UI
   - Ant Design

@@ -21,6 +21,9 @@
       - [JOINED](#joined)
       - [TABLE\_PER\_CLASS](#table_per_class)
     - [Gestion des collections de base](#gestion-des-collections-de-base)
+  - [Spring Web Service (REST)](#spring-web-service-rest)
+    - [Introduction à Postman](#introduction-à-postman)
+    - [RestController](#restcontroller)
 
 ---
 
@@ -473,4 +476,42 @@ public class Personne {
   joinColumns= @JoinColumn(name="id_spo", referencedColumnName="id")) 
   private List<String> sports;
 }
+```
+
+---
+
+## Spring Web Service (REST)
+
+Un Web Service est une application manipulable au travers d’API sur Internet, il permet d'échanger des données entre applications. Pour cela on va utiliser un langage object commun, comme le JSON.
+
+### Introduction à Postman
+
+Postman permet de tester des API REST. C’est un client HTTP qui permet d’exécuter des appels HTTP depuis une interface graphique.
+
+### RestController
+
+Avec Spring Boot pour manipuler des contrôleurs REST:
+
+- Utilisation du *starter Spring Web*
+- Utilisation de l’annotation **@RestController** sur les classes de contrôleurs
+- Utilisation de l’annotation **@RequestMapping** au niveau de la classe pour définir une URL racine de l’API REST
+- Manipulation des méthodes du protocole HTTP (GET, POST, …) via les annotations : *@GetMapping*, *@PostMapping*, *@PutMapping*, *@PatchMapping* et *@DeleteMapping*
+- Pour transmettre une donnée et un statut de retour utilisation de `ResponseEntity<T>`
+
+Un contrôleur REST de Spring peut travailler ou transmettre directement des données de types simples : String, int, … (Toutes données provenant du Client sont par défaut des String).
+
+Spring Boot utilise la librairie **Jackson** pour le mapping Java POJO - JSON (Du client vers le Serveur et inversement). Cette librairie est importée automatiquement avec le starter Spring Web.
+
+Un contrôleur REST de Spring peut transmettre un `ResponseEntity<T>`. C’est un objet Java pouvant contenir :
+
+- La valeur de retour (response body) (String, int, …, JSON, XML)
+- Des paramètres de headers HTTP
+- Un statut HTTP (2XX, 4XX, …)
+
+`ResponseEntity<T>` fournit un builder pour construire la réponse.
+
+```java
+ResponseEntity.ok(employes)
+
+ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Votre identifiant n'est pas un entier");
 ```
