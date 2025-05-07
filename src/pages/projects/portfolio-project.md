@@ -258,7 +258,7 @@ Importer le repo GitHub sur Vercel, c'est tout !
   - [] Projects
     - [] Refaire les projets, + perso, français, opérationnels
       - portfolio
-      - [] chrome extension
+      - [X] chrome extension
       - [] meme generator
       - [] chef claude
       - [] dice game
@@ -269,10 +269,12 @@ Importer le repo GitHub sur Vercel, c'est tout !
 
 ### Sprint 7.1 - Compléter About
 
-- [] Certificats
-- [] Liens
+- [X] Certificats
+- [X] Liens
 
 ### Sprint 7.2 - Refonte projet chrome extension
+
+- [X] Refonte projet
 
 ### Sprint 7.3 - Refonte projet meme generator
 
