@@ -20,7 +20,15 @@
       - [Déclencheur AFTER](#déclencheur-after)
       - [Déclencheur INSTEAD OF](#déclencheur-instead-of)
   - [MongoDB](#mongodb)
-    - [Guide des Opérateurs (MongoDB)](#guide-des-opérateurs-mongodb)
+    - [Introduction](#introduction)
+      - [Caractéristiques principales](#caractéristiques-principales)
+      - [Terminologie MongoDB vs. Base de données relationnelle](#terminologie-mongodb-vs-base-de-données-relationnelle)
+    - [Installation et Démarrage avec MongoDB](#installation-et-démarrage-avec-mongodb)
+    - [Créer une application Spring Boot avec une base MongoDB (pas à pas)](#créer-une-application-spring-boot-avec-une-base-mongodb-pas-à-pas)
+      - [Configurer MongoDB](#configurer-mongodb)
+      - [Créer l'utilisateur MongoDB](#créer-lutilisateur-mongodb)
+      - [Créer une entité](#créer-une-entité)
+    - [Guide des Opérateurs](#guide-des-opérateurs)
       - [Opérateurs de Comparaison](#opérateurs-de-comparaison)
       - [Opérateurs Logiques](#opérateurs-logiques)
       - [Opérateurs de Tableau](#opérateurs-de-tableau)
@@ -527,7 +535,136 @@ INSERT INTO ClientsAvecFiches(noCli, nom, cpo, ville, etat)
 
 ## MongoDB
 
-### Guide des Opérateurs (MongoDB)
+### Introduction
+
+NoSQL = Not Only SQL
+
+Le terme *NoSQL* désigne les bases de données qui ne reposent pas sur le modèle relationnel classique. Elles permettent de manipuler de grandes quantités de données non structurées ou semi-structurées.
+
+Avantages du NoSQL:
+
+- **Flexible** : Pas besoin de définir un schéma strict (ajout d’attributs à la volée).
+- **Scalabilité horizontale** : Très adapté au Big Data et aux architectures distribuées.
+- **Haute performance** en lecture/écriture.
+- **Facile à manipuler** pour les développeurs web (souvent orienté JSON).
+
+Inconvénients du NoSQL:
+
+- **Pas de schéma strict** → risques d’incohérences.
+- **Pas de langage de requête standard** (chaque base a son API spécifique).
+- **Peu ou pas de support des transactions complexes** (selon les systèmes).
+
+MongoDB est l’un des systèmes de bases de données NoSQL les plus populaires.
+
+#### Caractéristiques principales
+
+- **Orientée Document** (stocke des objets JSON → BSON).
+- **Réplicable** : Haute disponibilité grâce à la réplication automatique.
+- **Indexation** : Prend en charge les indexes simples et composés.
+- **Langage de requête** proche de SQL.
+- **Haute performance**, même avec un gros volume de données.
+- **Populaire** : Communauté active, nombreux outils et drivers.
+
+---
+
+#### Terminologie MongoDB vs. Base de données relationnelle
+
+| SGBDR (Relationnel) | MongoDB       |
+|---------------------|---------------|
+| Table               | Collection    |
+| Ligne (Row)         | Document      |
+| Colonne             | Champ (Field) |
+| Index               | Index         |
+
+---
+
+### Installation et Démarrage avec MongoDB
+
+1. Télécharger MongoDB depuis le site officiel : [https://www.mongodb.com/try/download/community](https://www.mongodb.com/try/download/community)
+2. Installer le serveur (`mongod`) et le shell (`mongosh`).
+3. Démarrer le serveur avec la commande :
+
+```bash
+mongod --dbpath <chemin-vers-dossier-data>
+```
+
+Dans un autre terminal, se connecter via :
+
+```bash
+mongosh
+```
+
+Il est aussi possible d'utiliser le GUI MongoCompass (proposé lors de l'install).
+
+---
+
+### Créer une application Spring Boot avec une base MongoDB (pas à pas)
+
+Il faut ajouter le starter Spring Data MongoDB au projet Spring Boot (ici on utilise aussi Lombock et Spring Web).
+
+#### Configurer MongoDB
+
+```properties title="application.properties"
+spring.data.mongodb.host=localhost
+spring.data.mongodb.port=27017
+spring.data.mongodb.database=mongoapp_db
+spring.data.mongodb.username=admin
+spring.data.mongodb.password=Pa$$w0rd
+spring.data.mongodb.authentication-database=admin
+```
+
+#### Créer l'utilisateur MongoDB
+
+Dans un terminal ou dans Compass:
+
+```bash
+mongosh
+```
+
+```js
+use admin
+db.createUser({
+  user: "admin",
+  pwd: "Pa$$w0rd",
+  roles: [
+    { role: "readWrite", db: "mongoapp_db" }
+  ]
+})
+
+```
+
+#### Créer une entité
+
+Pour l'exemple, on créé une entité Avis:
+
+```java
+package com.exemple.mongoapp.model;
+
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "avis")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Avis {
+
+    @Id
+    private String id;
+    private String auteur;
+    private String contenu;
+    private int note;
+}
+
+```
+
+(Rappel: Grâce à Lombok, pas besoin de créer manuellement les getters, setters, ou constructeurs.)
+
+---
+
+### Guide des Opérateurs
 
 #### Opérateurs de Comparaison
 
