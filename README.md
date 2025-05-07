@@ -2,6 +2,8 @@
 
 My personal notes taking app for school courses, dev documentation and projects management.
 
+Constructed with [Docusaurus](https://docusaurus.io/).
+
 ## Authors
 
 Antoine COULON
