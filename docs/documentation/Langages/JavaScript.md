@@ -53,6 +53,7 @@
       - [Safeguarding constructors](#safeguarding-constructors)
     - [Prototype](#prototype)
       - [Prototypal inheritance](#prototypal-inheritance)
+    - [The this keyword](#the-this-keyword)
   - [Functions](#functions)
     - [Functions parameters/arguments](#functions-parametersarguments)
     - [Arrow functions](#arrow-functions)
@@ -658,6 +659,37 @@ player2.getMarker(); // My marker is 'O'
 ```
 
 **Note**: Though it seems to be an easy way to set up Prototypal Inheritance using `Object.setPrototypeOf()`, the prototype chain has to be set up using this function before creating any objects. Using `setPrototypeOf()` after objects have already been created can result in performance issues.
+
+More on prototype, inheritance, `call()` function... : [Understand prototype inheritance](https://www.digitalocean.com/community/tutorials/understanding-prototypes-and-inheritance-in-javascript)
+
+### The this keyword
+
+If you have been working with other programming languages such as Java, C#, or PHP, you’re already familiar with the `this` keyword.
+
+In these languages, the `this` keyword represents the current instance of the class and it is only relevant within the class.
+
+JavaScript also has `this` keyword. However, the `this` keyword in JavaScript behaves differently from other programming languages.
+
+In JavaScript, you can use the `this` keyword in the global and function contexts. Moreover, the behavior of the `this` keyword changes between strict and non-strict modes.
+
+In general, the `this` references the object of which the function is a property. In other words, the `this` references the object that is currently calling the function.
+
+Suppose you have an object counter that has a method `next()`. When you call the `next()` method, you can access the this object.
+
+```js
+let counter = {
+  count: 0,
+  next: function () {
+    return ++this.count;
+  },
+};
+
+counter.next();
+```
+
+Inside the `next()` function, the this references the counter object. The `next()` is a function that is the property of the counter object. Therefore, inside the `next()` function, the `this` references the `counter` object.
+
+[More info](https://www.javascripttutorial.net/javascript-this/) about Context (global or function).
 
 ---
 
