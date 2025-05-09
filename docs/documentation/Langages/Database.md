@@ -28,6 +28,7 @@
       - [Configurer MongoDB](#configurer-mongodb)
       - [Créer l'utilisateur MongoDB](#créer-lutilisateur-mongodb)
       - [Créer une entité](#créer-une-entité)
+    - [MongoDB queries](#mongodb-queries)
     - [Guide des Opérateurs](#guide-des-opérateurs)
       - [Opérateurs de Comparaison](#opérateurs-de-comparaison)
       - [Opérateurs Logiques](#opérateurs-logiques)
@@ -661,6 +662,12 @@ public class Avis {
 ```
 
 (Rappel: Grâce à Lombok, pas besoin de créer manuellement les getters, setters, ou constructeurs.)
+
+---
+
+### MongoDB queries
+
+[See](https://labex.io/fr/tutorials/mongodb-write-basic-mongodb-queries-420824)
 
 ---
 

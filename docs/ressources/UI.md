@@ -31,6 +31,7 @@ description: Images, icones, animations, sprites...
 
 - [Palette Maker](https://palettemaker.com/)
 - [hue.tools](https://hue.tools/mix?mode=lch)
+- [Colorize.design](https://colorize.design/)
 
 ---
 
@@ -48,6 +49,7 @@ description: Images, icones, animations, sprites...
 - [Animated Icons](https://icons.pqoqubbw.dev/)
 - [favicon.io](https://favicon.io/) - Favicon generator
 - [React-icons](https://react-icons.github.io/react-icons/)
+- [Icon-Icons](https://icon-icons.com/fr/)
 
 ---
 

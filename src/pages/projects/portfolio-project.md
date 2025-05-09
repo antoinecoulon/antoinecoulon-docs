@@ -29,6 +29,7 @@
     - [Sprint 7.4 - Refonte projet chef claude](#sprint-74---refonte-projet-chef-claude)
     - [Sprint 7.5 - Refonte projet dice game](#sprint-75---refonte-projet-dice-game)
     - [Sprint 7.6 - Refonte projet 2D game portfolio](#sprint-76---refonte-projet-2d-game-portfolio)
+  - [TODO](#todo)
 
 ---
 
@@ -278,8 +279,20 @@ Importer le repo GitHub sur Vercel, c'est tout !
 
 ### Sprint 7.3 - Refonte projet meme generator
 
+- [X] Refonte projet
+
 ### Sprint 7.4 - Refonte projet chef claude
+
+- [] Refonte projet
 
 ### Sprint 7.5 - Refonte projet dice game
 
 ### Sprint 7.6 - Refonte projet 2D game portfolio
+
+## TODO
+
+- Transition slides smooth
+- Fix problème actualisation
+- Bonus Contact
+- Bonus Parcours (experience)
+- Sur écran large, passer en paysage
