@@ -84,7 +84,7 @@ Animations : à intégrer dans une future itération avec Framer Motion.
 
 ## Versions
 
-*v1 (en cours):* -> Home, About, Skills, Projects, Parcours, Contact (sans form)
+**v1**
 *v2:* -> Dark mode (upside/down?), Quotes
 
 ---
@@ -98,7 +98,8 @@ Animations : à intégrer dans une future itération avec Framer Motion.
 - Sprint 4: Expérience + certificats
 - Sprint 5: Responsive, polish, refactor
 - Sprint 6 (bonus): Ajout de Framer Motion / backend formulaire de contact
-- Sprint 7: dark mode, quotes
+- Sprint 7: refonte projets
+- Sprint 8: dark mode, quotes
 
 ### Sprint 0 – Initialisation du projet
 
@@ -260,8 +261,8 @@ Importer le repo GitHub sur Vercel, c'est tout !
     - [] Refaire les projets, + perso, français, opérationnels
       - portfolio
       - [X] chrome extension
-      - [] meme generator
-      - [] chef claude
+      - [X] meme generator
+      - [X] chef claude
       - [] dice game
   - [X] Skills
   - [X] Parcours
@@ -283,14 +284,17 @@ Importer le repo GitHub sur Vercel, c'est tout !
 
 ### Sprint 7.4 - Refonte projet chef claude
 
-- [] Refonte projet
+- [X] Refonte projet
 
 ### Sprint 7.5 - Refonte projet dice game
+
+- [] Refonte projet
 
 ### Sprint 7.6 - Refonte projet 2D game portfolio
 
 ## TODO
 
+- dark/light mode
 - Transition slides smooth
 - Fix problème actualisation
 - Bonus Contact
