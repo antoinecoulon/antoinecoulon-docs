@@ -7,6 +7,8 @@ tags: [learn]
 
 Voici un guide étape par étape pour créer une clé API sur OpenRouter, puis l'utiliser dans un projet React avec Vite et TypeScript. Nous allons passer par plusieurs étapes : créer une clé API, configurer l'environnement, et utiliser l'API dans ton projet.
 
+<!-- truncate -->
+
 ## Étape 1 : Créer une clé API sur OpenRouter
 
 Inscription sur OpenRouter
