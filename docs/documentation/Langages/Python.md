@@ -293,6 +293,18 @@ print(describe_user(last_name="DUPONT", first_name="Jean"))
 
 ## User Input
 
+```python
+name= input('What is your name?: ')
+age=input('What is your age?: ')
+print('Hello '+ name + '! You are '+ age + ' years old.')
+
+name = input('Enter your name: ') # Input: 'John'
+distance_km = input('Enter distance in km: ') # Input: '10'
+distance_mi = float(distance_km)/1.609
+print(f'Hi {name.title()}! {distance_km}km is equivalent to {distance_mi} miles.')
+# Hi John! 10km is equivalent to 6.215040397762586 miles.
+```
+
 ---
 
 ## Dictionnaires
