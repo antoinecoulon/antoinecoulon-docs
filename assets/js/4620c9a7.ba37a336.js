@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkantoinecoulon_docs=self.webpackChunkantoinecoulon_docs||[]).push([[3423],{1685:o=>{o.exports=JSON.parse('{"metadata":{"permalink":"/antoinecoulon-docs/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);

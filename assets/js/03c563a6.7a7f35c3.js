@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkantoinecoulon_docs=self.webpackChunkantoinecoulon_docs||[]).push([[9200],{4813:n=>{n.exports=JSON.parse('{"tags":[{"label":"Learn","permalink":"/antoinecoulon-docs/blog/tags/learn","description":"Learn tag description","count":3}]}')}}]);
