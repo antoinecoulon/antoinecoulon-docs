@@ -15,8 +15,10 @@
     - [Les arguments positionnels déballés](#les-arguments-positionnels-déballés)
     - [Les arguments de mots-clefs déballés](#les-arguments-de-mots-clefs-déballés)
   - [User Input](#user-input)
-  - [Dictionnaires](#dictionnaires)
-  - [Expressions Lambda](#expressions-lambda)
+  - [Variables complexes / conteneurs](#variables-complexes--conteneurs)
+    - [Dictionnaires](#dictionnaires)
+    - [Tuple](#tuple)
+    - [Listes](#listes)
 
 Docs:
 
@@ -307,7 +309,9 @@ print(f'Hi {name.title()}! {distance_km}km is equivalent to {distance_mi} miles.
 
 ---
 
-## Dictionnaires
+## Variables complexes / conteneurs
+
+### Dictionnaires
 
 ```python
 """ Dictionnaire: 'objet' avec couples key-value : <class 'dict'> """
@@ -319,6 +323,83 @@ print(d) # {'first_param': 1, 'second_param': 4, 'third_param': 3}
 ```
 
 Contrairement au tuple, on peut modifier un dictionnaire. (mutable)
+
+### Tuple
+
+Un tuple est une structure de données qui permet de stocker plusieurs éléments dans une seule variable, comme une liste. Mais contrairement aux listes, les tuples sont immuables : on ne peut pas les modifier après leur création.
+
+```python
+mon_tuple = (1, 2, 3)
+```
+
+On utilise des parenthèses () pour définir un tuple. Il peut contenir plusieurs types de données (int, str, float, etc), est immuable, et indexé.
+
+*Exemple cas réel*:
+
+```python
+villes = [
+    ("Paris", 48.8566, 2.3522),
+    ("Lyon", 45.7640, 4.8357),
+    ("Marseille", 43.2965, 5.3698)
+]
+
+for ville in villes:
+    nom, lat, long = ville
+    print(f"{nom} est située à {lat}°N, {long}°E")
+```
+
+### Listes
+
+Une liste est une structure de données modulable qui permet de stocker plusieurs éléments dans une seule variable. C’est l’un des types les plus utilisés en Python.
+
+```python
+ma_liste = [1, 2, 3]
+```
+
+On utilise des crochets [] pour définir une liste. Une liste est modifiable (ajouter, retirer, modifier des éléments), indexée (comme une chaîne de caractères ou un tuple) et peut contenir différents types (nombres, chaînes, booléens, etc.).
+
+```python
+animaux = ["chat", "chien", "lapin"]
+
+print(animaux[0])  # "chat"
+
+animaux[1] = "tigre"  # On remplace "chien" par "tigre"
+print(animaux)  # ["chat", "tigre", "lapin"]
+```
+
+Fonctions utiles avec les listes:
+
+- append(x): Ajoute x à la fin
+- insert(i, x): Insère x à l’indice i
+- remove(x): Supprime la première occurrence de x
+- pop(i): Supprime l’élément à l’indice i
+- len(liste): Donne la taille
+- in: Vérifie si un élément est dans la liste
+- sort(): Trie la liste (croissant par défaut)
+
+Exemple concret : liste de courses
+
+```python
+courses = ["pomme", "pain", "lait"]
+
+# Ajouter un élément
+courses.append("œufs")
+
+# Supprimer un élément
+courses.remove("pain")
+
+# Modifier un élément
+courses[0] = "banane"
+
+# Afficher les éléments
+for aliment in courses:
+    print("- " + aliment)
+
+"""
+- banane
+- lait
+- œufs
+"""
 
 ---
 
