@@ -20,6 +20,8 @@
     - [Tuple](#tuple)
     - [Listes](#listes)
 
+---
+
 Docs:
 
 - [Cheatsheet](https://www.pythoncheatsheet.org/cheatsheet/basics)
@@ -369,13 +371,13 @@ print(animaux)  # ["chat", "tigre", "lapin"]
 
 Fonctions utiles avec les listes:
 
-- append(x): Ajoute x à la fin
-- insert(i, x): Insère x à l’indice i
-- remove(x): Supprime la première occurrence de x
-- pop(i): Supprime l’élément à l’indice i
-- len(liste): Donne la taille
-- in: Vérifie si un élément est dans la liste
-- sort(): Trie la liste (croissant par défaut)
+- *append(x)*: Ajoute x à la fin
+- *insert(i, x)*: Insère x à l’indice i
+- *remove(x)*: Supprime la première occurrence de x
+- *pop(i)*: Supprime l’élément à l’indice i
+- *len(liste)*: Donne la taille
+- *in*: Vérifie si un élément est dans la liste
+- *sort()*: Trie la liste (croissant par défaut)
 
 Exemple concret : liste de courses
 
