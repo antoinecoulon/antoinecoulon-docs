@@ -13,6 +13,7 @@ description: Liste d'APIs et tutos
 
 - [API Web (MDN)](https://developer.mozilla.org/fr/docs/Web/API)
 - [Liste d'APIs publiques](https://github.com/public-apis/public-apis)
+- [Free Public APIs](https://www.freepublicapis.com/)
 
 - [Tests API](https://swagger.io/docs/)
 - [DummyJSON](https://dummyjson.com/)
