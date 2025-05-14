@@ -7,18 +7,31 @@
     - [Functions](#functions)
     - [Types](#types)
       - [Strings](#strings)
+    - [Split / Join](#split--join)
     - [Opérateurs](#opérateurs)
     - [Conditionnelles](#conditionnelles)
     - [Boucles](#boucles)
   - [Fonctions et procédures](#fonctions-et-procédures)
     - [Retour multiple](#retour-multiple)
-    - [Les arguments positionnels déballés](#les-arguments-positionnels-déballés)
-    - [Les arguments de mots-clefs déballés](#les-arguments-de-mots-clefs-déballés)
+    - [Args and Kwargs](#args-and-kwargs)
+      - [Les arguments positionnels déballés (\*args)](#les-arguments-positionnels-déballés-args)
+      - [Les arguments de mots-clefs déballés](#les-arguments-de-mots-clefs-déballés)
   - [User Input](#user-input)
   - [Variables complexes / conteneurs](#variables-complexes--conteneurs)
     - [Dictionnaires](#dictionnaires)
     - [Tuple](#tuple)
     - [Listes](#listes)
+    - [Set](#set)
+  - [Expressions Lambda](#expressions-lambda)
+  - [Comments](#comments)
+  - [POO](#poo)
+    - [Import de classes](#import-de-classes)
+    - [Les classes](#les-classes)
+      - [Méthodes](#méthodes)
+      - [Encapsulation](#encapsulation)
+      - [@property et cie](#property-et-cie)
+      - [Décrire une classe](#décrire-une-classe)
+      - [Autres classes spéciales](#autres-classes-spéciales)
 
 ---
 
@@ -149,6 +162,21 @@ print(msg1) # [TERRY] loves the color red!
 
 ---
 
+### Split / Join
+
+```python
+msg ='Welcome to Python 101: Split and Join'
+print(msg.split()) # ['Welcome', 'to', 'Python', '101:', 'Split', 'and', 'Join']
+
+csv = 'Eric,John,Michael,Terry,Graham'
+print(csv.split(',')) # ['Eric', 'John', 'Michael', 'Terry', 'Graham']
+
+friends_list = ['Eric','John','Michael','Terry','Graham']
+print('-'.join(friends_list)) # Eric-John-Michael-Terry-Graham
+```
+
+---
+
 ### Opérateurs
 
 - Assignation: '=' ('+=', '-=', '*=', etc)
@@ -265,9 +293,42 @@ print(une_liste)
 # print(un_tuple)
 ```
 
-### Les arguments positionnels déballés
+### Args and Kwargs
+
+`*args` and `**kwargs` allow you to pass an undefined number of arguments and keywords when calling a function.
+
+```python
+>>> def some_function(*args, **kwargs):
+...     pass
+...
+>>> # call some_function with any number of arguments
+>>> some_function(arg1, arg2, arg3)
+
+>>> # call some_function with any number of keywords
+>>> some_function(key1=arg1, key2=arg2, key3=arg3)
+
+>>> # call both, arguments and keywords
+>>> some_function(arg, key1=arg1)
+
+>>> # or none
+>>> some_function()
+```
+
+Python conventions The words *args and **kwargs are conventions. They are not imposed by the interpreter, but considered good practice by the Python community.
+
+#### Les arguments positionnels déballés (*args)
 
 **Syntaxe**: def my_function(*args)
+
+You can access the arguments through the args variable:
+
+```python
+>>> def some_function(*args):
+...     print(f'Arguments passed: {args} as {type(args)}')
+...
+>>> some_function('arg1', 'arg2', 'arg3')
+# Arguments passed: ('arg1', 'arg2', 'arg3') as <class 'tuple'>
+```
 
 ```python
 def make_sum(*integers):    
@@ -279,9 +340,19 @@ def make_sum(*integers):
 print("La somme de 1, 2, 3 et 4 est", make_sum(1, 2, 3, 4))
 ```
 
-### Les arguments de mots-clefs déballés
+#### Les arguments de mots-clefs déballés
 
 **Syntaxe**: def my_function(**kwargs)
+
+Keywords are accessed through the kwargs variable:
+
+```python
+>>> def some_function(**kwargs):
+...     print(f'keywords: {kwargs} as {type(kwargs)}')
+...
+>>> some_function(key1='arg1', key2='arg2')
+# keywords: {'key1': 'arg1', 'key2': 'arg2'} as <class 'dict'>
+```
 
 ```python
 def describe_user(**attributes):    
@@ -335,6 +406,8 @@ mon_tuple = (1, 2, 3)
 ```
 
 On utilise des parenthèses () pour définir un tuple. Il peut contenir plusieurs types de données (int, str, float, etc), est immuable, et indexé.
+
+Un des intérêts de ces tuples est qu'ils sont interprétés plus rapidement par la machine, il est donc plus rapide d'itérer sur un tuple que sur une liste, par exemple.
 
 *Exemple cas réel*:
 
@@ -402,6 +475,64 @@ for aliment in courses:
 - lait
 - œufs
 """
+```
+
+```python
+friends = ['John','Michael','Terry','Eric','Graham'] # Créer une liste avec []
+
+print(friends[1],friends[4]) # Utiliser ses index
+print(friends[2:4]) # Récupérer les éléments en position 2 et 3 (4 non inclus)
+print(len(friends)) # Récupérer la longueur/taille d'une liste
+print(friends.index('Eric')) # Récupérer l'index de la liste où l'on trouve la valeur 'Eric'
+print(friends.count('Eric')) # Compter le nombre de fois que l'on trouve 'Eric' dans cette liste
+
+# Trier une liste
+friends.sort()
+friends.sort(reverse=True)
+
+# min, max, sum
+list = [1, 2, 3]
+print(min(list)) # 1
+print(max(list)) # 3
+print(sum(list)) # 6
+
+# Ajouter un élément
+friends.append('Georges')
+friends.insert(1, 'Georges')
+
+friends.extends(list) # Ajoute une autre liste à cette liste
+
+# Supprimer un élément
+friends.remove('Georges') # Supprimer l'élément 'Georges' de cette liste
+friends.pop('Georges') # La même chose mais l'élément supprimé peut être stocké, il est retourné par la fonction pop
+
+friends.clear() # Efface le contenu de la liste
+del friends # Supprimer complètement la liste et sa variable
+
+# Copier une liste
+new_friends = friends[:]
+new_friends = friends.copy()
+new_friends = list(friends)
+```
+
+### Set
+
+Les sets ressemblent beaucoup aux listes (ce sont des listes non ordonnés) et permettent à peu près les mêmes choses. Les différences majeures sont:
+
+- Un Set va automatiquement supprimer les doublons qu'il contient.
+- Un Set est beaucoup plus rapide à parcourir ses membres qu'une liste peut l'être.
+
+```python
+# List
+friends = ['John','Michael','Terry','Eric','Graham']
+
+# Tuple
+friends_tuple = ('John','Michael','Terry','Eric','Graham')
+
+# Set
+friends_set = {'John','Michael','Terry','Eric','Graham','Eric'} # 'Eric' sera supprimé
+
+```
 
 ---
 
@@ -419,3 +550,122 @@ add(5, 3) # 8
 ```
 
 ---
+
+## Comments
+
+Les commentaires ont 3 raisons d'exister:
+
+- Pour faire des notes, pour soi-même ou pour d'autres développeurs, au sein du code (ex: todos)
+- Pour débugger, en commentant une ligne de code pour voir ce qu'il se passe par ex.
+- Pour auto-générer de la documentation de son code
+
+```python
+# Single line comment
+
+'''
+Multiple 
+lines 
+comment
+'''
+
+"""Auto-generated documentation"""
+```
+
+---
+
+## POO
+
+### Import de classes
+
+```python
+import math
+
+PI = math.pi
+```
+
+```python
+from math import pi
+
+PI = pi
+```
+
+### Les classes
+
+```python
+class Chat:
+    race = 'siamois'    # Attribut de classe (commun à toute la classe)
+    
+    def __init__(self, nom):    # Attribut spécifique à chaque instance
+        self.nom = nom
+
+c = Chat('Pablo')
+print(c.nom) # 'Pablo'
+print(c.race) # 'siamois'
+
+c.age = 8 # On peut définir une propriété à la volée
+print(c.age) # 8
+```
+
+#### Méthodes
+
+Il existe 3 types de méthodes:
+
+- Méthode d'instance: avec `self` en premier paramètre
+- Méthode de classe: sur la classe ou l'instance avec l'annotation `@classmethod`
+- Méthode statique: sur la classe ou l'instance avec l'annotation `@staticmethod`
+
+#### Encapsulation
+
+Python ne peut pas assurer strictement l'encapsulation: tout est modifiable, soit tout est de visibilité **publique** ! Par convention on indique un attribut **privé** en le préfixant par '_' (ou '__' pour un attribut **non-visible**). Mais cela n'empêche pas réellement d'y accéder. L'import d'un module ne va pas importer les méthodes invisibles.
+
+On ajoute des getters et des setters pour autoriser la consultation et/ou la modification sans passer par les attributs directement. Il existe aussi la méthode `property()` (propriétés d'instance), mais ce n'est toujours pas la meilleure pratique...
+
+#### @property et cie
+
+La meilleure pratique est d'utiliser les annotations `@property` et celles qui en découlent:
+
+```python
+    _nom = "Félix"
+    
+    @property
+    def nom(self):
+        return self._nom
+
+    @nom.setter
+    def nom(self, value):
+        self._nom = value
+
+    @nom.deleter
+    def nom(self):
+        self._nom = "Sans nom"
+
+chat.nom = "Pablo" # évite de faire chat._nom
+```
+
+#### Décrire une classe
+
+On peut ajouter une description avec un commentaire (pour la méthode help) et ajouter une méthode d'affichage de l'instance avec `__str__(self)`
+
+```python
+class Chat:
+    """ Description d'un chat """
+    nom = "Pablo"
+
+    def __init__(self):
+        ...
+    
+    def __str__(self):
+        return self.nom
+```
+
+#### Autres classes spéciales
+
+```python
+def __eq__(self, other):
+    return self.nom == other.nom
+
+# Il est possible de redéfinir n'importe quelle méthode spéciale
+
+# Voir les méthodes accessibles à ma classe:
+print(dir(Chat))
+```
