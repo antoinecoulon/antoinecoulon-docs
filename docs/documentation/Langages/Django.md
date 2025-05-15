@@ -6,9 +6,12 @@
     - [Install Django](#install-django)
     - [Pin your project dependencies](#pin-your-project-dependencies)
     - [Set up a Django project](#set-up-a-django-project)
+    - [Run the server](#run-the-server)
+    - [Setup the project database](#setup-the-project-database)
     - [Set up a Django app](#set-up-a-django-app)
     - [Register the app](#register-the-app)
     - [Command Reference](#command-reference)
+  - [Create a view to serve content](#create-a-view-to-serve-content)
   - [Models](#models)
     - [Example (Model)](#example-model)
     - [Migrations](#migrations)
@@ -19,81 +22,106 @@ Docs:
 
 - [Documentation officielle](https://docs.djangoproject.com/)
 - [Django Setup](https://realpython.com/django-setup/)
+- [Cours OpenClassrooms](https://openclassrooms.com/fr/courses/7172076-debutez-avec-le-framework-django)
 
 ---
 
 ## Setup a Django project
 
-First, you need to have Python installed and understand how to work with virtual environments (venv) and Python's package manager (pip).
+Créer un repository pour l'ensemble du projet, se placer à l'intérieur et initialiser le dépôt Git si besoin:
+
+```bash
+mkdir django-web-app
+cd django-web-app/
+git init
+```
 
 ### Set up a virtual environment
 
-When you’re ready to start your new Django web application, create a new folder and navigate into it. In this folder, you’ll set up a new virtual environment using your command line:
+Créer un environnement virtuel avec python3 (permet de garder les packages de notre projet isolés des autres projets):
+
+```bash
+~/django-web-app
+→ python --version
+Python 3.9.2
+```
 
 ```bash
 python3 -m venv env
 ```
 
-This command sets up a new virtual environment named `env` in your current working directory. Once the process is complete, you also need to activate the virtual environment:
+(Ajouter `env/` au fichier `.gitignore` !)
+
+Puis activer cet environnement virtuel:
 
 ```bash
-source env/bin/activate
+~/django-web-app
+→ source env/bin/activate
+(env) ~/django-web-app 
+# Le (env) indique que l'environnement est bien activé
 ```
 
-If the activation was successful, then you’ll see the name of your virtual environment, (env), at the beginning of your command prompt. This means that your environment setup is complete.
+**Important !** Vous devez toujours avoir votre environnement virtuel activé pendant le développement. Si vous redémarrez votre machine ou que vous importer votre projet depuis une autre machine, reproduisez l'étape ci-dessus.
 
-You can learn more about [how to work with virtual environments in Python](https://realpython.com/python-virtual-environments-a-primer/), and [how to perfect your Python development setup](https://realpython.com/learning-paths/perfect-your-python-development-setup/), but for your Django setup, you have all you need. You can continue with installing the django package.
+Voir +: [how to work with virtual environments in Python](https://realpython.com/python-virtual-environments-a-primer/), et [how to perfect your Python development setup](https://realpython.com/learning-paths/perfect-your-python-development-setup/)
 
 ### Install Django
 
-Once you’ve created and activated your Python virtual environment, you can install Django into this dedicated development workspace:
+Installer Django avec `pip`:
 
 ```bash
-(env) $ python -m pip install django
+(env) ~/django-web-app
+
+→ pip install django
+...
+Successfully installed django-3.1.7
 ```
 
-This command fetches the django package from the Python Package Index (PyPI) using pip.
+Le package Django est installé, ainsi qu'un certain nombre de dépendances : des packages dont Django a besoin pour fonctionner.
+
+Gardons la trace de tous ces packages dans un fichier requirements.txt.
 
 ### Pin your project dependencies
 
-After the installation has completed, you can pin your dependencies to make sure that you’re keeping track of which Django version you installed:
+Pour conserver la liste des dépendances nécessaires et pouvoir les réinstaller facilement:
 
 ```bash
-(env) $ python -m pip freeze > requirements.txt
+(env) pip freeze > requirements.txt
 ```
 
-This command writes the names and versions of all external Python packages that are currently in your virtual environment to a file called requirements.txt. This file will include the django package and all of its dependencies.
+```ini
+# ~/django-web-app/requirements.txt
 
-You should always include a record of the versions of all packages you used in your project code, such as in a requirements.txt file. The requirements.txt file allows you and other programmers to reproduce the exact conditions of your project build.
+asgiref==3.3.1
+Django==3.1.7
+sqlparse==0.4.1
+```
 
-Suppose you’re working on an existing project with its dependencies already pinned in a requirements.txt file. In that case, you can install the right Django version as well as all the other necessary packages in a single command:
+Si besoin de charger/réinstaller toutes les dépendances nécessaires:
 
 ```bash
-(env) $ python -m pip install -r requirements.txt
+(env) pip install -r requirements.txt
 ```
-
-The command reads all names and versions of the pinned packages from your requirements.txt file and installs the specified version of each package in your virtual environment.
-
-Keeping a separate virtual environment for every project allows you to work with different versions of Django for different web application projects. Pinning the dependencies with pip freeze enables you to reproduce the environment that you need for the project to work as expected.
 
 ### Set up a Django project
 
-After you’ve successfully installed Django, you’re ready to create the scaffolding for your new web application. The Django framework distinguishes between projects and apps:
+Nous allons générer automatiquement notre code de base Django.
 
-A Django project is a high-level unit of organization that contains logic that governs your whole web application. Each project can contain multiple apps.
-A Django app is a lower-level unit of your web application. You can have zero to many apps in a project, and you’ll usually have at least one app. You’ll learn more about apps in the next section.
-With your virtual environment set up and activated and Django installed, you can now create a project. This tutorial uses setup as an example for the project name:
+Le code de base est un code gabarit ou code de démarrage : c'est le code de base dont nous avons besoin pour un projet Django fonctionnel, mais vide.
 
 ```bash
-(env) $ django-admin startproject setup
+(env) ~/django-web-app
+→ django-admin startproject <project_name>
 ```
 
-Running this command creates a default folder structure, which includes some Python files and your management app that has the same name as your project:
+Nous avons généré notre code de base en lançant la commande `django-admin` , suivie de la sous-commande `startproject` et en passant comme argument le nom à utiliser pour le projet (`project_name`).
+
+C'est ce nom qui est utilisé pour le répertoire de premier niveau.
 
 ```markdown
-setup/
+project_name/
 │
-├── setup/
+├── project_name/
 │   ├── __init__.py
 │   ├── asgi.py
 │   ├── settings.py
@@ -103,52 +131,84 @@ setup/
 └── manage.py
 ```
 
-On the code block above, you can see the folder structure that the startproject command created for you:
+À l'intérieur, nous avons un autre répertoire avec le même nom, dont nous parlerons plus tard dans ce chapitre. Nous avons également un script Python appelé `manage.py`.
 
-- setup/ is your top-level project folder.
-- setup/setup/ is your lower-level folder that represents your management app.
-- manage.py is a Python file that serves as the command center of your project. It does the same as the django-admin command-line utility.
+Maintenant, lorsque nous utiliserons l'utilitaire de ligne de commande de Django, nous l'appellerons via `manage.py` au lieu de `django-admin` comme nous le faisions auparavant. En fait, `manage.py` est conçu pour fonctionner spécifiquement avec notre projet, alors que `django-admin` est une version plus générique de l'utilitaire.
 
-The nested setup/setup/ folder contains a couple more files that you’ll edit when you work on your web application.
+Avec le code de base en place, nous avons tout ce dont nous avons besoin pour lancer notre site pour la première fois.
 
-Note: If you want to avoid creating the additional top-level project folder, you can add a dot (.) at the end of the django-admin startproject command:
+### Run the server
+
+Appelons à nouveau l'utilitaire de ligne de commande, cette fois via `manage.py`, et lançons la sous-commande `runserver`.
+
+Le fichier `manage.py` est un script Python ; nous allons donc ajouter le préfixe `python3` à chaque fois que nous l'exécuterons, par exemple: `python3 manage.py runserver`.
 
 ```bash
-(env) $ django-admin startproject <projectname> .
+(env) ~/django-web-app/project_name
+→ python3 manage.py runserver
+Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+February 07, 2021 - 17:58:59
+Django version 3.1.6, using settings 'merchex.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
 ```
 
-The dot skips the top-level project folder and creates your management app and the manage.py file right inside your current working directory. You might encounter this syntax in some online Django tutorials. All it does is create the project scaffolding without an extra top-level project folder.
+L'utilitaire nous indique que le serveur de développement a démarré à l'adresse `http://127.0.0.1:8000/`.
 
-Take a moment to explore the default project scaffolding that the django-admin command-line utility created for you. Every project that you’ll make using the startproject command will have the same structure.
+### Setup the project database
 
-When you’re ready, you can move on to create a Django app as a lower-level unit of your new web application.
+Nous avions ce message:
+
+```bash
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+```
+
+Les migrations représentent un moyen de configurer la base de données de notre application.
+
+Utilisons maintenant l'utilitaire de ligne de commande pour créer notre base de données.
+
+```bash
+^C
+(env) ~/django-web-app/project_name
+→ python3 manage.py migrate
+Operations to perform:
+Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+Applying ...
+```
+
+Un fichier de base de données a été créé, appelé `db.sqlite3` ! Il s'agit de la base de données qui contiendra toutes les données de notre application, c’est donc une bonne chose de l’avoir créée dès maintenant.
+
+Ajouter ce fichier `db.sqlite3` au gitignore !
 
 ### Set up a Django app
 
-Every project you build with Django can contain multiple Django apps. When you ran the startproject command in the previous section, you created a management app that you’ll need for every default project that you’ll build. Now, you’ll create a Django app that’ll contain the specific functionality of your web application.
+Ensuite, nous allons créer ce que Django appelle une « application ».
 
-You don’t need to use the django-admin command-line utility anymore, and you can execute the startapp command through the manage.py file instead:
+Dans Django, une application est une sous-section de votre projet entier. Django nous encourage à compartimenter notre projet entier Django en applications, pour deux raisons principales :
+
+- cela permet de garder notre projet organisé et gérable au fur et à mesure qu'il se développe.
+- cela signifie qu'une application peut éventuellement être réutilisée dans plusieurs projets.
+
+Créer cette application en utilisant la sous-commande `startapp` dans l'utilitaire de ligne de commande :
 
 ```bash
-(env) $ python manage.py startapp <appname>
+(env) $ python3 manage.py startapp <appname>
 ```
 
-The startapp command generates a default folder structure for a Django app. This tutorial uses example as the name for the app:
-
-```bash
-(env) $ python manage.py startapp example
-```
-
-Remember to replace example with your app name when you create the Django app for your personal web application.
-
-Note: If you created your project without the dot shortcut mentioned further up, you’ll need to change your working directory into your top-level project folder before running the command shown above.
-
-Once the startapp command has finished execution, you’ll see that Django has added another folder to your folder structure:
+Chaque répertoire d'applications est spécifique à une application. Mais votre répertoire de projet contient des fichiers de configuration pour l'ensemble du projet : c'est un peu la « tour de contrôle » de votre projet Django.
 
 ```markdown
-setup/
+project_name/
 │
-├── example/
+├── appname/
 │   │
 │   ├── migrations/
 │   │   └── __init__.py
@@ -160,7 +220,7 @@ setup/
 │   ├── tests.py
 │   └── views.py
 │
-├── setup/
+├── project_name/
 │   ├── __init__.py
 │   ├── asgi.py
 │   ├── settings.py
@@ -170,20 +230,11 @@ setup/
 └── manage.py
 ```
 
-The new folder has the name you gave it when running the command. In the case of this tutorial, that’s example/. You can see that the folder contains a couple of Python files.
-
-This Django app folder is where you’ll spend most of your time when creating your web application. You’ll also need to make some changes in the management app, setup/, but you’ll build most of your functionality inside the Django app, example/.
-
-You’ll get to know the generated Python files in more detail when working through a tutorial or building your own project. Here are three notable files that were created in the app folder:
-
-1. __init__.py: Python uses this file to declare a folder as a package, which allows Django to use code from different apps to compose the overall functionality of your web application. You probably won’t have to touch this file.
-2. models.py: You’ll declare your app’s models in this file, which allows Django to interface with the database of your web application.
-3. views.py: You’ll write most of the code logic of your app in this file.
-At this point, you’ve finished setting up the scaffolding for your Django web application, and you can start implementing your ideas. From here on out, it’s up to you what you want to build to create your own unique project.
-
 ### Register the app
 
-For Django to see your new app, you need to add it to the list of installed apps in settings.py:
+La dernière étape consiste à « installer » l'application dans le projet.
+
+Lorsque nous avons généré le code de base de notre projet, l'un des fichiers créés s'appelait settings.py. Ouvrez maintenant ce fichier et trouvez une liste Python appelée INSTALLED_APPS. En bas de cette liste, ajoutez la chaîne de caractères `<appname>`:
 
 ```python
 INSTALLED_APPS = [
@@ -193,10 +244,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'example',  # <- Here
+    'appname',  # <- Here
 ]
 
 ```
+
+Par défaut, le code de base de Django comprend l'installation d'un certain nombre d'applications utiles, que la plupart des projets utiliseront probablement à un moment ou à un autre.
+
+Contrairement à notre application, ces applications supplémentaires ne se trouvent pas dans notre code source, nous ne voyons pas leur répertoire dans notre code. Ces applications sont, en fait, importées depuis le package de Django que nous avons installé au début de ce chapitre avec pip.
+
+La meilleure pratique consiste à ajouter notre application en bas de la liste afin qu'elle soit la dernière à se charger.
 
 ### Command Reference
 
@@ -206,6 +263,12 @@ INSTALLED_APPS = [
 2b: Pin your dependencies: `python -m pip freeze > requirements.txt`
 3: Set up a Django project: `django-admin startproject <projectname>`
 4: Start a Django app: `python manage.py startapp <appname>`
+
+---
+
+## Create a view to serve content
+
+
 
 ---
 
