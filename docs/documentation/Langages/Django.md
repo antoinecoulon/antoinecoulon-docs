@@ -17,6 +17,8 @@
     - [Migrations](#migrations)
   - [Update the view with the new data object](#update-the-view-with-the-new-data-object)
   - [Gabarit](#gabarit)
+    - [Template base](#template-base)
+    - [Static files](#static-files)
 
 ---
 
@@ -534,3 +536,54 @@ Avec une boucle pour gérer les ajouts/retraits:
 </p>
  
 ```
+
+### Template base
+
+Il est possible de définir un template qui contiendra toutes les parties de codes qui seront répétés sur chaque page html, et de l'*étendre* à toutes les pages:
+
+```html title="templates/base.html"
+<html>
+    <head>
+        <title>Merchex</title>
+    </head>
+    <body>
+
+        {% block content %}{% endblock %} <!-- Ce bloc sera remplacé par le contenu de chacune de nos pages -->
+
+    </body>
+</html>
+```
+
+Et dans nos autres fichiers:
+
+```html
+{% extends "listings/base.html" %}
+
+{% block content %}
+
+<h1>Hello from hello</h1>
+<ul>
+    {% for band in bands %}
+        <li>{{ band.name }}</li>
+    {% empty %}
+        <li>Aucun groupe trouvé...</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+```
+
+### Static files
+
+Pour pouvoir servir des fichiers static, comme des images, ou ici notre feuille de styles css, il faut créer un dossier listings/static/listings/ et charger dans notre base.html:
+
+```html
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'listings/styles.css' %}" />
+        ...
+```
+
+---
