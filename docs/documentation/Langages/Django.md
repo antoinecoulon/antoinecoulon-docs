@@ -19,6 +19,7 @@
   - [Gabarit](#gabarit)
     - [Template base](#template-base)
     - [Static files](#static-files)
+  - [Django REST](#django-rest)
 
 ---
 
@@ -534,7 +535,6 @@ Avec une boucle pour gérer les ajouts/retraits:
     {% endif %}
     exemples.
 </p>
- 
 ```
 
 ### Template base
@@ -587,3 +587,7 @@ Pour pouvoir servir des fichiers static, comme des images, ou ici notre feuille 
 ```
 
 ---
+
+## Django REST
+
+Vous pouvez convertir votre projet Django et son rendu côté serveur en une API REST à l'aide du cadre Django REST.
