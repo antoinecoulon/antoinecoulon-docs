@@ -105,7 +105,7 @@ Anaconda est une distribution Python spécialement pensée pour le ML. Jupyter N
 
 ## Librairie Scikit-Learn
 
-Scikit-learn est la librairie incontournable pour le machine learning en Python :
+[Scikit-learn](https://scikit-learn.org/stable/index.html) est la librairie incontournable pour le machine learning en Python :
 
 - Implémentation de tous les algorithmes de base en ML
 - Outils pour la préparation des données pour l'apprentissage
@@ -113,3 +113,5 @@ Scikit-learn est la librairie incontournable pour le machine learning en Python 
 - Facile à prendre en main
 
 Elle permet de travailler avec des données numpy ou pandas.
+
+[Exemple](https://www.datacamp.com/fr/tutorial/machine-learning-python)
