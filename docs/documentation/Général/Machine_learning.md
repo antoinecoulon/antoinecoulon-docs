@@ -11,6 +11,7 @@
     - [Pandas](#pandas)
     - [MatPlotLib](#matplotlib)
     - [Seaborn](#seaborn)
+  - [Librairie Scikit-Learn](#librairie-scikit-learn)
 
 ---
 
@@ -99,3 +100,16 @@ Anaconda est une distribution Python spécialement pensée pour le ML. Jupyter N
 [Seaborn](https://seaborn.pydata.org/) est une librairie de visualisation plus récente qui intègre très bien les DataFrame de Pandas et qui simplifie la syntaxe de Matplotlib.
 
 `import seaborn as sns`
+
+---
+
+## Librairie Scikit-Learn
+
+Scikit-learn est la librairie incontournable pour le machine learning en Python :
+
+- Implémentation de tous les algorithmes de base en ML
+- Outils pour la préparation des données pour l'apprentissage
+- Méthodes d'évaluation des performances des modèles créés
+- Facile à prendre en main
+
+Elle permet de travailler avec des données numpy ou pandas.
