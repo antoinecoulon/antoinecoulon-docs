@@ -18,3 +18,4 @@
 ## Learn React
 
 [Course on Scrimba](https://scrimba.com/learn-react-c0e)
+[Full Stack Open](https://fullstackopen.com/en/)
