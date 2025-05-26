@@ -187,10 +187,12 @@ const config = {
                 label: 'Portfolio',
                 href: 'https://portfolio-antoinecoulon.vercel.app/',
               },
+              /*
               {
                 label: 'Projects',
                 to: '/projects/intro',
               },
+              */
             ],
           },
         ],
