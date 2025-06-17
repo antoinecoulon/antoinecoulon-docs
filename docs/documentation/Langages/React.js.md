@@ -80,6 +80,7 @@
 - [HeroUI](https://www.heroui.com/) - React UI library
 - [Fancy Components](https://www.fancycomponents.dev/)
 - [AnimeJS](https://animejs.com/)
+- [Kokonutui](https://kokonutui.com/)
   
 - [Documentation officielle](https://fr.react.dev/)
 - [Cheatsheet](https://zerotomastery.io/cheatsheets/react-cheat-sheet/?utm_content=CS+-+React+-+Email+1B+%28non-members%29&utm_medium=email_action&utm_source=customer.io)
