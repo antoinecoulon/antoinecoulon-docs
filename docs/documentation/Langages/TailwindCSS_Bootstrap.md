@@ -8,6 +8,8 @@
 
 ## Ressources
 
+- [Animations](https://tailwindcss-animations.vercel.app/)
+
 - [Tailblocks](https://tailblocks.cc/)
 - [Flowbite](https://flowbite.com/blocks/)
 - [Shadcn](https://ui.shadcn.com/)
